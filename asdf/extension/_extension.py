@@ -220,6 +220,7 @@ class ExtensionProxy(ExtensionLike):
         if hasattr(self._delegate, "compressors"):
             for compressor in self._delegate.compressors:
                 if not isinstance(compressor, Compressor):
+                    # when[>=6.0]: remove
                     if isinstance(compressor, (_Compress, _Decompress)):
                         # Handle compressors that use the old interface
                         warnings.warn(DeprecatedCompressorWarning())

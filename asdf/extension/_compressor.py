@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from collections.abc import Iterable, Iterator
 
 
+# when[>=6.0]: merge into Compressor
 @runtime_checkable
 class _CompressionPlugin(Protocol):
     @property
@@ -34,6 +35,7 @@ class _CompressionPlugin(Protocol):
         ...
 
 
+# when[>=6.0]: merge into Compressor
 @runtime_checkable
 class _Compress(_CompressionPlugin, Protocol):
     def compress(self, data: memoryview, **kwargs) -> Iterator[bytes]:
@@ -58,6 +60,7 @@ class _Compress(_CompressionPlugin, Protocol):
         raise NotImplementedError
 
 
+# when[>=6.0]: merge into Compressor
 @runtime_checkable
 class _Decompress(_CompressionPlugin, Protocol):
     def decompress(self, data: Iterable[bytes], out: memoryview, **kwargs) -> int:
