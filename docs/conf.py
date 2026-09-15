@@ -1,6 +1,8 @@
 import datetime
 import sys
 from pathlib import Path
+import functools
+from collections import defaultdict
 
 if sys.version_info < (3, 11):
     import tomli as tomllib
@@ -50,19 +52,19 @@ man_pages = [("index", project.lower(), project + " Documentation", [author], 1)
 
 nitpicky = True
 
+suppress_warnings = ["config.cache"]
 # ignore a few pyyaml docs links since they don't appear to support intersphinx
 nitpick_ignore = [
     ("py:class", "yaml.representer.RepresenterError"),
     ("py:class", "yaml.error.YAMLError"),
     # Ignore since they're not part of the public API
-    ("py:attr", "asdf.util._NOT_SET_TYPE.NOT_SET"),
-    ("py:class", "BlockAttrCallback"),
     ("py:class", "BlockManager"),
     ("py:class", "BlockKey"),
     ("py:class", "asdf._block.key.Key"),
     # Needed because sphinx breaks trying to process `asdf.typing.NDArray` for some reason
-    ("py:class", "NDArray"),
     ("py:class", "ByteArray1D"),
+    ("py:obj", "ByteArray1D"),
+    ("py:class", "numpy.uint8"),
     # Needed because `dict_keys` isn't documented
     ("py:class", "dict_keys"),
 ]
@@ -76,6 +78,12 @@ intersphinx_mapping = {
     "semantic_version": ("https://python-semanticversion.readthedocs.io/en/latest/", None),
     "stdatamodels": ("https://stdatamodels.readthedocs.io/en/latest/", None),
 }
+
+api_target_substitutions = {
+    "numpy._typing._array_like.NDArray": "numpy.typing.NDArray",
+    "Version": "semantic_version.Version",
+}
+
 
 
 # Docs are hosted as a "subproject" under the main project's domain: https://www.asdf-format.org/projects
@@ -97,20 +105,49 @@ intersphinx_mapping.update(subprojects)
 extensions = [
     # TODO clean these up, do we need them all?
     "sphinx_inline_tabs",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.extlinks",
-    "sphinx_asdf",
-    "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
-    "sphinx.ext.inheritance_diagram",
     "sphinx.ext.mathjax",
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
-    "sphinxcontrib.jquery",
+    "sphinx.ext.extlinks",
+
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
     "numpydoc",
-    "sphinx_automodapi.automodapi",
-    "sphinx_automodapi.smart_resolver",
 ]
+
+
+# Don't show summaries of the members in each class along with the
+# class' docstring
+numpydoc_show_class_members = False
+autosummary_ignore_module_all = False
+# Class documentation should contain *both* the class docstring and
+# the __init__ docstring
+autoclass_content = "both"
+# autosummary custom templates
+templates_path = ["_templates"]
+
+
+# Skip these items when generating documentation
+AUTODOC_SKIP = [
+    # Exported elsewhere
+    "asdf.tags.core.ExternalArrayReference",
+    "asdf.tags.core.IntegerType",
+    "asdf.ValidationError",
+    "asdf.Stream",
+
+    # Breaks sphinx autodoc
+    "asdf.typing.ByteArray1D",
+]
+# Document inherited methods and attributes for classes in these modules
+# For all other classes, only document items defined in the class itself
+AUTODOC_SHOW_INHERITED = ["asdf", "asdf.extension"]
+# Mapping of item paths to correct public API paths
+# Needed because autodoc can't always determine the correct public path for base classes
+AUTODOC_REMAP_BASES = {
+    "semantic_version.base.Version": "semantic_version.Version",
+}
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -125,18 +162,6 @@ master_doc = "index"
 # The reST default role (used for this markup: `text`) to use for all
 # documents. Set to the "smart" one.
 default_role = "obj"
-
-# Don't show summaries of the members in each class along with the
-# class' docstring
-numpydoc_show_class_members = False
-
-autosummary_generate = True
-
-automodapi_toctreedirnm = "api"
-
-# Class documentation should contain *both* the class docstring and
-# the __init__ docstring
-autoclass_content = "both"
 
 html_theme = "furo"
 html_static_path = ["_static"]
@@ -188,6 +213,66 @@ latex_documents = [("index", project + ".tex", project + " Documentation", autho
 
 latex_logo = "_static/images/logo-light-mode.png"
 
+def autodoc_remap_bases(app, name, obj, _unused, bases):
+    """Check if any of the object's base classes are in AUTODOC_REMAP_BASES and remap them.
+
+    Needed because autodoc can't always determine the correct public path for base classes.
+    """
+    for i, base in enumerate(bases):
+        qualname = f"{base.__module__}.{base.__name__}"
+        if qualname in AUTODOC_REMAP_BASES:
+            bases[i] = AUTODOC_REMAP_BASES[qualname]
+
+
+def filter_private_symbols(app, domain, node):
+    """Ignore broken references to items starting with an underscore.
+
+    These items are assumed to not be public so we don't want them documented anyway.
+    """
+    target: str = node.get("reftarget", "")
+    mod, _, name = target.rpartition(".")
+
+    if name.startswith("_"):
+        # Ignore broken references to private symbols
+        return True
+
+
+def filter_inherited(qualname: str, members: list[str], inherited_members: list[str]):
+    """Filter list of class members to remove inherited members unless parent module is in SHOW_INHERITED."""
+    @functools.cache
+    def show_inherited(qualname: str):
+        module, _, cls = qualname.rpartition(".")
+        return any(module == m for m in AUTODOC_SHOW_INHERITED)
+
+    if show_inherited(qualname):
+        return members
+
+    return [m for m in members if m not in inherited_members]
+
+
+def filter_ignored(qualname: str, members: list[str]):
+    """Filter list of module members to remove any present in AUTODOC_SKIP."""
+    @functools.cache
+    def ignore_map():
+        ignore = defaultdict(set)
+        for item in AUTODOC_SKIP:
+            path, _, name = item.rpartition(".")
+            ignore[path].add(name)
+
+        return ignore
+
+    ignored = ignore_map()[qualname]
+    return [mem for mem in members if mem not in ignored]
+
+
+# Helper functions used in autosummary Jinja templates
+autosummary_context = {
+    "filter_inherited": filter_inherited,
+    "filter_ignored": filter_ignored,
+}
+
 
 def setup(app):
     app.add_css_file("css/globalnav.css")
+    app.connect("warn-missing-reference", filter_private_symbols)
+    app.connect("autodoc-process-bases", autodoc_remap_bases)
