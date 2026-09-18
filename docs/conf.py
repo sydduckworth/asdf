@@ -221,7 +221,10 @@ def autodoc_remap_bases(app, name, obj, _unused, bases):
     for i, base in enumerate(bases):
         qualname = f"{base.__module__}.{base.__name__}"
         if qualname in AUTODOC_REMAP_BASES:
-            bases[i] = AUTODOC_REMAP_BASES[qualname]
+            module, _, name = AUTODOC_REMAP_BASES[qualname].rpartition(".")
+            bases[i].__module__ = module
+            bases[i].__name__ = name
+            bases[i].__qualname__ = name
 
 
 def filter_private_symbols(app, domain, node):
