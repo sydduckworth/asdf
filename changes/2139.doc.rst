@@ -1,0 +1,2 @@
+Small reorganization and wording changes in user and developer API docs.
+API documentation for classes no longer contains an inheritance graph.
