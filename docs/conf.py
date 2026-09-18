@@ -186,18 +186,6 @@ html_theme_options = {
 pygments_style = "monokai"
 # NB Dark style pygments is furo-specific at this time
 pygments_dark_style = "monokai"
-# Render inheritance diagrams in SVG
-graphviz_output_format = "svg"
-
-graphviz_dot_args = [
-    "-Nfontsize=10",
-    "-Nfontname=Helvetica Neue, Helvetica, Arial, sans-serif",
-    "-Efontsize=10",
-    "-Efontname=Helvetica Neue, Helvetica, Arial, sans-serif",
-    "-Gbgcolor=white",
-    "-Gfontsize=10",
-    "-Gfontname=Helvetica Neue, Helvetica, Arial, sans-serif",
-]
 
 # -- Options for LaTeX output --------------------------------------------------
 
