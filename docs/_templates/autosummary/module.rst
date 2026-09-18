@@ -1,9 +1,9 @@
 {{ fullname | escape | underline}}
-{% set attributes = filter_ignored(fullname, attributes) %}
-{% set functions = filter_ignored(fullname, functions) %}
-{% set classes = filter_ignored(fullname, classes) %}
-{% set exceptions = filter_ignored(fullname, exceptions) %}
-{% set modules = filter_ignored(fullname, modules) %}
+{%- set attributes = filter_ignored(fullname, attributes) %}
+{%- set functions = filter_ignored(fullname, functions) %}
+{%- set classes = filter_ignored(fullname, classes) %}
+{%- set exceptions = filter_ignored(fullname, exceptions) %}
+{%- set modules = filter_ignored(fullname, modules) %}
 
 .. automodule:: {{ fullname }}
 

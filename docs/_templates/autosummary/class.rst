@@ -1,7 +1,7 @@
 {{ name | escape | underline}}
-{% set methods = filter_inherited(fullname, methods, inherited_members) %}
-{% set attributes = filter_inherited(fullname, attributes, inherited_members) %}
-{% set properties = filter_inherited(fullname, properties, inherited_members) %}
+{%- set methods = filter_inherited(fullname, methods, inherited_members) %}
+{%- set attributes = filter_inherited(fullname, attributes, inherited_members) %}
+{%- set properties = filter_inherited(fullname, properties, inherited_members) %}
 
 .. currentmodule:: {{ module }}
 
@@ -13,7 +13,7 @@
 
     {% if '__init__' in methods %}
         {% set caught_result = methods.remove('__init__') %}
-    {% endif %}
+    {%- endif %}
 
     {% block attributes_summary %}
     {% if attributes or properties %}
@@ -29,8 +29,8 @@
         ~{{ name }}.{{ item }}
     {%- endfor %}
 
-    {% endif %}
-    {% endblock %}
+    {%- endif %}
+    {%- endblock %}
 
     {% block methods_summary %}
     {% if methods %}
@@ -42,8 +42,8 @@
         ~{{ name }}.{{ item }}
     {%- endfor %}
 
-    {% endif %}
-    {% endblock %}
+    {%- endif %}
+    {%- endblock %}
 
     {% block attributes_documentation %}
     {% if attributes or properties%}
@@ -58,8 +58,8 @@
     .. autoproperty:: {{ item }}
     {%- endfor %}
 
-    {% endif %}
-    {% endblock %}
+    {%- endif %}
+    {%- endblock %}
 
     {% block methods_documentation %}
     {% if methods %}
@@ -70,5 +70,5 @@
     .. automethod:: {{ item }}
     {%- endfor %}
 
-    {% endif %}
-    {% endblock %}
+    {%- endif %}
+    {%- endblock %}
