@@ -79,12 +79,6 @@ intersphinx_mapping = {
     "stdatamodels": ("https://stdatamodels.readthedocs.io/en/latest/", None),
 }
 
-api_target_substitutions = {
-    "numpy._typing._array_like.NDArray": "numpy.typing.NDArray",
-    "Version": "semantic_version.Version",
-}
-
-
 
 # Docs are hosted as a "subproject" under the main project's domain: https://www.asdf-format.org/projects
 # This requires including links to main project (asdf-website) and the other asdf subprojects
