@@ -2,6 +2,8 @@ import datetime
 import sys
 from pathlib import Path
 import functools
+import importlib
+import inspect
 from collections import defaultdict
 
 if sys.version_info < (3, 11):
@@ -249,11 +251,22 @@ def filter_ignored(qualname: str, members: list[str]):
     ignored = ignore_map()[qualname]
     return [mem for mem in members if mem not in ignored]
 
+def is_property(modname, qualname, attr):
+    """Used by the autosummary class template to pick autoproperty vs autoattribute."""
+    obj = importlib.import_module(modname)
+    for part in qualname.split("."):
+        obj = getattr(obj, part)
+    try:
+        member = inspect.getattr_static(obj, attr)
+    except AttributeError:
+        return False
+    return isinstance(member, property)
 
 # Helper functions used in autosummary Jinja templates
 autosummary_context = {
     "filter_inherited": filter_inherited,
     "filter_ignored": filter_ignored,
+    "is_property": is_property,
 }
 
 

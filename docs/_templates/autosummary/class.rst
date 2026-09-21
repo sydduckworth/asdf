@@ -1,7 +1,6 @@
 {{ name | escape | underline}}
 {%- set methods = filter_inherited(fullname, methods, inherited_members) %}
 {%- set attributes = filter_inherited(fullname, attributes, inherited_members) %}
-{%- set properties = filter_inherited(fullname, properties, inherited_members) %}
 
 .. currentmodule:: {{ module }}
 
@@ -16,7 +15,7 @@
     {%- endif %}
 
     {% block attributes_summary %}
-    {% if attributes or properties %}
+    {% if attributes %}
 
     .. rubric:: Attributes Summary
 
@@ -24,11 +23,6 @@
     {% for item in attributes %}
         ~{{ name }}.{{ item }}
     {%- endfor %}
-
-    {% for item in properties %}
-        ~{{ name }}.{{ item }}
-    {%- endfor %}
-
     {%- endif %}
     {%- endblock %}
 
@@ -46,18 +40,17 @@
     {%- endblock %}
 
     {% block attributes_documentation %}
-    {% if attributes or properties%}
+    {% if attributes %}
 
     .. rubric:: Attributes Documentation
 
     {% for item in attributes %}
-    .. autoattribute:: {{ item }}
-    {%- endfor %}
-
-    {% for item in properties %}
+    {%- if is_property(module, objname, item) %}
     .. autoproperty:: {{ item }}
+    {% else %}
+    .. autoattribute:: {{ item }}
+    {% endif %}
     {%- endfor %}
-
     {%- endif %}
     {%- endblock %}
 
@@ -69,6 +62,5 @@
     {% for item in methods %}
     .. automethod:: {{ item }}
     {%- endfor %}
-
     {%- endif %}
     {%- endblock %}
