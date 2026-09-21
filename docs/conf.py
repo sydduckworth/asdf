@@ -75,7 +75,7 @@ nitpick_ignore = [
 # Add intersphinx mappings
 intersphinx_mapping = {
     "numpy": ("https://numpy.org/doc/stable/", None),
-    "pypa-packaging": ("https://packaging.python.org/en/latest/", None),
+    "packaging": ("https://packaging.pypa.io/en/stable/", None),
     "pytest": ("https://docs.pytest.org/en/latest/", None),
     "python": ("https://docs.python.org/3/", None),
     "semantic_version": ("https://python-semanticversion.readthedocs.io/en/latest/", None),
