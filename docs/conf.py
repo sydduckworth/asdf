@@ -63,6 +63,7 @@ nitpick_ignore = [
     ("py:class", "BlockManager"),
     ("py:class", "BlockKey"),
     ("py:class", "asdf._block.key.Key"),
+    ("py:class", "asdf.extension._manager.ValidatorManager"),
     # Needed because sphinx breaks trying to process `asdf.typing.NDArray` for some reason
     ("py:class", "ByteArray1D"),
     ("py:obj", "ByteArray1D"),
