@@ -1,4 +1,4 @@
-* [asdf.tagged `dev` :smile:](../api/asdf/tagged.md)
+* [asdf.tagged](../api/asdf/tagged.md)
 * [asdf.exceptions](../api/asdf/exceptions.md)
 * [asdf.extension](../api/asdf/extension/index.md)
 * [asdf.resource](../api/asdf/resource.md)
