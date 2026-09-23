@@ -1,3 +1,0 @@
-# asdf.config
-
-::: asdf.config

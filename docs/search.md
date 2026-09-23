@@ -1,3 +1,0 @@
-# asdf.search
-
-::: asdf.search

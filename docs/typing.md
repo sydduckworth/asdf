@@ -1,3 +1,0 @@
-# asdf.typing
-
-::: asdf.typing

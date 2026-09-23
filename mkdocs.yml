@@ -1,7 +1,19 @@
 site_name: asdf
 site_url: https://www.asdf-format.org/projects/asdf
+repo_url: https://github.com/asdf-format/asdf
+repo_name: asdf-format/asdf
 theme:
   name: material
+  custom_dir: docs/overrides
+  favicon: assets/favicon.ico
+  logo: assets/logo-dark-mode.png
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.path
+    - navigation.top
+    - toc.follow
+    - header.autohide
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -11,26 +23,29 @@ theme:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
+      primary: black
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
+      primary: black
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
 
-nav:
-# rest of the navigation...
-# defer to gen-files + literate-nav
-- Code Reference: api/
+extra_css:
+  - assets/stylesheets/extra.css
 
-validation:
-  omitted_files: warn
-  absolute_links: warn  # Or 'relative_to_docs' - new in MkDocs 1.6
-  unrecognized_links: warn
-  anchors: warn  # New in MkDocs 1.6
+not_in_nav: |
+  api/
+
+# validation:
+#   omitted_files: warn
+#   absolute_links: warn  # Or 'relative_to_docs' - new in MkDocs 1.6
+#   unrecognized_links: warn
+#   anchors: warn  # New in MkDocs 1.6
 
 plugins:
 - search
@@ -60,11 +75,13 @@ plugins:
           show_signature_annotations: true
           show_signature_type_parameters: true
           signature_crossrefs: true
-          show_if_no_docstring: true
+          merge_init_into_class: true
+          show_if_no_docstring: false
           find_stubs_package: true
+          show_symbol_type_heading: true
+          show_symbol_type_toc: true
           filters: "public"
           extensions:
             - griffe_sphinx
             - griffe_generics
             - griffe_inherited_docstrings
-            # - griffe_inherited_method_crossrefs
