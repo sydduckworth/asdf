@@ -58,12 +58,12 @@ docs = [
   "griffe-inherited-docstrings",
   "griffe-inherited-method-crossrefs",
   "griffe-sphinx",
-  "mkdocs",
   "mkdocs-gen-files",
   "mkdocs-literate-nav",
   "mkdocs-material",
   "mkdocs-section-index",
   "mkdocstrings[python]",
+  "properdocs",
   "ruff",
   "towncrier",
 ]

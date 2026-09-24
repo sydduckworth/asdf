@@ -2,6 +2,8 @@ site_name: asdf
 site_url: https://www.asdf-format.org/projects/asdf
 repo_url: https://github.com/asdf-format/asdf
 repo_name: asdf-format/asdf
+watch:
+  - asdf
 theme:
   name: material
   custom_dir: docs/overrides

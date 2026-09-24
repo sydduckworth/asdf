@@ -11,6 +11,13 @@ build:
       - git fetch --all --tags || true
     post_install:
       - git describe --exact-match || towncrier build --keep
+    build:
+      html:
+        - properdocs build
+    post_build:
+      # Copy the built site into the directory Read the Docs publishes.
+      - mkdir -p $READTHEDOCS_OUTPUT/html/
+      - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
 
 mkdocs:
   configuration: mkdocs.yml
