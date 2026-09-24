@@ -33,4 +33,4 @@ for path in sorted(src.glob("asdf/**/*.py")):
             ]
         )
 
-    mkdocs_gen_files.set_edit_path(full_doc_path, path.relative_to(root))
+    mkdocs_gen_files.set_edit_path(full_doc_path, Path("..") / path.relative_to(root))
