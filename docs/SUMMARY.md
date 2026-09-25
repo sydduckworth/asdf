@@ -1,3 +1,7 @@
 * [Home](index.md)
+* [Overview](overview.md)
+* [Core Features](features/index.md)
+    * [Array Data](features/arrays.md)
+    * [Using Extensions](features/using_extensions.md)
 * [User API](user/)
 * [Developer API](developer/)
