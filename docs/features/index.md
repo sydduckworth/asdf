@@ -646,7 +646,7 @@ single-node search results, the
 [`AsdfSearchResult.path`][AsdfSearchResult.path] property contains
 the Python code required to reference that node directly:
 
-```
+```python
 >>> af.search("example").path  # doctest: +SKIP
 "root['data']['example_key']"
 ```
@@ -654,7 +654,7 @@ the Python code required to reference that node directly:
 While the [`AsdfSearchResult.node`][AsdfSearchResult.node] property
 contains the actual value of the node:
 
-```
+```python
 >>> af.search("example").node  # doctest: +SKIP
 'example value'
 ```
@@ -664,7 +664,7 @@ For searches with multiple matching nodes, use the
 [`AsdfSearchResult.nodes`][AsdfSearchResult.nodes] properties
 instead:
 
-```
+```python
 >>> af.search("duplicate_key").paths  # doctest: +SKIP
 ["root['data']['duplicate_key']", "root['other_data']['duplicate_key']"]
 >>> af.search("duplicate_key").nodes  # doctest: +SKIP

@@ -5,3 +5,4 @@
     * [Using Extensions](features/using_extensions.md)
 * [User API](user/)
 * [Developer API](developer/)
+* [Changelog](CHANGES.md)

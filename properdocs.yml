@@ -19,6 +19,8 @@ theme:
     - header.autohide
     - content.action.edit
     - content.action.view
+    - content.code.select
+    - content.code.copy
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -54,10 +56,15 @@ not_in_nav: |
 
 markdown_extensions:
   - admonition
+  - footnotes
+  - pymdownx.details
   - pymdownx.superfences
   - pymdownx.highlight:
       anchor_linenums: true
       pygments_lang_class: true
+      line_spans: __span
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
 
 plugins:
 - search
