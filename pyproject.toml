@@ -57,7 +57,7 @@ docs = [
   "griffe-generics",
   "griffe-inherited-docstrings",
   "griffe-sphinx",
-  "mkdocs-gen-files",
+  "mkdocs-api-autonav",
   "mkdocs-git-authors-plugin",
   "mkdocs-git-revision-date-localized-plugin",
   "mkdocs-literate-nav",
@@ -225,7 +225,7 @@ issue_format = "`#{issue} <https://github.com/asdf-format/asdf/pull/{issue}>`_"
 [tool.towncrier.fragment.general]
 
 [tool.pyrefly]
-project-excludes = ["asdf/_jsonschema/", "scripts/"]
+project-excludes = ["asdf/_jsonschema/"]
 search-path = [".", "integration_tests/compatibility"]
 baseline = ".pyrefly-baseline.json"
 

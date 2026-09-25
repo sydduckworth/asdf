@@ -54,9 +54,12 @@ not_in_nav: |
 
 plugins:
 - search
-- gen-files:
-    scripts:
-    - scripts/gen_api_docs.py
+- api-autonav:
+      modules: ['asdf']
+      api_root_uri: api
+      exclude:
+      - asdf.conftest
+      on_implicit_namespace_package: skip
 - literate-nav:
     nav_file: SUMMARY.md
 - section-index
@@ -73,7 +76,6 @@ plugins:
         - "https://docs.pytest.org/en/latest/objects.inv"
         - "https://packaging.python.org/en/latest/objects.inv"
         options:
-          summary: true
           docstring_style: numpy
           docstring_options:
             warn_missing_types: true
@@ -90,6 +92,12 @@ plugins:
           show_symbol_type_toc: true
           line_length: 88
           filters: "public"
+          summary:
+            modules: false
+            attributes: true
+            functions: true
+            classes: true
+            type_aliases: true
           extensions:
             - griffe_sphinx
             - griffe_generics
