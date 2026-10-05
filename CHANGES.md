@@ -1,4 +1,8 @@
-# 5.4.0 (2026-09-04)
+# Changelog
+
+<!-- towncrier release notes start -->
+
+## 5.4.0 (2026-09-04)
 
 ## Bugfix
 
@@ -68,14 +72,14 @@
   `IOBase`. Deprecated reading from non-seekable files.
   ([\#2059](https://github.com/asdf-format/asdf/pull/2059))
 
-# 5.3.1 (2026-06-08)
+## 5.3.1 (2026-06-08)
 
 ## Bugfix
 
 - Fix bug where `add_history_entry` incorrectly used a custom schema if
   available. ([\#2044](https://github.com/asdf-format/asdf/pull/2044))
 
-# 5.3.0 (2026-04-23)
+## 5.3.0 (2026-04-23)
 
 ## Bugfix
 
@@ -99,7 +103,7 @@
 - Added support for disabling block checksums in file write methods.
   ([\#2018](https://github.com/asdf-format/asdf/pull/2018))
 
-# 5.2.0 (2026-03-19)
+## 5.2.0 (2026-03-19)
 
 ## Bugfix
 
@@ -117,7 +121,7 @@
 - Drop support for python 3.9.
   ([\#1992](https://github.com/asdf-format/asdf/pull/1992))
 
-# 5.1.0 (2025-11-06)
+## 5.1.0 (2025-11-06)
 
 ## Bugfix
 
@@ -137,7 +141,7 @@
   can be helpful when opening old files with unsupported tags.
   ([\#1983](https://github.com/asdf-format/asdf/pull/1983))
 
-# 5.0.0 (2025-09-10)
+## 5.0.0 (2025-09-10)
 
 ## Removal
 
@@ -151,7 +155,7 @@
   Remove deprecated pytest_asdf plugin.
   ([\#1970](https://github.com/asdf-format/asdf/pull/1970))
 
-# 4.5.0 (2025-09-04)
+## 4.5.0 (2025-09-04)
 
 ## Bugfix
 
@@ -174,7 +178,7 @@
   to run schema tests.
   ([\#1959](https://github.com/asdf-format/asdf/pull/1959))
 
-# 4.4.0 (2025-08-18)
+## 4.4.0 (2025-08-18)
 
 ## Bugfix
 
@@ -196,7 +200,7 @@
 - Deprecate asdftool defragment. Use implode instead.
   ([\#1939](https://github.com/asdf-format/asdf/pull/1939))
 
-# 4.3.0 (2025-07-16)
+## 4.3.0 (2025-07-16)
 
 ## Bugfix
 
@@ -235,7 +239,7 @@
   needed for a non-ndarray object.
   ([\#1937](https://github.com/asdf-format/asdf/pull/1937))
 
-# 4.2.0 (2025-05-30)
+## 4.2.0 (2025-05-30)
 
 ## Bugfix
 
@@ -269,7 +273,7 @@
 - Deprecate opening http uris unless fsspec is installed.
   ([\#1906](https://github.com/asdf-format/asdf/pull/1906))
 
-# 4.1.0 (2025-01-31)
+## 4.1.0 (2025-01-31)
 
 ## Bugfix
 
@@ -299,7 +303,7 @@
 - Add `Converter.to_info` to allow customizing `info` output.
   ([\#1884](https://github.com/asdf-format/asdf/pull/1884))
 
-# 4.0.0 (2024-11-19)
+## 4.0.0 (2024-11-19)
 
 ## Feature
 
@@ -324,7 +328,7 @@
   deprecation warning if it is enabled.
   ([\#1858](https://github.com/asdf-format/asdf/pull/1858))
 
-# 3.5.0 (2024-10-02)
+## 3.5.0 (2024-10-02)
 
 ## Bugfix
 
@@ -349,7 +353,7 @@
   since asdf 3.0.0 and will be removed in an upcoming asdf version
   ([\#1819](https://github.com/asdf-format/asdf/pull/1819))
 
-# 3.4.0 (2024-08-04)
+## 3.4.0 (2024-08-04)
 
 - Fix issue where roundtripping a masked array with no masked values
   removes the mask
@@ -366,7 +370,7 @@
 - Bumped minimal requirement on `attrs` from `20.1.0` to `22.2.0`
   \[[\#1815](https://github.com/asdf-format/asdf/issues/1815)\]
 
-# 3.3.0 (2024-07-12)
+## 3.3.0 (2024-07-12)
 
 - Fix `__asdf_traverse__` for non-tagged objects
   \[[\#1739](https://github.com/asdf-format/asdf/issues/1739)\]
@@ -403,7 +407,7 @@
 - Deprecate `copy_arrays` in favor of `memmap`
   \[[\#1797](https://github.com/asdf-format/asdf/issues/1797)\]
 
-# 3.2.0 (2024-04-05)
+## 3.2.0 (2024-04-05)
 
 - Deprecate `AsdfFile.version_map`
   \[[\#1745](https://github.com/asdf-format/asdf/issues/1745)\]
@@ -414,7 +418,7 @@
 - Removed unused `asdf-unit-schemas` dependency
   \[[\#1767](https://github.com/asdf-format/asdf/issues/1767)\]
 
-# 3.1.0 (2024-02-27)
+## 3.1.0 (2024-02-27)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -460,7 +464,7 @@
   contains a single line (and does not fail)
   \[[\#1748](https://github.com/asdf-format/asdf/issues/1748)\]
 
-# 3.0.1 (2023-10-30)
+## 3.0.1 (2023-10-30)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -473,7 +477,7 @@
 - Deprecate `asdf.util.is_primitive`
   \[[\#1687](https://github.com/asdf-format/asdf/issues/1687)\]
 
-# 3.0.0 (2023-10-16)
+## 3.0.0 (2023-10-16)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -762,7 +766,7 @@
 - Replace asdf-standard submodule with pypi package.
   \[[\#1079](https://github.com/asdf-format/asdf/issues/1079)\]
 
-# 2.9.2 (2022-02-07)
+## 2.9.2 (2022-02-07)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -773,7 +777,7 @@
   "schemas".
   \[[\#1076](https://github.com/asdf-format/asdf/issues/1076)\]
 
-# 2.9.1 (2022-02-03)
+## 2.9.1 (2022-02-03)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -781,7 +785,7 @@
 - Fix typo in testing module `__init__.py` name.
   \[[\#1071](https://github.com/asdf-format/asdf/issues/1071)\]
 
-# 2.9.0 (2022-02-02)
+## 2.9.0 (2022-02-02)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -810,7 +814,7 @@
   helpers previously available in `asdf.tests.helpers`.
   \[[\#1067](https://github.com/asdf-format/asdf/issues/1067)\]
 
-# 2.8.3 (2021-12-13)
+## 2.8.3 (2021-12-13)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -818,7 +822,7 @@
 - Fix more use of 'python' where 'python3' is intended.
   \[[\#1033](https://github.com/asdf-format/asdf/issues/1033)\]
 
-# 2.8.2 (2021-12-06)
+## 2.8.2 (2021-12-06)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -835,13 +839,13 @@
 - Remove 'name' and 'version' attributes from NDArrayType instances.
   \[[\#1031](https://github.com/asdf-format/asdf/issues/1031)\]
 
-# 2.8.1 (2021-06-09)
+## 2.8.1 (2021-06-09)
 
 - Fix bug in block manager when a new block is added to an existing file
   without a block index.
   \[[\#1000](https://github.com/asdf-format/asdf/issues/1000)\]
 
-# 2.8.0 (2021-05-12)
+## 2.8.0 (2021-05-12)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -930,7 +934,7 @@
 - Update asdf-standard to 1.6.0 tag.
   \[[\#993](https://github.com/asdf-format/asdf/issues/993)\]
 
-# 2.7.5 (2021-06-09)
+## 2.7.5 (2021-06-09)
 
 !!! note
 	The ASDF Standard is at v1.5.0
@@ -942,7 +946,7 @@
   without a block index.
   \[[\#1000](https://github.com/asdf-format/asdf/issues/1000)\]
 
-# 2.7.4 (2021-04-30)
+## 2.7.4 (2021-04-30)
 
 !!! note
 	The ASDF Standard is at v1.5.0
@@ -958,7 +962,7 @@
 - Prevent astropy warnings in tests when opening known bad files.
   \[[\#977](https://github.com/asdf-format/asdf/issues/977)\]
 
-# 2.7.3 (2021-02-25)
+## 2.7.3 (2021-02-25)
 
 !!! note
 	The ASDF Standard is at v1.5.0
@@ -969,7 +973,7 @@
 - Fix bug resulting in invalid strides values for views over FITS
   arrays. \[[\#930](https://github.com/asdf-format/asdf/issues/930)\]
 
-# 2.7.2 (2021-01-15)
+## 2.7.2 (2021-01-15)
 
 !!! note
 	The ASDF Standard is at v1.5.0
@@ -980,7 +984,7 @@
   \[[\#901](https://github.com/asdf-format/asdf/issues/901),
   [\#909](https://github.com/asdf-format/asdf/issues/909)\]
 
-# 2.7.1 (2020-08-18)
+## 2.7.1 (2020-08-18)
 
 !!! note
 	The ASDF Standard is at v1.5.0
@@ -988,7 +992,7 @@
 - Fix bug preventing access to copied array data after `AsdfFile` is
   closed. \[[\#869](https://github.com/asdf-format/asdf/issues/869)\]
 
-# 2.7.0 (2020-07-23)
+## 2.7.0 (2020-07-23)
 
 !!! note
 	The ASDF Standard is at v1.5.0
@@ -1046,7 +1050,7 @@
 - Prevent errors when extension metadata contains additional properties.
   \[[\#832](https://github.com/asdf-format/asdf/issues/832)\]
 
-# 2.6.0 (2020-04-22)
+## 2.6.0 (2020-04-22)
 
 !!! note
 	The ASDF Standard is at v1.5.0
@@ -1082,7 +1086,7 @@
   to handle internal references and reference cycles.
   \[[\#781](https://github.com/asdf-format/asdf/issues/781)\]
 
-# 2.5.2 (2020-02-28)
+## 2.5.2 (2020-02-28)
 
 !!! note
 	The ASDF Standard is at v1.4.0
@@ -1102,7 +1106,7 @@
 - Simplify example in README.rst
   \[[\#763](https://github.com/asdf-format/asdf/issues/763)\]
 
-# 2.5.1 (2020-01-07)
+## 2.5.1 (2020-01-07)
 
 !!! note
 	The ASDF Standard is at v1.4.0
@@ -1111,7 +1115,7 @@
   installed asdf package.
   \[[\#732](https://github.com/asdf-format/asdf/issues/732)\]
 
-# 2.5.0 (2019-12-23)
+## 2.5.0 (2019-12-23)
 
 !!! note
 	The ASDF Standard is at v1.4.0
@@ -1130,7 +1134,7 @@
 - Fix bug causing segfault after update of a memory-mapped file.
   \[[\#716](https://github.com/asdf-format/asdf/issues/716)\]
 
-# 2.4.2 (2019-08-29)
+## 2.4.2 (2019-08-29)
 
 !!! note
 	The ASDF Standard is at v1.3.0
@@ -1139,7 +1143,7 @@
   Deprecation warning.
   \[[\#700](https://github.com/asdf-format/asdf/issues/700)\]
 
-# 2.4.1 (2019-08-27)
+## 2.4.1 (2019-08-27)
 
 !!! note
 	The ASDF Standard is at v1.3.0
@@ -1160,7 +1164,7 @@
 - Fix bug in `NDArrayType.__len__`. It must be a method, not a property.
   \[[\#673](https://github.com/asdf-format/asdf/issues/673)\]
 
-# 2.3.3 (2019-04-02)
+## 2.3.3 (2019-04-02)
 
 !!! note
 	The ASDF Standard is at v1.3.0
@@ -1178,7 +1182,7 @@
 - Allow use of `pathlib.Path` objects for `custom_schema` option.
   \[[\#663](https://github.com/asdf-format/asdf/issues/663)\]
 
-# 2.3.2 (2019-02-19)
+## 2.3.2 (2019-02-19)
 
 !!! note
 	The ASDF Standard is at v1.3.0
@@ -1187,7 +1191,7 @@
   that found in file.
   \[[\#641](https://github.com/asdf-format/asdf/issues/641)\]
 
-# 2.3.1 (2018-12-20)
+## 2.3.1 (2018-12-20)
 
 !!! note
 	The ASDF Standard is at v1.3.0
@@ -1203,7 +1207,7 @@
 - Fix bug in `asdftool` that prevented `extract` command from being
   visible. \[[\#633](https://github.com/asdf-format/asdf/issues/633)\]
 
-# 2.3.0 (2018-11-28)
+## 2.3.0 (2018-11-28)
 
 !!! note
 	The ASDF Standard is at v1.3.0
@@ -1224,13 +1228,13 @@
   \[[\#617](https://github.com/asdf-format/asdf/issues/617)\]
 - Update ASDF Standard submodule to version 1.3.0.
 
-# 2.2.1 (2018-11-15)
+## 2.2.1 (2018-11-15)
 
 - Fix an issue with the README that caused sporadic installation
   failures and also prevented the long description from being rendered
   on pypi. \[[\#607](https://github.com/asdf-format/asdf/issues/607)\]
 
-# 2.2.0 (2018-11-14)
+## 2.2.0 (2018-11-14)
 
 - Add new parameter `lazy_load` to `AsdfFile.open`. It is `True` by
   default and preserves the default behavior. `False` detaches the
@@ -1250,14 +1254,14 @@
   file handle is readonly.
   \[[\#579](https://github.com/asdf-format/asdf/issues/579)\]
 
-# 2.1.2 (2018-11-13)
+## 2.1.2 (2018-11-13)
 
 - Make sure that all types corresponding to core tags are added to the
   type index before any others. This fixes a bug that was related to the
   way that subclass tags were overwritten by external extensions.
   \[[\#598](https://github.com/asdf-format/asdf/issues/598)\]
 
-# 2.1.1 (2018-11-01)
+## 2.1.1 (2018-11-01)
 
 - Make sure extension metadata is written even when constructing the
   ASDF tree on-the-fly.
@@ -1275,7 +1279,7 @@
   the offending node is converted to basic Python data structures.
   \[[\#571](https://github.com/asdf-format/asdf/issues/571)\]
 
-# 2.1.0 (2018-09-25)
+## 2.1.0 (2018-09-25)
 
 - Add API function for retrieving history entries.
   \[[\#501](https://github.com/asdf-format/asdf/issues/501)\]
@@ -1291,7 +1295,7 @@
 - Add top-level `keys` method to `AsdfFile` to access tree keys.
   \[[\#545](https://github.com/asdf-format/asdf/issues/545)\]
 
-# 2.0.3 (2018-09-06)
+## 2.0.3 (2018-09-06)
 
 - Update asdf-standard to reflect more stringent (and, consequently,
   more correct) requirements on the formatting of complex numbers.
@@ -1301,7 +1305,7 @@
 - Fix bug that prevented fortran-order arrays from being serialized
   properly. \[[\#539](https://github.com/asdf-format/asdf/issues/539)\]
 
-# 2.0.2 (2018-07-27)
+## 2.0.2 (2018-07-27)
 
 - Allow serialization of broadcasted `numpy` arrays.
   \[[\#507](https://github.com/asdf-format/asdf/issues/507)\]
@@ -1315,12 +1319,12 @@
   definitions in schema file.
   \[[\#522](https://github.com/asdf-format/asdf/issues/522)\]
 
-# 2.0.1 (2018-05-08)
+## 2.0.1 (2018-05-08)
 
 - Allow test suite to run even when package is not installed.
   \[[\#502](https://github.com/asdf-format/asdf/issues/502)\]
 
-# 2.0.0 (2018-04-19)
+## 2.0.0 (2018-04-19)
 
 - Astropy-specific tags have moved to Astropy core package.
   \[[\#359](https://github.com/asdf-format/asdf/issues/359)\]
@@ -1379,14 +1383,14 @@
   `fits`. Bump top-level ASDF schema version to v1.1.0.
   \[[\#444](https://github.com/asdf-format/asdf/issues/444)\]
 
-# 1.3.3 (2018-03-01)
+## 1.3.3 (2018-03-01)
 
 - Update test infrastructure to rely on new Astropy v3.0 plugins.
   \[[\#461](https://github.com/asdf-format/asdf/issues/461)\]
 - Disable use of 2to3. This was causing test failures on Debian builds.
   \[[\#463](https://github.com/asdf-format/asdf/issues/463)\]
 
-# 1.3.2 (2018-02-22)
+## 1.3.2 (2018-02-22)
 
 - Updates to allow this version of ASDF to be compatible with Astropy
   v3.0. \[[\#450](https://github.com/asdf-format/asdf/issues/450)\]
@@ -1394,7 +1398,7 @@
   Astropy's testing infrastructure.
   \[[\#458](https://github.com/asdf-format/asdf/issues/458)\]
 
-# 1.3.1 (2017-11-02)
+## 1.3.1 (2017-11-02)
 
 - Relax requirement on `semantic_version` version to 2.3.1.
   \[[\#361](https://github.com/asdf-format/asdf/issues/361)\]
@@ -1405,7 +1409,7 @@
 - Allow tag references using the tag URI scheme to be resolved in schema
   files. \[[\#371](https://github.com/asdf-format/asdf/issues/371)\]
 
-# 1.3.0 (2017-10-24)
+## 1.3.0 (2017-10-24)
 
 - Fixed a bug in reading data from an "http:" url.
   \[[\#231](https://github.com/asdf-format/asdf/issues/231)\]
@@ -1477,13 +1481,13 @@
   `__setitem__`.
   \[[\#352](https://github.com/asdf-format/asdf/issues/352)\]
 
-# 1.2.1 (2016-11-07)
+## 1.2.1 (2016-11-07)
 
 - Make asdf conditionally dependent on the version of astropy to allow
   running it with older versions of astropy.
   \[[\#228](https://github.com/asdf-format/asdf/issues/228)\]
 
-# 1.2.0 (2016-10-04)
+## 1.2.0 (2016-10-04)
 
 - Added Tabular model.
   \[[\#214](https://github.com/asdf-format/asdf/issues/214)\]
@@ -1494,24 +1498,24 @@
 - Fixed version error message
   \[[\#224](https://github.com/asdf-format/asdf/issues/224)\]
 
-# 1.0.5 (2016-06-28)
+## 1.0.5 (2016-06-28)
 
 - Fixed a memory leak when reading wcs that grew memory to over 10 Gb.
   \[[\#200](https://github.com/asdf-format/asdf/issues/200)\]
 
-# 1.0.4 (2016-05-25)
+## 1.0.4 (2016-05-25)
 
 - Added wrapper class for astropy.core.Time, TaggedTime.
   \[[\#198](https://github.com/asdf-format/asdf/issues/198)\]
 
-# 1.0.2 (2016-02-29)
+## 1.0.2 (2016-02-29)
 
 - Renamed package to ASDF.
   \[[\#190](https://github.com/asdf-format/asdf/issues/190)\]
 - Stopped support for Python 2.6
   \[[\#191](https://github.com/asdf-format/asdf/issues/191)\]
 
-# 1.0.1 (2016-01-08)
+## 1.0.1 (2016-01-08)
 
 - Fixed installation from the source tarball on Python 3.
   \[[\#187](https://github.com/asdf-format/asdf/issues/187)\]
@@ -1522,6 +1526,6 @@
   from a stream.
   \[[\#183](https://github.com/asdf-format/asdf/issues/183)\]
 
-# 1.0.0 (2015-09-18)
+## 1.0.0 (2015-09-18)
 
 - Initial release.
