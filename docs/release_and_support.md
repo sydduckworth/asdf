@@ -1,3 +1,4 @@
+[](){ #release-and-support }
 # Release Cycle and Major Dependency Support Policy
 
 This document describes a general plan for releasing the asdf library,

@@ -63,14 +63,15 @@ ASDF 2.15 introduced many new
 [`asdf.exceptions.AsdfDeprecationWarning`][asdf.exceptions.AsdfDeprecationWarning]
 messages. These warnings are subclasses of the built-in python
 [`DeprecationWarning`][DeprecationWarning] and will by default be
-ignored except in [`\_\_main\_\_`][\_\_main\_\_] and with
-testing tools such as `pytest <pytest:deprecation-warnings>`.
+ignored except in `__main__` and with
+testing tools such as [pytest][deprecation-warnings].
 
 These are intended to highlight use of features that we will likely
-remove in the next major version of ASDF (see our `release_and_support`
+remove in the next major version of ASDF (see our *[Release Cycle and Major Dependency Support Policy][release-and-support]*
 for more details about our versioning, compatibility and support
 policy).
 
+[](){ #legacy-extension-deprecation }
 ### Legacy Extension API Deprecation
 
 A large number of
@@ -100,21 +101,22 @@ examples include:
   - `asdf.AsdfFile.extension_list`
 
 This deprecated api is replaced by new-style
-`converters <extending_converters>`, `extensions <extending_extensions>`
-and `validators <extending_validators>`.
+[converters](extending/converters.md), [extensions](extending/extensions.md)
+and [validators](extending/validators.md).
 [asdf-astropy](https://asdf-astropy.readthedocs.io/en/latest/) is a
 useful example package that uses these new-style extension api.
 
+[](){ #asdf-in-fits-deprecation }
 ### ASDF-in-FITS Deprecation
 
 Support for `AsdfInFits` (including the `asdf.fits_embed` module) is
 deprecated. Code using this format can migrate to using
 [`stdatamodels`][stdatamodels] which contains functions to
-read and write AsdfInFits files (see `asdf_in_fits` for migration
+read and write AsdfInFits files (see [AsdfInFits][asdf_in_fits] for migration
 information).
 
 Without support for `fits_embed.AsdfInFits` the `extract` and
-`remove-hdu` commands for `asdftool <asdf_tool>` are no longer usable
+`remove-hdu` commands for [asdftool](asdf_tool.md) are no longer usable
 and are deprecated.
 
 ### asdf.tests.helpers Deprecation

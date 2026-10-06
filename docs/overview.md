@@ -5,7 +5,7 @@ introduce you to some of the core features of ASDF and will show you how
 to get started with using ASDF in your own projects.
 
 To follow along with this tutorial, you will need to install the `asdf`
-package. See `installation` for details.
+package. See *[Installation](install.md)* for details.
 
 ## Hello World
 

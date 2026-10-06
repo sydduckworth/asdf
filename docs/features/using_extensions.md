@@ -1,3 +1,4 @@
+[](){ #using-extensions-using-extensions }
 # Using Extensions
 
 ## The built-in extension
@@ -137,6 +138,7 @@ by removing its extension with the
 [`remove_extension`][asdf.config.AsdfConfig.remove_extension]
 method.
 
+[](){ #other-packages }
 ## Extensions from other packages
 
 Some external packages may define extensions that allow

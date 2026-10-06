@@ -208,6 +208,7 @@ reading and writing (if it's expected that the
 encouraged to write unit tests that check reading and writing with any
 custom [`Converter`][asdf.extension.Converter] instances.
 
+[](){ #extending-converters-deferral }
 ## Deferring to another converter
 
 Converters only support the exact types listed in
@@ -395,6 +396,7 @@ with asdf.open("with_inverse.asdf") as af:
 assert reconstituted_f1.inverse.inverse is reconstituted_f1
 ```
 
+[](){ #extending-converters-block-storage }
 ## Block storage
 
 As described above `extending_converters` can return complex objects

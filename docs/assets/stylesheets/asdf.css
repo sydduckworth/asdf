@@ -9,3 +9,25 @@ div.asdf-header {
     text-decoration: underline;
     font-size: 1.1em;
 }
+
+code.doc-symbol-package,
+a code.doc-symbol-package {
+    color: var(--doc-symbol-package-fg-color);
+    background-color: var(--doc-symbol-package-bg-color);
+}
+
+code.doc-symbol-package::after {
+    content: "pkg";
+}
+
+:root,
+:host,
+[data-md-color-scheme="default"] {
+    --doc-symbol-package-fg-color: #b9b915;
+    --doc-symbol-package-bg-color: #b9b9151a;
+}
+
+[data-md-color-scheme="slate"] {
+    --doc-symbol-package-fg-color: #fff879;
+    --doc-symbol-package-bg-color: #fff8791a;
+}
