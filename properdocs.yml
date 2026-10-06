@@ -51,7 +51,7 @@ theme:
 
 hooks:
   - scripts/toctree.py
-  - scripts/pycon.py
+  - scripts/strip_doctest_flags.py
 extra_css:
   - assets/stylesheets/mkdocstrings.css
   - assets/stylesheets/asdf.css
