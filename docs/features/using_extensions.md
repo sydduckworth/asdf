@@ -4,18 +4,18 @@
 ## The built-in extension
 
 The ability to serialize the following types is provided by
-[`asdf`][asdf]'s built-in extension:
+[`asdf`][]'s built-in extension:
 
-- [`dict`][dict]
-- [`list`][list]
-- [`str`][str]
-- [`int`][int]
-- [`float`][float]
-- [`complex`][complex]
-- [`numpy.ndarray`][numpy.ndarray]
+- [`dict`][]
+- [`list`][]
+- [`str`][]
+- [`int`][]
+- [`float`][]
+- [`complex`][]
+- [`numpy.ndarray`][]
 
 The built-in extension is packaged with
-[`asdf`][asdf] and is automatically used when
+[`asdf`][] and is automatically used when
 reading and writing files. Users can not control the use of the built-in
 extension and in general they need not concern themselves with the
 details of its implementation. However, it is useful to be aware that
@@ -31,15 +31,15 @@ In order for a particular custom type to be serialized, a special class
 called a "converter" must be implemented. Each converter defines how the
 corresponding custom type will be serialized and deserialized. More
 details on how converters are implemented can be found in
-`extending_converters`. Users should never have to refer to converter
+*[Converters](../extending/converters.md)*. Users should never have to refer to converter
 implementations directly; they simply enable
-[`asdf`][asdf] to recognize and process custom
+[`asdf`][] to recognize and process custom
 types.
 
 In addition to converters, each custom type may have a corresponding
 schema, which is used for validation. The definition of the schema if
 present is closely tied to the definition of the converter. More details
-on schema validation can be found in `schema_validation`.
+on schema validation can be found in *[Schema validation][features-schema-validation]*.
 
 Schemas are generally versioned and change in sync with their associated
 converters. The version number will increase whenever a schema (and
@@ -48,9 +48,9 @@ therefore the converter implementation) changes.
 ## Extensions
 
 In order for the converters and schemas to be used by
-[`asdf`][asdf], they must be packaged into an
+[`asdf`][], they must be packaged into an
 **extension** class. In general, the details of extensions are
-irrelevant to users of [`asdf`][asdf]. However,
+irrelevant to users of [`asdf`][]. However,
 users need to be aware of extensions in the following two scenarios:
 
 - when storing custom data types to files to be written
@@ -58,19 +58,19 @@ users need to be aware of extensions in the following two scenarios:
 
 These scenarios require the use of custom extensions (the built-in
 extension is always used). There are two ways to use custom extensions,
-which are detailed below in `other_packages` and `explicit_extensions`.
+which are detailed below in *[Extensions from other packages][features-extensions-other-packages]* and *[Explicit use of extensions][features-extensions-explicit]*.
 
 ### Writing custom types to files
 
-[`asdf`][asdf] is not capable of serializing any
+[`asdf`][] is not capable of serializing any
 custom type unless an extension is provided that defines how to
 serialize that type. Attempting to do so will cause an error when trying
 to write the file. For details on developing support for custom types
-and extensions, see `extending_extensions`.
+and extensions, see *[Extensions](../extending/extensions.md)*.
 
 ### Reading files with custom types
 
-The [`asdf`][asdf] software is capable of reading
+The [`asdf`][] software is capable of reading
 files that contain custom data types even if the extension that was used
 to create the file is not present. However, the extension is required in
 order to properly deserialize the original type.
@@ -84,7 +84,7 @@ In this case, a warning will occur by default to indicate to the user
 that the custom type in the file was not recognized and can not be
 deserialized. To suppress these warnings, users should pass
 `ignore_unrecognized_tag=True` to
-[`asdf.open`][asdf.open].
+[`asdf.open`][].
 
 Even if an extension for the custom type is present, it does not
 guarantee that the type can be deserialized successfully. Instantiating
@@ -98,7 +98,7 @@ custom types when reading ASDF files.
 
 Tags and schemas that follow best practices are versioned. This allows
 changes to tags and schemas to be recorded, and it allows
-[`asdf`][asdf] to define behavior with respect to
+[`asdf`][] to define behavior with respect to
 version compatibility.
 
 Tag and schema versions may change for several reasons. One common
@@ -112,7 +112,7 @@ versions.
 
 ### Reading files
 
-When [`asdf`][asdf] encounters a tagged object in a
+When [`asdf`][] encounters a tagged object in a
 file, it will compare the URI of the tag in the file with the list of
 tags handled by available converters. The first matching converter will
 be selected to deserialize the object. If no such converters exist, the
@@ -127,7 +127,7 @@ method.
 
 ### Writing files
 
-When writing a object to a file, [`asdf`][asdf]
+When writing a object to a file, [`asdf`][]
 compares the object's type to the list of types handled by available
 converters. The first matching converter will be selected to serialize
 the object. If no such converters exist, the library will raise an
@@ -139,17 +139,17 @@ by removing its extension with the
 [`remove_extension`][asdf.config.AsdfConfig.remove_extension]
 method.
 
-[](){ #other-packages }
+[](){ #features-extensions-other-packages }
 ## Extensions from other packages
 
 Some external packages may define extensions that allow
-[`asdf`][asdf] to recognize some or all of the
+[`asdf`][] to recognize some or all of the
 types that are defined by that package. Such packages may install the
 extension class as part of the package itself (details for developers
-can be found in `extending_extensions_installing_entry_points`).
+can be found in *[Installing extensions via entry points][extending-extensions-installing-entry-points]*).
 
 If the package installs its extension, then
-[`asdf`][asdf] will automatically detect the
+[`asdf`][] will automatically detect the
 extension and use it when processing any files. No specific action is
 required by the user in order to successfully read and write custom
 types defined by the extension for that particular package.
@@ -158,7 +158,7 @@ Users can use the `extensions` command of the `asdftool` command line
 tool in order to determine which packages in the current Python
 environment have installed ASDF extensions:
 
-```
+```bash
 $ asdftool extensions -s
 Extension Name: 'bizbaz' (from bizbaz 1.2.3) Class: bizbaz.io.asdf.extension.BizbazExtension
 Extension Name: 'builtin' (from asdf 2.0.0) Class: asdf.extension.BuiltinExtension
@@ -168,6 +168,7 @@ The output will always include the built-in extension, but may also
 display other extensions from other packages, depending on what is
 installed.
 
+[](){ #features-extensions-explicit }
 ## Explicit use of extensions
 
 Sometimes no packaged extensions are provided for the types you wish to
@@ -223,9 +224,9 @@ itself. This includes the extension's URI, which uniquely identifies a
 particular version of the extension.
 
 When reading files with extension metadata,
-[`asdf`][asdf] can check whether the required
+[`asdf`][] can check whether the required
 extensions are present before processing the file. If a required
-extension is not present, [`asdf`][asdf] will issue
+extension is not present, [`asdf`][] will issue
 a warning.
 
 It is possible to turn these warnings into errors by using the

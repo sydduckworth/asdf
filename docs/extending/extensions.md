@@ -258,6 +258,7 @@ asdf.get_config().add_extension(FooExtension())
 Now the extension will be available when working with ASDF files, but
 only for the duration of the current Python session.
 
+[](){ #extending-extensions-installing-entry-points }
 ### Installing extensions via entry points
 
 The [`asdf`][asdf] package also offers an entry

@@ -61,6 +61,7 @@ long as the proper extensions are available.
 
 [toctree using_extensions.md depth=2]
 
+[](){ #features-schema-validation }
 ## Schema validation
 
 Schema validation is used to determine whether an ASDF file is well
