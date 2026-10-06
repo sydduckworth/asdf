@@ -402,7 +402,7 @@ def type_checking(session: Session) -> None:
     """Run pyrefly type-checking."""
 
     # Install asdf with typing dependencies
-    Asdf(extras=["all", "tests", "typing"]).install(session)
+    Asdf(extras=["all", "tests", "typing"]).install(session, *nox.project.dependency_groups(PYPROJECT, "docs"))
     # If running in CI, set Github output format unless output format is manually set
     if not any(arg.startswith("--output-format") for arg in session.posargs) and is_ci():
         session.posargs.append("--output-format=github")
