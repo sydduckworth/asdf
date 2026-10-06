@@ -93,6 +93,7 @@ not present, will cause an error when the type is deserialized. Users
 should be aware of the dependencies that are required for instantiating
 custom types when reading ASDF files.
 
+[](){ #using-extensions-custom-types }
 ## Custom types, extensions, and versioning
 
 Tags and schemas that follow best practices are versioned. This allows
@@ -213,6 +214,7 @@ asdf.get_config().add_extension(MyCustomExtension())
 af = asdf.open("custom.asdf")
 ```
 
+[](){ #using-extensions-extension-checking }
 ## Extension checking
 
 When writing ASDF files using this software, metadata about the

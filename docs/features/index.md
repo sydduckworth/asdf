@@ -12,49 +12,28 @@ numbers. In Python, these types correspond to `dict`, `list`, `str`, and
 `int`, `float`, and `complex`, respectively. The top-level tree object
 behaves like a Python dictionary and supports arbitrary nesting of data
 structures. For simple examples of creating and reading trees, see
-`overview`.
+*[Overview](../overview.md)*.
 
 !!! note
-	The ASDF specification imposes a maximum size of 64-bit signed
-	integers literals in the tree (see `asdf-standard:literal_integers`
-	for details and justification). Attempting to store a larger value as
-	a YAML literal will result in a validation error.
+	The ASDF specification imposes a maximum size of 64-bit signed integers literals in the tree (see *[Literal integer values in the tree][literal_integers]* for details and justification). Attempting to store a larger value as a YAML literal will result in a validation error.
 
-	For arbitrary precision integer support, see
-	[`IntegerType`][asdf.IntegerType].
+	For arbitrary precision integer support, see [`IntegerType`][asdf.IntegerType].
 
-	Integers and floats of up to 64 bits can be stored inside of `numpy`
-	arrays (see below).
+	Integers and floats of up to 64 bits can be stored inside of [`numpy`][] arrays (see below).
 
 !!! note
-	The ASDF specification does not have an immutable sequence type that
-	maps directly to Python's `tuple`. Following the behavior of pyyaml,
-	asdf writes tuples as YAML sequences, which when loaded are converted
-	to lists. If round-tripping of tuples is important to your application
-	see `extending` to write a custom extension to save and load tuples.
+	The ASDF specification does not have an immutable sequence type that maps directly to Python's `tuple`. Following the behavior of pyyaml, asdf writes tuples as YAML sequences, which when loaded are converted to lists. If round-tripping of tuples is important to your application see *[Extending ASDF](../extending/use_cases.md)* to write a custom extension to save and load tuples.
 
-One of the key features of [`asdf`][asdf] is its
-ability to serialize `numpy` arrays. This is discussed in detail in
-`array-data`.
+One of the key features of [`asdf`][asdf] is its ability to serialize `numpy` arrays. This is discussed in detail in *[Array Data](arrays.md#array-data)*.
 
-While the core [`asdf`][asdf] package supports
-serialization of basic data types and Numpy arrays, its true power comes
-from its ability to be extended to support serialization of a wide range
-of custom data types. Details on using ASDF extensions can be found in
-`using_extensions`. Details on creating custom ASDF extensions to
-support custom data types can be found in `extending`.
+While the core [`asdf`][asdf] package supports serialization of basic data types and Numpy arrays, its true power comes from its ability to be extended to support serialization of a wide range of custom data types. Details on using ASDF extensions can be found in *[Using Extensions][using-extensions-using-extensions]*. Details on creating custom ASDF extensions to support custom data types can be found in *[Extending ASDF](../extending/use_cases.md)*.
 
 ## Array Data
 
-Much of ASDF's power and convenience comes from its ability to represent
-multidimensional array data. The `asdf` Python package provides native
-support for `numpy` arrays.
+Much of ASDF's power and convenience comes from its ability to represent multidimensional array data. The [`asdf`][] Python package provides native support for [`numpy`][] arrays.
 
-<div class="toctree" data-maxdepth="2">
+[toctree arrays.md depth=2]
 
-arrays
-
-</div>
 
 ## Using extensions
 
@@ -71,7 +50,7 @@ While ASDF is capable of serializing basic Python types and Numpy arrays
 out of the box, it can also be extended to serialize arbitrary custom
 data types. This section discusses the extension mechanism from a user's
 perspective. For documentation on creating extensions, see
-`extending_extensions`.
+*[Extensions](../extending/extensions.md)*.
 
 Even though this particular implementation of ASDF necessarily
 serializes Python data types, in theory an ASDF implementation in
@@ -80,42 +59,21 @@ analogous type in that language. Conversely, this implementation can
 read ASDF files that were written by other implementations of ASDF as
 long as the proper extensions are available.
 
-<div class="toctree" data-maxdepth="2">
-
-using_extensions
-
-</div>
+[toctree using_extensions.md depth=2]
 
 ## Schema validation
 
 Schema validation is used to determine whether an ASDF file is well
-formed. All ASDF files must conform to the schemas defined by the
-`ASDF specification
-<asdf-standard:asdf-standard>`. Schema validation can be run using
-[`AsdfFile.validate`][asdf.AsdfFile.validate] and occurs when reading
-ASDF files (using [`asdf.open`][asdf.open]) and writing
-them out (using [`AsdfFile.write_to`][asdf.AsdfFile.write_to] or
+formed. All ASDF files must conform to the schemas defined by the [ASDF specification][asdf-standard]. Schema validation can be run using [`AsdfFile.validate`][asdf.AsdfFile.validate] and occurs when reading ASDF files (using [`asdf.open`][asdf.open]) and writing them out (using [`AsdfFile.write_to`][asdf.AsdfFile.write_to] or
 [`AsdfFile.update`][asdf.AsdfFile.update]).
 
-Schema validation also plays a role when using custom extensions (see
-`using_extensions` and `extending_extensions`). Extensions must provide
-schemas for the types that they serialize. When writing a file with
-custom types, the output is validated against the schemas corresponding
-to those types. If the appropriate extension is installed when reading a
-file with custom types, then the types will be validated against the
-schemas provided by the corresponding extension.
+Schema validation also plays a role when using custom extensions (see *[Using Extensions](using_extensions.md)* and *[Extensions](../extending/extensions.md)*). Extensions must provide schemas for the types that they serialize. When writing a file with custom types, the output is validated against the schemas corresponding to those types. If the appropriate extension is installed when reading a file with custom types, then the types will be validated against the schemas provided by the corresponding extension.
 
 ### Custom schemas
 
-Every ASDF file is validated against the ASDF core schemas, and also
-against any schemas provided by custom extensions. However, it is
-sometimes useful for particular applications to impose additional
-restrictions when deciding whether a given file is valid or not.
+Every ASDF file is validated against the ASDF core schemas, and also against any schemas provided by custom extensions. However, it is sometimes useful for particular applications to impose additional restrictions when deciding whether a given file is valid or not.
 
-For example, consider an application that processes digital image data.
-The application expects the file to contain an image, and also some
-metadata about how the image was created. The following example schema
-reflects these expectations:
+For example, consider an application that processes digital image data. The application expects the file to contain an image, and also some metadata about how the image was created. The following example schema reflects these expectations:
 
 ``` yaml
 %YAML 1.1
@@ -162,14 +120,14 @@ In order to use this schema for a secondary validation pass, we pass the
 schema file lives in `image_schema.yaml`, and we wish to open a file
 called `image.asdf`. We would open the file with the following code:
 
-```
+```py
 import asdf
 af = asdf.open('image.asdf', custom_schema='image_schema.yaml')
 ```
 
 Similarly, if we wished to use this schema when creating new files:
 
-```
+```py
 new_af = asdf.AsdfFile(custom_schema='image_schema.yaml')
 ...
 ```
@@ -177,6 +135,9 @@ new_af = asdf.AsdfFile(custom_schema='image_schema.yaml')
 If your custom schema is registered with ASDF in an extension, you may
 pass the schema URI (`http://example.com/schemas/your-custom-schema`, in
 this case) instead of a file path.
+
+!!! note
+	The top-level core schemas can be found [here][core-schema].
 
 ## Versioning and Compatibility
 
@@ -196,8 +157,7 @@ specific combinations of these versions.
 
 Tag, schema, and extension versions are also important for serializing
 and deserializing data types that are stored in ASDF files. A detailed
-discussion of these versions from a user perspective can be found in
-`custom_type_versions`.
+discussion of these versions from a user perspective can be found in *[Custom types, extensions, and versioning][using-extensions-custom-types]*.
 
 Since ASDF is designed to serve as an archival format, this library is
 careful to maintain backwards compatibility with older versions of the
@@ -554,9 +514,7 @@ a: !core/ndarray-1.1.0
 [`asdf`][asdf] automatically saves history metadata
 about the extensions that were used to create the file. This information
 is used when opening files to determine if the proper extensions are
-installed (see `extension_checking` for more details).
-
-**Footnotes**
+installed (see *[Extension checking][using-extensions-extension-checking]* for more details).
 
 ## Rendering ASDF trees
 
@@ -608,7 +566,7 @@ tree of the associated [`AsdfFile`][asdf.AsdfFile].
 Normally [`asdf.info`][asdf.info] will not show the
 contents of asdf nodes turned into Python custom objects, but if that
 object supports a special method, you may see the contents of such
-objects. See `exposing_extension_object_internals` for how to implement
+objects. See *[Making converted object's contents visible to `info` and `search`][extending-exposing-extension-object-internals]* for how to implement
 such support for [`asdf.info`][asdf.info] and
 [`asdf.search`][asdf.search].
 
@@ -785,7 +743,7 @@ results. For example, to search for NDArrayType with a particular shape:
 The [`AsdfSearchResult`][asdf.search.AsdfSearchResult] object displays its
 content as a rendered tree with reasonable defaults for maximum number
 of lines and columns displayed. To change those values, we call
-\`AsdfSearchResult.format\`:
+[`AsdfSearchResult.format`][asdf.search.AsdfSearchResult.format]:
 
 ```pycon
 >>> af.search(type_=float)  # Displays limited rows # doctest: +SKIP

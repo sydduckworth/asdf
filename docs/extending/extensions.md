@@ -213,6 +213,7 @@ class FooExtension(Extension):
     ]
 ```
 
+[](){ #extending-exposing-extension-object-internals }
 ### Making converted object's contents visible to `info` and `search`
 
 If the object produced by the extension supports a class method
