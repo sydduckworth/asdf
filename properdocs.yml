@@ -111,7 +111,6 @@ plugins:
     nav_file: SUMMARY.md
     implicit_index: true
 - section-index
-# - git-authors
 # Show last modified date for pages
 - git-revision-date-localized:
     fallback_to_build_date: true
