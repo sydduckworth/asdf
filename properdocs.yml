@@ -61,14 +61,18 @@ extra_css:
 extra_javascript:
   - assets/scripts/readthedocs.js
 
+exclude_docs: |
+  # literate-nav files not actually part of the final docs
+  SUMMARY.md
 not_in_nav: |
+  # API docs are selectively included in navigation
   api/
 
-# validation:
-#   omitted_files: warn
-#   absolute_links: warn  # Or 'relative_to_docs' - new in MkDocs 1.6
-#   unrecognized_links: warn
-#   anchors: warn  # New in MkDocs 1.6
+validation:
+  omitted_files: warn
+  absolute_links: relative_to_docs
+  unrecognized_links: warn
+  anchors: warn
 
 markdown_extensions:
   - toc:
