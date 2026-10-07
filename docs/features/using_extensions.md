@@ -31,7 +31,7 @@ In order for a particular custom type to be serialized, a special class
 called a "converter" must be implemented. Each converter defines how the
 corresponding custom type will be serialized and deserialized. More
 details on how converters are implemented can be found in
-*[Converters](../extending/converters.md)*. Users should never have to refer to converter
+*[Converters](/extending/converters.md)*. Users should never have to refer to converter
 implementations directly; they simply enable
 [`asdf`][] to recognize and process custom
 types.
@@ -66,7 +66,7 @@ which are detailed below in *[Extensions from other packages][features-extension
 custom type unless an extension is provided that defines how to
 serialize that type. Attempting to do so will cause an error when trying
 to write the file. For details on developing support for custom types
-and extensions, see *[Extensions](../extending/extensions.md)*.
+and extensions, see *[Extensions](/extending/extensions.md)*.
 
 ### Reading files with custom types
 
