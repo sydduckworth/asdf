@@ -18,6 +18,7 @@ theme:
     - navigation.tracking
     - navigation.path # Show path breadcrumbs for nested pages
     - navigation.top # Show "return to top" button when scrolling up
+    - navigation.footer # Show "next/previous" page links in footer
     - toc.follow
     - header.autohide
     - content.action.edit
