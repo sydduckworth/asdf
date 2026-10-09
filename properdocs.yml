@@ -100,6 +100,7 @@ markdown_extensions:
     alternate_style: true
 # Convert `--` to emdash, `...` to ellipse, etc
 - smarty
+- pymdownx.smartsymbols
 
 plugins:
 - search

@@ -18,7 +18,7 @@ This string looks just like the URL of a web page, but if we were to attempt to 
 
 The similarity arises from the need for URIs to be globally unique. Since web domains are already controlled by a single organization or individual, they offer a convenient way to define URIs -- just reserve some path prefix off a domain you control and dole out strings with that prefix where unique identifiers are needed. But using `http://` as a URI scheme has the downside that users expect to be able to retrieve the document contents from that address.
 
-## The asdf:// URI scheme
+## The `asdf://` URI scheme
 
 To counter the problem of URIs vs URLs, [`asdf`][] 2.8 introduced support for the `asdf://` URI scheme. These URIs are constructed just like `http://` or `https://` URIs, but the ASDF-specific scheme makes clear that the content cannot be fetched from a webserver.
 
@@ -26,6 +26,7 @@ To counter the problem of URIs vs URLs, [`asdf`][] 2.8 introduced support for th
 
 The following is a complete list of entity types that are identified by URI in ASDF:
 
+[](){ #extending-uris-entities-schemas }
 ### Schemas
 
 Schemas are expected to include an `id` property that contains the URI that identifies them. That URI is used when referring to the schema in calls to [`asdf`][] library functions. We recommend the following pattern for schema URIs:
@@ -36,6 +37,7 @@ Where `<domain>` is some domain that you control, `<project>` collects all entit
 
 `asdf://example.com/example-project/schemas/foo-1.2.3`
 
+[](){ #extending-uris-entities-tags }
 ### Tags
 
 Tags, which annotate typed objects in an ASDF file's YAML tree, are represented as URIs. Unlike schemas, there is no resource associated with the tag; no blob of bytes exists that corresponds to the URI. Instead, the URI alone communicates the type of a YAML object. We recommend the following pattern for tag URIs:

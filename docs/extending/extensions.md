@@ -173,10 +173,12 @@ If the object produced by the extension supports a class method `__asdf_traverse
 
 Similarly a [`Converter`][asdf.extension.Converter] can implement a method `to_info` which converts an instance of one of the supported types to a dict, tuple or list of items to show during `info` and `search`. This can be useful when the supported type cannot be easily updated to add an `__asdf_traverse__` method.
 
+[](){ #extending-extensions-installing }
 ## Installing an extension
 
 Once an extension is implemented, it must be installed so that the [`asdf`][] library knows to use it. There are two options for installing an extension: manually per session using [`AsdfConfig`][asdf.config.AsdfConfig], or automatically for every session using the `asdf.extensions` entry point
 
+[](){ #extending-extensions-installing-asdf-config }
 ### Installing extensions via AsdfConfig
 
 The simplest way to install an extension is to add it at runtime using the [`AsdfConfig.add_extension`][asdf.config.AsdfConfig.add_extension] method. For example, the following code defines and installs a minimal extension:

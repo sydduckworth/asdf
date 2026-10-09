@@ -98,6 +98,7 @@ schema = load_schema(uri)
 assert schema["id"] == uri
 ```
 
+[](){ #extending-resources-entry-points }
 ## Installing resources via entry points
 
 The [`asdf`][] package also offers an entry point for installing resource mapping plugins. This installs a package's resources automatically without requiring calls to the AsdfConfig method. The entry point is called `asdf.resource_mappings` and expects to receive a method that returns a list of [`Mapping`][collections.abc.Mapping] instances.
