@@ -33,8 +33,8 @@ This section outlines basic use cases of the ASDF package for creating and readi
 ### Creating a file
 
 <!-- --8<-- [start:create-file] -->
-We're going to store several [`numpy`][] arrays
-and other data to an ASDF file. We do this by creating a "tree", which is simply a [`dict`][], and we provide it as
+We're going to store several `numpy` arrays
+and other data to an ASDF file. We do this by creating a "tree", which is simply a `dict`, and we provide it as
 input to the constructor of `AsdfFile`:
 
 ``` python
@@ -114,7 +114,7 @@ The built-in compression algorithms are `'zlib'`, and `'bzp2'`. The `'lz4'` algo
 ### Reading a file
 
 <!-- --8<-- [start:read-file] -->
-To read an existing ASDF file, we simply use the top-level [`open`][asdf.open] function of the [`asdf`][] package:
+To read an existing ASDF file, we simply use the top-level `open` function of the `asdf` package:
 
 ``` python
 import asdf
@@ -122,14 +122,14 @@ import asdf
 af = asdf.open("example.asdf")
 ```
 
-The [`open`][asdf.open] function also works as a context handler:
+The `open` function also works as a context handler:
 
 ``` python
 with asdf.open("example.asdf") as af:
     ...
 ```
 
-To get a quick overview of the data stored in the file, use the top-level [`AsdfFile.info()`][asdf.AsdfFile.info] method:
+To get a quick overview of the data stored in the file, use the top-level `AsdfFile.info()` method:
 
 ```pycon
 >>> import asdf
@@ -156,7 +156,7 @@ root (AsdfObject)
 └─sequence (NDArrayType): shape=(100,), dtype=int64
 ```
 
-The [`AsdfFile`][asdf.AsdfFile] behaves like a Python [`dict`][], and nodes are accessed like any other dictionary entry:
+The `AsdfFile` behaves like a Python `dict`, and nodes are accessed like any other dictionary entry:
 
 ```pycon
 >>> af["name"]
