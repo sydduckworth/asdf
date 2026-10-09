@@ -1,19 +1,10 @@
 # Configuration
 
-Version 2.8 of this library introduced a new mechanism,
-[`AsdfConfig`][asdf.config.AsdfConfig], for setting global
-configuration options. Currently available options are limited, but we
-expect to eventually move many of the
-[`asdf.AsdfFile`][asdf.AsdfFile] and
-[`asdf.AsdfFile.write_to`][asdf.AsdfFile.write_to] keyword arguments
-to [`AsdfConfig`][asdf.config.AsdfConfig].
+Version 2.8 of this library introduced a new mechanism, [`AsdfConfig`][asdf.config.AsdfConfig], for setting global configuration options. Currently available options are limited, but we expect to eventually move many of the [`asdf.AsdfFile`][asdf.AsdfFile] and [`asdf.AsdfFile.write_to`][asdf.AsdfFile.write_to] keyword arguments to [`AsdfConfig`][asdf.config.AsdfConfig].
 
 ## Using AsdfConfig
 
-The [`AsdfConfig`][asdf.config.AsdfConfig] class provides properties
-that can be adjusted to change the behavior of the
-[`asdf`][asdf] library for all files. For example,
-to disable schema validation on read:
+The [`AsdfConfig`][asdf.config.AsdfConfig] class provides properties that can be adjusted to change the behavior of the [`asdf`][asdf] library for all files. For example, to disable schema validation on read:
 
 ```pycon
 >>> import asdf
@@ -21,16 +12,11 @@ to disable schema validation on read:
 
 ```
 
-This will prevent validation on any subsequent call to
-[`open`][asdf.open].
+This will prevent validation on any subsequent call to [`open`][asdf.open].
 
 ### Obtaining an AsdfConfig instance
 
-There are two methods available that give access to an
-[`AsdfConfig`][asdf.config.AsdfConfig] instance:
-[`get_config`][asdf.get_config] and
-[`config_context`][asdf.config_context]. The former simply
-returns the currently active config:
+There are two methods available that give access to an [`AsdfConfig`][asdf.config.AsdfConfig] instance: [`get_config`][asdf.get_config] and [`config_context`][asdf.config_context]. The former simply returns the currently active config:
 
 ```pycon
 >>> import asdf
@@ -51,12 +37,7 @@ returns the currently active config:
 
 ```
 
-The latter method, [`config_context`][asdf.config_context],
-returns a context manager that yields a copy of the currently active
-config. The copy is also returned by subsequent calls to
-[`get_config`][asdf.get_config], but only until the
-context manager exits. This allows for short-lived configuration changes
-that do not impact other code:
+The latter method, [`config_context`][asdf.config_context], returns a context manager that yields a copy of the currently active config. The copy is also returned by subsequent calls to [`get_config`][asdf.get_config], but only until the context manager exits. This allows for short-lived configuration changes that do not impact other code:
 
 ```pycon
 >>> import asdf
@@ -96,20 +77,13 @@ that do not impact other code:
 
 ### Special note to library maintainers
 
-Libraries that use [`asdf`][asdf] are encouraged to
-only modify [`AsdfConfig`][asdf.config.AsdfConfig] within a
-surrounding call to [`config_context`][asdf.config_context].
-The downstream library will then be able to customize
-[`asdf`][asdf]'s behavior without impacting other
-libraries or clobbering changes made by the user.
+Libraries that use [`asdf`][asdf] are encouraged to only modify [`AsdfConfig`][asdf.config.AsdfConfig] within a surrounding call to [`config_context`][asdf.config_context]. The downstream library will then be able to customize [`asdf`][asdf]'s behavior without impacting other libraries or clobbering changes made by the user.
 
 ## Config options
 
 ### array_inline_threshold
 
-The threshold number of array elements under which arrays are
-automatically stored inline in the ASDF tree instead of in binary
-blocks. If `None`, array storage type is not managed automatically.
+The threshold number of array elements under which arrays are automatically stored inline in the ASDF tree instead of in binary blocks. If `None`, array storage type is not managed automatically.
 
 Defaults to `None`.
 
@@ -122,122 +96,71 @@ Use this storage type for all arrays within an ASDF file. Must be one of
 - `"inline"`
 - `None`
 
-If `None` a different storage type can be used for each array. See
-[`asdf.AsdfFile.set_array_storage`][asdf.AsdfFile.set_array_storage] for more
-details.
+If `None` a different storage type can be used for each array. See [`asdf.AsdfFile.set_array_storage`][asdf.AsdfFile.set_array_storage] for more details.
 
 Defaults to `None`.
 
 ### all_array_compression
 
-Use this compression type for all arrays within an ASDF file. If
-`"input"` a different compression type can be used for each array. See
-[`asdf.AsdfFile.set_array_compression`][asdf.AsdfFile.set_array_compression] for
-more details.
+Use this compression type for all arrays within an ASDF file. If `"input"` a different compression type can be used for each array. See [`asdf.AsdfFile.set_array_compression`][asdf.AsdfFile.set_array_compression] for more details.
 
 Defaults to `"input"`.
 
 ### all_array_compression_kwargs
 
-Use these additional compression keyword arguments for all arrays within
-an ASDF file. If `None` diffeerent keyword arguments can be set for each
-array. See
-[`asdf.AsdfFile.set_array_compression`][asdf.AsdfFile.set_array_compression] for
-more details.
+Use these additional compression keyword arguments for all arrays within an ASDF file. If `None` diffeerent keyword arguments can be set for each array. See [`asdf.AsdfFile.set_array_compression`][asdf.AsdfFile.set_array_compression] for more details.
 
 Defaults to `None`.
 
 ### default_array_save_base
 
-If `True` (the default) when an array is saved, the bytes for the "base"
-array that owns the memory will be stored as an ASDF block (see
-[`asdf.util.get_array_base`][asdf.util.get_array_base]). This means
-that saving a small "view" of a large array will result in the entire
-large array being saved to the file.
+If `True` (the default) when an array is saved, the bytes for the "base" array that owns the memory will be stored as an ASDF block (see [`asdf.util.get_array_base`][asdf.util.get_array_base]). This means that saving a small "view" of a large array will result in the entire large array being saved to the file.
 
-If `False` bytes for different arrays (even if they are views of the
-same memory) will be stored in different ASDF blocks.
+If `False` bytes for different arrays (even if they are views of the same memory) will be stored in different ASDF blocks.
 
 ### default_version
 
-The default ASDF core schemas version used for new files. This can be
-overridden on an individual file basis (using the version argument to
-[`asdf.AsdfFile`][asdf.AsdfFile]) or set here to change the
-default for all new files created in the current session.
+The default ASDF core schemas version used for new files. This can be overridden on an individual file basis (using the version argument to [`asdf.AsdfFile`][asdf.AsdfFile]) or set here to change the default for all new files created in the current session.
 
 Defaults to the latest stable ASDF core schemas version.
 
 ### io_block_size
 
-The buffer size used when reading and writing to the filesystem. Users
-may wish to adjust this value to improve I/O performance. Set to -1 to
-use the system provided default block size for each file.
+The buffer size used when reading and writing to the filesystem. Users may wish to adjust this value to improve I/O performance. Set to -1 to use the system provided default block size for each file.
 
 Defaults to -1.
 
 ### legacy_fill_schema_defaults
 
-Flag that controls filling default values from schemas for older
-versions of ASDF. This library used to remove nodes from the tree whose
-values matched the default property in the schema. That behavior was
-changed in [`asdf`][asdf] 2.8, but in order to read
-files produced by older versions of the library, default values must
-still be filled from the schema for ASDF core schemas \<= 1.5.0.
+Flag that controls filling default values from schemas for older versions of ASDF. This library used to remove nodes from the tree whose values matched the default property in the schema. That behavior was changed in [`asdf`][asdf] 2.8, but in order to read files produced by older versions of the library, default values must still be filled from the schema for ASDF core schemas \<= 1.5.0.
 
-Set to False to disable filling default values from the schema for these
-older ASDF core schema versions. The flag has no effect for ASDF core
-schemas \>= 1.6.0.
+Set to False to disable filling default values from the schema for these older ASDF core schema versions. The flag has no effect for ASDF core schemas \>= 1.6.0.
 
 Defaults to True.
 
 ### validate_on_read
 
-Flag that controls schema validation of the ASDF tree when opening
-files. Users who trust the source of their files may wish to disable
-validation on read to improve performance.
+Flag that controls schema validation of the ASDF tree when opening files. Users who trust the source of their files may wish to disable validation on read to improve performance.
 
 Defaults to True.
 
 !!! warning
-	In a future release the default value will change from
-	[`True`][True] to
-	[`False`][False]. Currently, if a validation error
-	occurs while loading a file and this field hasn't been manually set
-	then ASDF will emit an
-	[`asdf.exceptions.AsdfFutureWarning`][asdf.exceptions.AsdfFutureWarning]
-	*before* raising an exception. Manually set the field to either
-	[`True`][True] or
-	[`False`][False] to silence this warning.
+	In a future release the default value will change from [`True`][True] to [`False`][False]. Currently, if a validation error occurs while loading a file and this field hasn't been manually set then ASDF will emit an [`asdf.exceptions.AsdfFutureWarning`][asdf.exceptions.AsdfFutureWarning] *before* raising an exception. Manually set the field to either [`True`][True] or [`False`][False] to silence this warning.
 
 ### lazy_tree
 
-Flag to control if the tree is "lazy". See the `lazy_tree` argument to
-[`asdf.open`][asdf.open] for more details.
+Flag to control if the tree is "lazy". See the `lazy_tree` argument to [`asdf.open`][asdf.open] for more details.
 
 ### warn_on_failed_conversion
 
-Flag to control if any errors raised during conversion of a tagged
-object to a custom object are caught and turned into warnings. It may be
-helpful to enable this option when opening old files with tags that are
-no longer supported in the current environment.
+Flag to control if any errors raised during conversion of a tagged object to a custom object are caught and turned into warnings. It may be helpful to enable this option when opening old files with tags that are no longer supported in the current environment.
 
 !!! warning
-	In a future release the default value will change from
-	[`False`][False] to
-	[`True`][True]. Currently, if a conversion fails
-	and this field hasn't been set then ASDF will emit an
-	[`asdf.exceptions.AsdfFutureWarning`][asdf.exceptions.AsdfFutureWarning]
-	*before* raising an exception. Manually set the field to either
-	[`True`][True] or
-	[`False`][False] to silence this warning.
+	In a future release the default value will change from [`False`][False] to [`True`][True]. Currently, if a conversion fails and this field hasn't been set then ASDF will emit an [`asdf.exceptions.AsdfFutureWarning`][asdf.exceptions.AsdfFutureWarning] *before* raising an exception. Manually set the field to either [`True`][True] or [`False`][False] to silence this warning.
 
 ## Additional AsdfConfig features
 
-[`AsdfConfig`][asdf.config.AsdfConfig] also provides methods for
-adding and removing plugins at runtime. For example, the
-[`AsdfConfig.add_resource_mapping`][asdf.config.AsdfConfig.add_resource_mapping] method
-can be used to register a schema, which can then be used to validate a
-file:
+[`AsdfConfig`][asdf.config.AsdfConfig] also provides methods for adding and removing plugins at runtime. For example, the [`AsdfConfig.add_resource_mapping`][asdf.config.AsdfConfig.add_resource_mapping] method can be used to register a schema, which can then be used to validate a file:
 
 ```pycon
 >>> import asdf
@@ -267,5 +190,4 @@ asdf._jsonschema.exceptions.ValidationError: 'foo' is a required property
 
 ```
 
-See the [`AsdfConfig`][asdf.config.AsdfConfig] API documentation for
-more detail.
+See the [`AsdfConfig`][asdf.config.AsdfConfig] API documentation for more detail.

@@ -1,16 +1,12 @@
 # Overview
 
-Let's start by taking a look at a few basic ASDF use cases. This will
-introduce you to some of the core features of ASDF and will show you how
-to get started with using ASDF in your own projects.
+Let's start by taking a look at a few basic ASDF use cases. This will introduce you to some of the core features of ASDF and will show you how to get started with using ASDF in your own projects.
 
-To follow along with this tutorial, you will need to install the `asdf`
-package. See *[Installation](install.md)* for details.
+To follow along with this tutorial, you will need to install the `asdf` package. See *[Installation](install.md)* for details.
 
 ## Hello World
 
-At its core, ASDF is a way of saving nested data structures to YAML.
-Here we save a `dict` with the key/value pair `'hello': 'world'`.
+At its core, ASDF is a way of saving nested data structures to YAML. Here we save a `dict` with the key/value pair `'hello': 'world'`.
 
 ```pycon
 >>> from asdf import AsdfFile
@@ -50,10 +46,7 @@ hello: world
 
 --8<-- "README.md:create-file"
 
-A rendering of the binary data contained in the file can be found below.
-Observe that the value of `source` in the metadata corresponds to the
-block number (e.g. `BLOCK 0`) of the block which contains the binary
-data.
+A rendering of the binary data contained in the file can be found below. Observe that the value of `source` in the metadata corresponds to the block number (e.g. `BLOCK 0`) of the block which contains the binary data.
 
 --8<-- "README.md:compress-file"
 
