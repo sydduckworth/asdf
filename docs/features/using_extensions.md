@@ -126,4 +126,4 @@ When writing ASDF files using this software, metadata about the extensions that 
 
 When reading files with extension metadata, [`asdf`][] can check whether the required extensions are present before processing the file. If a required extension is not present, [`asdf`][] will issue a warning.
 
-It is possible to turn these warnings into errors by using the `strict_extension_check` parameter of [`asdf.open`][asdf.open]. If this parameter is set to [`True`][True], then opening the file will fail if any of the required extensions are missing.
+It is possible to turn these warnings into errors by using the `strict_extension_check` parameter of [`asdf.open`][]. If this parameter is set to [`True`][], then opening the file will fail if any of the required extensions are missing.

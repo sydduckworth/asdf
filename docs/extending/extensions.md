@@ -61,6 +61,7 @@ class FooExtension(Extension):
     converters = [FooConverter()]
 ```
 
+[](){ #extending-extensions-compressors }
 ### Additional block compressors
 
 Binary block compressors implement the [`Compressor`][asdf.extension.Compressor] interface and are included in an extension via the `compressors` property:
@@ -174,7 +175,7 @@ Similarly a [`Converter`][asdf.extension.Converter] can implement a method `to_i
 
 ## Installing an extension
 
-Once an extension is implemented, it must be installed so that the [`asdf`][asdf] library knows to use it. There are two options for installing an extension: manually per session using [`AsdfConfig`][asdf.config.AsdfConfig], or automatically for every session using the `asdf.extensions` entry point
+Once an extension is implemented, it must be installed so that the [`asdf`][] library knows to use it. There are two options for installing an extension: manually per session using [`AsdfConfig`][asdf.config.AsdfConfig], or automatically for every session using the `asdf.extensions` entry point
 
 ### Installing extensions via AsdfConfig
 
@@ -197,7 +198,7 @@ Now the extension will be available when working with ASDF files, but only for t
 [](){ #extending-extensions-installing-entry-points }
 ### Installing extensions via entry points
 
-The [`asdf`][asdf] package also offers an entry point for installing extensions This registers a package's extensions automatically on package install without requiring calls to the AsdfConfig method. The entry point is called `asdf.extensions` and expects to receive a method that returns a list of `Extension` instances.
+The [`asdf`][] package also offers an entry point for installing extensions This registers a package's extensions automatically on package install without requiring calls to the AsdfConfig method. The entry point is called `asdf.extensions` and expects to receive a method that returns a list of `Extension` instances.
 
 For example, let's say we're creating a package named `asdf-foo-extension` that provides the not-particularly-useful `FooExtension` from the previous section. We'll need to define an entry point method that returns a list containing an instance of `FooExtension`:
 
@@ -239,7 +240,7 @@ It is important to consider the order of extensions registered via the entry poi
 
 ### Entry point performance considerations
 
-For the good of [`asdf`][asdf] users everywhere, it's important that entry point methods load as quickly as possible. All extensions must be loaded before reading an ASDF file, so any entry point method that lingers will introduce a delay to the initial call to [`asdf.open`][asdf.open]. For that reason, we recommend that extension authors minimize the number of imports that occur in the module containing the entry point method, particularly imports of modules outside of the Python standard library or [`asdf`][asdf] itself.
+For the good of [`asdf`][] users everywhere, it's important that entry point methods load as quickly as possible. All extensions must be loaded before reading an ASDF file, so any entry point method that lingers will introduce a delay to the initial call to [`asdf.open`][]. For that reason, we recommend that extension authors minimize the number of imports that occur in the module containing the entry point method, particularly imports of modules outside of the Python standard library or [`asdf`][] itself.
 
 ## Populating an extension from a manifest
 
@@ -296,7 +297,7 @@ def get_extensions():
     return [EXTENSION]
 ```
 
-When the module is imported, `ManifestExtension.from_uri` asks the [`asdf`][asdf] library to load all available resources so that it can retrieve the manifest content. But loading the resources requires importing this module to get at the `get_resource_mappings` method, so now we're stuck!
+When the module is imported, `ManifestExtension.from_uri` asks the [`asdf`][] library to load all available resources so that it can retrieve the manifest content. But loading the resources requires importing this module to get at the `get_resource_mappings` method, so now we're stuck!
 
 The solution is to instantiate the ManifestExtension inside of its entry point method:
 
@@ -309,7 +310,7 @@ def get_extensions():
     ]
 ```
 
-This is not as inefficient as it might seem, since the [`asdf`][asdf] library only calls the method once and reuses a cached result thereafter.
+This is not as inefficient as it might seem, since the [`asdf`][] library only calls the method once and reuses a cached result thereafter.
 
 ## Versioning extensions
 

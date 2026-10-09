@@ -1,10 +1,10 @@
 # Configuration
 
-Version 2.8 of this library introduced a new mechanism, [`AsdfConfig`][asdf.config.AsdfConfig], for setting global configuration options. Currently available options are limited, but we expect to eventually move many of the [`asdf.AsdfFile`][asdf.AsdfFile] and [`asdf.AsdfFile.write_to`][asdf.AsdfFile.write_to] keyword arguments to [`AsdfConfig`][asdf.config.AsdfConfig].
+Version 2.8 of this library introduced a new mechanism, [`AsdfConfig`][asdf.config.AsdfConfig], for setting global configuration options. Currently available options are limited, but we expect to eventually move many of the [`asdf.AsdfFile`][] and [`asdf.AsdfFile.write_to`][asdf.AsdfFile.write_to] keyword arguments to [`AsdfConfig`][asdf.config.AsdfConfig].
 
 ## Using AsdfConfig
 
-The [`AsdfConfig`][asdf.config.AsdfConfig] class provides properties that can be adjusted to change the behavior of the [`asdf`][asdf] library for all files. For example, to disable schema validation on read:
+The [`AsdfConfig`][asdf.config.AsdfConfig] class provides properties that can be adjusted to change the behavior of the [`asdf`][] library for all files. For example, to disable schema validation on read:
 
 ```pycon
 >>> import asdf
@@ -77,7 +77,7 @@ The latter method, [`config_context`][asdf.config_context], returns a context ma
 
 ### Special note to library maintainers
 
-Libraries that use [`asdf`][asdf] are encouraged to only modify [`AsdfConfig`][asdf.config.AsdfConfig] within a surrounding call to [`config_context`][asdf.config_context]. The downstream library will then be able to customize [`asdf`][asdf]'s behavior without impacting other libraries or clobbering changes made by the user.
+Libraries that use [`asdf`][] are encouraged to only modify [`AsdfConfig`][asdf.config.AsdfConfig] within a surrounding call to [`config_context`][asdf.config_context]. The downstream library will then be able to customize [`asdf`][]'s behavior without impacting other libraries or clobbering changes made by the user.
 
 ## Config options
 
@@ -120,7 +120,7 @@ If `False` bytes for different arrays (even if they are views of the same memory
 
 ### default_version
 
-The default ASDF core schemas version used for new files. This can be overridden on an individual file basis (using the version argument to [`asdf.AsdfFile`][asdf.AsdfFile]) or set here to change the default for all new files created in the current session.
+The default ASDF core schemas version used for new files. This can be overridden on an individual file basis (using the version argument to [`asdf.AsdfFile`][]) or set here to change the default for all new files created in the current session.
 
 Defaults to the latest stable ASDF core schemas version.
 
@@ -132,7 +132,7 @@ Defaults to -1.
 
 ### legacy_fill_schema_defaults
 
-Flag that controls filling default values from schemas for older versions of ASDF. This library used to remove nodes from the tree whose values matched the default property in the schema. That behavior was changed in [`asdf`][asdf] 2.8, but in order to read files produced by older versions of the library, default values must still be filled from the schema for ASDF core schemas \<= 1.5.0.
+Flag that controls filling default values from schemas for older versions of ASDF. This library used to remove nodes from the tree whose values matched the default property in the schema. That behavior was changed in [`asdf`][] 2.8, but in order to read files produced by older versions of the library, default values must still be filled from the schema for ASDF core schemas \<= 1.5.0.
 
 Set to False to disable filling default values from the schema for these older ASDF core schema versions. The flag has no effect for ASDF core schemas \>= 1.6.0.
 
@@ -145,18 +145,18 @@ Flag that controls schema validation of the ASDF tree when opening files. Users 
 Defaults to True.
 
 !!! warning
-	In a future release the default value will change from [`True`][True] to [`False`][False]. Currently, if a validation error occurs while loading a file and this field hasn't been manually set then ASDF will emit an [`asdf.exceptions.AsdfFutureWarning`][asdf.exceptions.AsdfFutureWarning] *before* raising an exception. Manually set the field to either [`True`][True] or [`False`][False] to silence this warning.
+	In a future release the default value will change from [`True`][] to [`False`][]. Currently, if a validation error occurs while loading a file and this field hasn't been manually set then ASDF will emit an [`asdf.exceptions.AsdfFutureWarning`][] *before* raising an exception. Manually set the field to either [`True`][] or [`False`][] to silence this warning.
 
 ### lazy_tree
 
-Flag to control if the tree is "lazy". See the `lazy_tree` argument to [`asdf.open`][asdf.open] for more details.
+Flag to control if the tree is "lazy". See the `lazy_tree` argument to [`asdf.open`][] for more details.
 
 ### warn_on_failed_conversion
 
 Flag to control if any errors raised during conversion of a tagged object to a custom object are caught and turned into warnings. It may be helpful to enable this option when opening old files with tags that are no longer supported in the current environment.
 
 !!! warning
-	In a future release the default value will change from [`False`][False] to [`True`][True]. Currently, if a conversion fails and this field hasn't been set then ASDF will emit an [`asdf.exceptions.AsdfFutureWarning`][asdf.exceptions.AsdfFutureWarning] *before* raising an exception. Manually set the field to either [`True`][True] or [`False`][False] to silence this warning.
+	In a future release the default value will change from [`False`][] to [`True`][]. Currently, if a conversion fails and this field hasn't been set then ASDF will emit an [`asdf.exceptions.AsdfFutureWarning`][] *before* raising an exception. Manually set the field to either [`True`][] or [`False`][] to silence this warning.
 
 ## Additional AsdfConfig features
 

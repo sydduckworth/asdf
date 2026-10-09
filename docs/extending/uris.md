@@ -20,7 +20,7 @@ The similarity arises from the need for URIs to be globally unique. Since web do
 
 ## The asdf:// URI scheme
 
-To counter the problem of URIs vs URLs, [`asdf`][asdf] 2.8 introduced support for the `asdf://` URI scheme. These URIs are constructed just like `http://` or `https://` URIs, but the ASDF-specific scheme makes clear that the content cannot be fetched from a webserver.
+To counter the problem of URIs vs URLs, [`asdf`][] 2.8 introduced support for the `asdf://` URI scheme. These URIs are constructed just like `http://` or `https://` URIs, but the ASDF-specific scheme makes clear that the content cannot be fetched from a webserver.
 
 ## Entities identified by URI
 
@@ -28,7 +28,7 @@ The following is a complete list of entity types that are identified by URI in A
 
 ### Schemas
 
-Schemas are expected to include an `id` property that contains the URI that identifies them. That URI is used when referring to the schema in calls to [`asdf`][asdf] library functions. We recommend the following pattern for schema URIs:
+Schemas are expected to include an `id` property that contains the URI that identifies them. That URI is used when referring to the schema in calls to [`asdf`][] library functions. We recommend the following pattern for schema URIs:
 
 `asdf://<domain>/<project>/schemas/<name>-<version>`
 
@@ -48,7 +48,7 @@ Where `<domain>` is some domain that you control, `<project>` collects all entit
 
 ### Manifests
 
-Manifest documents are language-independent definitions of extensions to ASDF and include an `id` property that contains the URI that identifies them. That URI is used when referring to the manifest in calls to [`asdf`][asdf] library functions. We recommend the following pattern for manifest URIs:
+Manifest documents are language-independent definitions of extensions to ASDF and include an `id` property that contains the URI that identifies them. That URI is used when referring to the manifest in calls to [`asdf`][] library functions. We recommend the following pattern for manifest URIs:
 
 `asdf://<domain>/<project>/manifests/<name>-<version>`
 

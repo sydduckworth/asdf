@@ -1,10 +1,10 @@
 # Installation
 
-There are several different ways to install the [`asdf`][asdf] package. Each is described in detail below.
+There are several different ways to install the [`asdf`][] package. Each is described in detail below.
 
 ## Requirements
 
-The [`asdf`][asdf] package has several dependencies which are listed in the project's build configuration `pyproject.toml`. All dependencies are available on pypi and will be automatically installed along with [`asdf`][asdf].
+The [`asdf`][] package has several dependencies which are listed in the project's build configuration `pyproject.toml`. All dependencies are available on pypi and will be automatically installed along with [`asdf`][].
 
 Support for units, time, and transform tags requires an implementation of these types. One recommended option is the [asdf-astropy](https://asdf-astropy.readthedocs.io/en/latest/) package.
 
@@ -16,9 +16,9 @@ Optional support for [lz4](https://en.wikipedia.org/wiki/LZ4_(compression_algori
 
 ## Installing with conda
 
-[`asdf`][asdf] is also distributed as a [conda](https://conda.io/docs/) package via the [conda-forge](https://conda-forge.org/) channel. It is also available through the [astroconda](https://astroconda.readthedocs.io/en/latest/) channel.
+[`asdf`][] is also distributed as a [conda](https://conda.io/docs/) package via the [conda-forge](https://conda-forge.org/) channel. It is also available through the [astroconda](https://astroconda.readthedocs.io/en/latest/) channel.
 
-To install [`asdf`][asdf] within an existing conda environment:
+To install [`asdf`][] within an existing conda environment:
 
     $ conda install -c conda-forge asdf
 

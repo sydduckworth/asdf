@@ -33,18 +33,18 @@ The following functions in `asdf.util` are deprecated:
 
 ## Version 3.0
 
-SerializationContext was previously importable from `asdf.asdf.SerializationContext`. Although not part of the public API, this import path has been deprecated and users should instead import `SerializationContext` from [`asdf.extension`][asdf.extension].
+SerializationContext was previously importable from `asdf.asdf.SerializationContext`. Although not part of the public API, this import path has been deprecated and users should instead import `SerializationContext` from [`asdf.extension`][].
 
 ## Version 2.15
 
-ASDF 2.15 introduced many new [`asdf.exceptions.AsdfDeprecationWarning`][asdf.exceptions.AsdfDeprecationWarning] messages. These warnings are subclasses of the built-in python [`DeprecationWarning`][DeprecationWarning] and will by default be ignored except in `__main__` and with testing tools such as [pytest][deprecation-warnings].
+ASDF 2.15 introduced many new [`asdf.exceptions.AsdfDeprecationWarning`][] messages. These warnings are subclasses of the built-in python [`DeprecationWarning`][] and will by default be ignored except in `__main__` and with testing tools such as [pytest][deprecation-warnings].
 
 These are intended to highlight use of features that we will likely remove in the next major version of ASDF (see our *[Release Cycle and Major Dependency Support Policy][release-and-support]* for more details about our versioning, compatibility and support policy).
 
 [](){ #legacy-extension-deprecation }
 ### Legacy Extension API Deprecation
 
-A large number of [`asdf.exceptions.AsdfDeprecationWarning`][asdf.exceptions.AsdfDeprecationWarning] messages appear related to use of the `legacy extension api`. Some examples include:
+A large number of [`asdf.exceptions.AsdfDeprecationWarning`][] messages appear related to use of the `legacy extension api`. Some examples include:
 
 - `asdf.types`
 - `asdf.types.CustomType`
@@ -72,10 +72,10 @@ This deprecated api is replaced by new-style [converters](extending/converters.m
 [](){ #asdf-in-fits-deprecation }
 ### ASDF-in-FITS Deprecation
 
-Support for `AsdfInFits` (including the `asdf.fits_embed` module) is deprecated. Code using this format can migrate to using [`stdatamodels`][stdatamodels] which contains functions to read and write AsdfInFits files (see [AsdfInFits][asdf_in_fits] for migration information).
+Support for `AsdfInFits` (including the `asdf.fits_embed` module) is deprecated. Code using this format can migrate to using [`stdatamodels`][] which contains functions to read and write AsdfInFits files (see [AsdfInFits][asdf_in_fits] for migration information).
 
 Without support for `fits_embed.AsdfInFits` the `extract` and `remove-hdu` commands for [asdftool](asdf_tool.md) are no longer usable and are deprecated.
 
 ### asdf.tests.helpers Deprecation
 
-Use of `asdf.tests.helpers` is deprecated. Please see [`asdf.testing.helpers`][asdf.testing.helpers] for alternative functions to aid in testing.
+Use of `asdf.tests.helpers` is deprecated. Please see [`asdf.testing.helpers`][] for alternative functions to aid in testing.

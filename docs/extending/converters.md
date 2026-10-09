@@ -12,9 +12,9 @@ Every Converter implementation must provide two required properties and two requ
 
 The string type name is recommended over a type object for performance reasons, see `extending_converters_performance`.
 
-[`Converter.to_yaml_tree`][asdf.extension.Converter.to_yaml_tree] - a method that accepts a complex Python object and returns a simple node object (typically a [`dict`][dict]) suitable for serialization to YAML. The node is permitted to contain nested complex objects; these will in turn be passed to other `to_yaml_tree` methods in other Converters.
+[`Converter.to_yaml_tree`][asdf.extension.Converter.to_yaml_tree] - a method that accepts a complex Python object and returns a simple node object (typically a [`dict`][]) suitable for serialization to YAML. The node is permitted to contain nested complex objects; these will in turn be passed to other `to_yaml_tree` methods in other Converters.
 
-[`Converter.from_yaml_tree`][asdf.extension.Converter.from_yaml_tree] - a method that accepts a simple node object from parsed YAML and returns the appropriate complex Python object. For a non-lazy-tree, nested nodes in the received node will have already been converted to complex objects by other calls to `from_yaml_tree` methods, except where reference cycles are present -- see `extending_converters_reference_cycles` for information on how to handle that situation. For a `lazy_tree` (see [`asdf.open`][asdf.open]) the node will contain [`asdf.lazy_nodes`][asdf.lazy_nodes] instances which act like dicts and lists but convert child objects only when they are accessed.
+[`Converter.from_yaml_tree`][asdf.extension.Converter.from_yaml_tree] - a method that accepts a simple node object from parsed YAML and returns the appropriate complex Python object. For a non-lazy-tree, nested nodes in the received node will have already been converted to complex objects by other calls to `from_yaml_tree` methods, except where reference cycles are present -- see `extending_converters_reference_cycles` for information on how to handle that situation. For a `lazy_tree` (see [`asdf.open`][]) the node will contain [`asdf.lazy_nodes`][asdf.lazy_nodes] instances which act like dicts and lists but convert child objects only when they are accessed.
 
 Additionally, the Converter interface includes a method that must be implemented when some logic is required to select the tag to assign to a `to_yaml_tree` result:
 
@@ -178,7 +178,7 @@ Just like a non-deferring Converter this Converter will need to be added to an E
 
 ## Reference cycles
 
-Special considerations must be made when deserializing a tagged object that contains a reference to itself among its descendants. Consider a [`fractions.Fraction`][fractions.Fraction] subclass that maintains a reference to its multiplicative inverse:
+Special considerations must be made when deserializing a tagged object that contains a reference to itself among its descendants. Consider a [`fractions.Fraction`][] subclass that maintains a reference to its multiplicative inverse:
 
 ``` python
 import fractions
@@ -268,7 +268,7 @@ def from_yaml_tree(self, node, tag, ctx):
     obj.inverse = node["inverse"]
 ```
 
-The generator version of `from_yaml_tree` yields the partially constructed `FractionWithInverse` object before setting its inverse property. This allows [`asdf`][asdf] to proceed to constructing the inverse `FractionWithInverse` object, and resume the original `from_yaml_tree` execution only when the inverse is actually available.
+The generator version of `from_yaml_tree` yields the partially constructed `FractionWithInverse` object before setting its inverse property. This allows [`asdf`][] to proceed to constructing the inverse `FractionWithInverse` object, and resume the original `from_yaml_tree` execution only when the inverse is actually available.
 
 With this modification we can successfully deserialize our ASDF file:
 
@@ -284,7 +284,7 @@ assert reconstituted_f1.inverse.inverse is reconstituted_f1
 
 As described above `extending_converters` can return complex objects that will be passed to other Converters. If a Converter returns a ndarray, asdf will recognize this array and store it in an ASDF block. This is the easiest and preferred means of storing data in ASDF blocks.
 
-For applications that require more flexibility, Converters can control block storage through use of the [`asdf.extension.SerializationContext`][asdf.extension.SerializationContext] provided as an argument to [`Converter.to_yaml_tree`][asdf.extension.Converter.to_yaml_tree] [`Converter.from_yaml_tree`][asdf.extension.Converter.from_yaml_tree] and `Converter.select_tag`.
+For applications that require more flexibility, Converters can control block storage through use of the [`asdf.extension.SerializationContext`][] provided as an argument to [`Converter.to_yaml_tree`][asdf.extension.Converter.to_yaml_tree] [`Converter.from_yaml_tree`][asdf.extension.Converter.from_yaml_tree] and `Converter.select_tag`.
 
 It is helpful to first review some details of how asdf `stores block <asdf-standard:block>`. Blocks are stored sequentially within a ASDF file following the YAML tree. During reads and writes, asdf will need to know the index of the block a Converter would like to use to read or write the correct block. However, the index used for reading might not be the same index for writing if the tree was modified or the file is being written to a new location. During serialization and deserialization, asdf will associate each object with the accessed block during [`Converter.from_yaml_tree`][asdf.extension.Converter.from_yaml_tree] and [`Converter.to_yaml_tree`][asdf.extension.Converter.to_yaml_tree].
 
@@ -386,4 +386,4 @@ As discussed above, while serializing and deserializing objects that use one blo
 
 ## Entry point performance considerations
 
-For the good of [`asdf`][asdf] users everywhere, it's important that entry point methods load as quickly as possible. All extensions must be loaded before reading an ASDF file, and therefore all converters are created as well. Any converter module or `__init__` method that lingers will introduce a delay to the initial call to [`asdf.open`][asdf.open]. For that reason, we recommend that converter authors minimize the number of imports that occur in the module containing the Converter implementation, and defer imports of serializable types to within the `from_yaml_tree` method. This will prevent the type from ever being imported when reading ASDF files that do not contain the associated tag.
+For the good of [`asdf`][] users everywhere, it's important that entry point methods load as quickly as possible. All extensions must be loaded before reading an ASDF file, and therefore all converters are created as well. Any converter module or `__init__` method that lingers will introduce a delay to the initial call to [`asdf.open`][]. For that reason, we recommend that converter authors minimize the number of imports that occur in the module containing the Converter implementation, and defer imports of serializable types to within the `from_yaml_tree` method. This will prevent the type from ever being imported when reading ASDF files that do not contain the associated tag.

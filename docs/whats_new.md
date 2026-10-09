@@ -9,7 +9,7 @@ Asdf 5.0.0 removes some deprecated API.
 - The `refresh_extension_manager` argument is no longer supported for [`AsdfFile.schema_info`][asdf.AsdfFile.schema_info] and [`AsdfFile.info`][asdf.AsdfFile.info]. There should be no need for forced refreshing.
 - The `url_mapping` argument to `asdf.schema.get_validator` was removed. This was a leftover from the legacy extension API and is no longer needed.
 - The `resolver` argument to [`asdf.schema.load_schema`][asdf.schema.load_schema] was removed. This was a leftover from the legacy extension API and is no longer needed.
-- `AsdfConfig.convert_unknown_ndarray_subclasses` is removed. Please implement a [`asdf.extension.Converter`][asdf.extension.Converter] for any subclasses.
+- `AsdfConfig.convert_unknown_ndarray_subclasses` is removed. Please implement a [`asdf.extension.Converter`][] for any subclasses.
 - Opening of "http://" and "https://" uris now requires fsspec to be installed.
 - The bundled `pytest_asdf` plugin was removed. Please install `pytest-asdf-plugin` for a replacement.
 
@@ -25,20 +25,20 @@ Hi! Asdf 4.0.0 is a new major version including:
 
 - The `copy_arrays` argument for `asdf.open` and `AsdfFile` has been removed and replaced by `memmap` (`memmap == not copy_arrays`).
 - `ignore_version_mismatch` has had no effect since asdf 3.0.0 and was removed.
-- the [`asdf.util`][asdf.util] submodule had several unused functions removed:
+- the [`asdf.util`][] submodule had several unused functions removed:
   - `filepath_to_url`, see `pathlib.Path.as_uri` as an alternative
   - `is_primitive`, use `isinstance`
   - `iter_subclasses`, use `object.__subclasses__`
   - `minversion`, see `astropy.utils.minversion`
   - `resolve_name`, see `astropy.utils.resolve_name`
   - `human_list`, use `pprint` or your own string formatting
-- `versioning.AsdfSpec`, see [`asdf.versioning.AsdfVersion`][asdf.versioning.AsdfVersion] comparisons
+- `versioning.AsdfSpec`, see [`asdf.versioning.AsdfVersion`][] comparisons
 - `asdf.testing.helpers.format_tag`, use your own string formatting
 - `AsdfFile.version_map`, could have been removed with the legacy extension API
 - `AsdfFile.resolve_and_inline`, use [`AsdfFile.resolve_references`][asdf.AsdfFile.resolve_references] and `all_array_storage=="inline"`
-- `asdf.asdf`, the public items in this submodule are all in the top level [`asdf`][asdf] module
-- `asdf.asdf.SerializationContext`, available at [`asdf.extension.SerializationContext`][asdf.extension.SerializationContext]
-- `asdf.stream`, see [`asdf.tags.core.Stream`][asdf.tags.core.Stream]
+- `asdf.asdf`, the public items in this submodule are all in the top level [`asdf`][] module
+- `asdf.asdf.SerializationContext`, available at [`asdf.extension.SerializationContext`][]
+- `asdf.stream`, see [`asdf.tags.core.Stream`][]
 - `ignore_implicit_conversion` has been removed (see `whats_new_4.0.0_implicit_conversion` below)
 - providing a tag uri within a schema `$ref` will no longer resolve to the schema uri associated with that tag
 
@@ -137,8 +137,8 @@ In an attempt to construct a coherent api, asdf 3.1 (and additional minor versio
 
 Asdf 2.15.1 includes internally a version of jsonschema 4.17.3. This inclusion was done to deal with incompatible changes in jsonschema 4.18.
 
-Many libraries that use asdf import jsonschema to allow catching of `ValidationError` instances that might be raised during schema validation. Prior to asdf 2.15 this error type was not part of the public asdf API. For 2.15 and later users are expected to import `ValidationError` from [`asdf.exceptions`][asdf.exceptions] (instead of jsonschema directly).
+Many libraries that use asdf import jsonschema to allow catching of `ValidationError` instances that might be raised during schema validation. Prior to asdf 2.15 this error type was not part of the public asdf API. For 2.15 and later users are expected to import `ValidationError` from [`asdf.exceptions`][] (instead of jsonschema directly).
 
-To further ease the transition, asdf will, when possible, use exceptions imported from any installed version of jsonschema. This means that when the asdf internal jsonschema raises a `ValidationError` on a system where jsonschema was separately installed, the internal jsonschema will attempt to use `ValidationError` from the installed version. This should allow code that catches exceptions imported from jsonschema to continue to work with no changes. However, asdf cannot guarantee compatibility with future installed jsonschema versions and users are encouraged to update their code to import `ValidationError` from [`asdf.exceptions`][asdf.exceptions].
+To further ease the transition, asdf will, when possible, use exceptions imported from any installed version of jsonschema. This means that when the asdf internal jsonschema raises a `ValidationError` on a system where jsonschema was separately installed, the internal jsonschema will attempt to use `ValidationError` from the installed version. This should allow code that catches exceptions imported from jsonschema to continue to work with no changes. However, asdf cannot guarantee compatibility with future installed jsonschema versions and users are encouraged to update their code to import `ValidationError` from [`asdf.exceptions`][].
 
 Finally, asdf is temporarily keeping jsonschema as a dependency as many libraries expected this to be installed by asdf. We expect to drop this requirement soon (likely in 3.0.0) and this change might occur in a minor or even patch version.

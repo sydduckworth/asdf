@@ -1,6 +1,6 @@
 # Command line tool
 
-[`asdf`][asdf] includes a command-line tool,
+[`asdf`][] includes a command-line tool,
 `asdftool` that performs a number of useful operations:
 
 - `explode`: Convert a self-contained ASDF file into exploded form (see `exploded`).

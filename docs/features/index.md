@@ -16,9 +16,9 @@ The fundamental data object in ASDF is the `tree`, which is a nested combination
 !!! note
 	The ASDF specification does not have an immutable sequence type that maps directly to Python's `tuple`. Following the behavior of pyyaml, asdf writes tuples as YAML sequences, which when loaded are converted to lists. If round-tripping of tuples is important to your application see *[Extending ASDF](/extending/use_cases.md)* to write a custom extension to save and load tuples.
 
-One of the key features of [`asdf`][asdf] is its ability to serialize `numpy` arrays. This is discussed in detail in *[Array Data](arrays.md#array-data)*.
+One of the key features of [`asdf`][] is its ability to serialize `numpy` arrays. This is discussed in detail in *[Array Data](arrays.md#array-data)*.
 
-While the core [`asdf`][asdf] package supports serialization of basic data types and Numpy arrays, its true power comes from its ability to be extended to support serialization of a wide range of custom data types. Details on using ASDF extensions can be found in *[Using Extensions][using-extensions-using-extensions]*. Details on creating custom ASDF extensions to support custom data types can be found in *[Extending ASDF](/extending/use_cases.md)*.
+While the core [`asdf`][] package supports serialization of basic data types and Numpy arrays, its true power comes from its ability to be extended to support serialization of a wide range of custom data types. Details on using ASDF extensions can be found in *[Using Extensions][using-extensions-using-extensions]*. Details on creating custom ASDF extensions to support custom data types can be found in *[Extending ASDF](/extending/use_cases.md)*.
 
 ## Array Data
 
@@ -42,7 +42,7 @@ Even though this particular implementation of ASDF necessarily serializes Python
 [](){ #features-schema-validation }
 ## Schema validation
 
-Schema validation is used to determine whether an ASDF file is well formed. All ASDF files must conform to the schemas defined by the [ASDF specification][asdf-standard]. Schema validation can be run using [`AsdfFile.validate`][asdf.AsdfFile.validate] and occurs when reading ASDF files (using [`asdf.open`][asdf.open]) and writing them out (using [`AsdfFile.write_to`][asdf.AsdfFile.write_to] or [`AsdfFile.update`][asdf.AsdfFile.update]).
+Schema validation is used to determine whether an ASDF file is well formed. All ASDF files must conform to the schemas defined by the [ASDF specification][asdf-standard]. Schema validation can be run using [`AsdfFile.validate`][asdf.AsdfFile.validate] and occurs when reading ASDF files (using [`asdf.open`][]) and writing them out (using [`AsdfFile.write_to`][asdf.AsdfFile.write_to] or [`AsdfFile.update`][asdf.AsdfFile.update]).
 
 Schema validation also plays a role when using custom extensions (see *[Using Extensions](using_extensions.md)* and *[Extensions](/extending/extensions.md)*). Extensions must provide schemas for the types that they serialize. When writing a file with custom types, the output is validated against the schemas corresponding to those types. If the appropriate extension is installed when reading a file with custom types, then the types will be validated against the schemas provided by the corresponding extension.
 
@@ -87,7 +87,7 @@ additionalProperties: true
 
 This schema restricts the kinds of files that will be accepted as valid to those that contain a top-level `image` property that is an `ndarray`, and a top-level `metadata` property that contains information about the time the image was taken and the resolution of the image.
 
-In order to use this schema for a secondary validation pass, we pass the `custom_schema` argument to either [`asdf.open`][asdf.open] or the [`AsdfFile`][asdf.AsdfFile] constructor. Assume that the schema file lives in `image_schema.yaml`, and we wish to open a file called `image.asdf`. We would open the file with the following code:
+In order to use this schema for a secondary validation pass, we pass the `custom_schema` argument to either [`asdf.open`][] or the [`AsdfFile`][asdf.AsdfFile] constructor. Assume that the schema file lives in `image_schema.yaml`, and we wish to open a file called `image.asdf`. We would open the file with the following code:
 
 ```py
 import asdf
@@ -138,7 +138,7 @@ When creating new ASDF files, it is possible to control the version of the ASDF 
 
 ### Tree References
 
-ASDF files may reference items in the tree in other ASDF files. The syntax used in the file for this is called "JSON Pointer", but users of [`asdf`][asdf] can largely ignore that.
+ASDF files may reference items in the tree in other ASDF files. The syntax used in the file for this is called "JSON Pointer", but users of [`asdf`][] can largely ignore that.
 
 First, we'll create a ASDF file with a couple of arrays in it:
 
@@ -266,13 +266,13 @@ my_ref_b: !core/ndarray-1.1.0
 ...
 ```
 
-A similar feature provided by YAML, anchors and aliases, also provides a way to support references within the same file. These are supported by [`asdf`][asdf], however the JSON Pointer approach is generally favored because:
+A similar feature provided by YAML, anchors and aliases, also provides a way to support references within the same file. These are supported by [`asdf`][], however the JSON Pointer approach is generally favored because:
 
 > - It is possible to reference elements in another file
 > - Elements are referenced by location in the tree, not an identifier,
 >   therefore, everything can be referenced.
 
-Anchors and aliases are handled automatically by [`asdf`][asdf] when the data structure is recursive. For example here is a dictionary that is included twice in the same tree:
+Anchors and aliases are handled automatically by [`asdf`][] when the data structure is recursive. For example here is a dictionary that is included twice in the same tree:
 
 ```pycon
 >>> from asdf import AsdfFile
@@ -314,7 +314,7 @@ External files need not be ASDF files: ASDF is completely agnostic as to the for
 Creating an external array reference is simple. Only four pieces of information are required:
 
 - The name of the external file. Since ASDF does not itself resolve the file or check for its existence, the format of the name is not important. In most cases the name will be a path relative to the ASDF file itself, or a URI for a network resource.
-- The data type of the array data. This is a string representing any valid [`numpy.dtype`][numpy.dtype].
+- The data type of the array data. This is a string representing any valid [`numpy.dtype`][].
 - The shape of the data array. This is a tuple representing the dimensions of the array data.
 - The array data `target`. This is either an integer or a string that indicates to the user something about how the data array should be accessed in the external file. For example, if there are multiple data arrays in the external file, the `target` might be an integer index. Or if the external file is an ASDF file, the `target` might be a string indicating the key to use in the external file's tree. The value and format of the `target` field is completely arbitrary since ASDF will not use it itself.
 
@@ -359,9 +359,9 @@ When reading a file containing external references, the user is responsible for 
 
 ## Saving history entries
 
-[`asdf`][asdf] has a convenience method for notating the history of transformations that have been performed on a file.
+[`asdf`][] has a convenience method for notating the history of transformations that have been performed on a file.
 
-Given a [`AsdfFile`][asdf.AsdfFile] object, call [`add_history_entry`][asdf.AsdfFile.add_history_entry], given a description of the change and optionally a description of the software (i.e. your software, not [`asdf`][asdf]) that performed the operation.
+Given a [`AsdfFile`][asdf.AsdfFile] object, call [`add_history_entry`][asdf.AsdfFile.add_history_entry], given a description of the change and optionally a description of the software (i.e. your software, not [`asdf`][]) that performed the operation.
 
 ```pycon
 >>> from asdf import AsdfFile
@@ -410,11 +410,11 @@ a: !core/ndarray-1.1.0
 ...
 ```
 
-[`asdf`][asdf] automatically saves history metadata about the extensions that were used to create the file. This information is used when opening files to determine if the proper extensions are installed (see *[Extension checking][using-extensions-extension-checking]* for more details).
+[`asdf`][] automatically saves history metadata about the extensions that were used to create the file. This information is used when opening files to determine if the proper extensions are installed (see *[Extension checking][using-extensions-extension-checking]* for more details).
 
 ## Rendering ASDF trees
 
-The [`asdf.info`][asdf.info] function prints a representation of an ASDF tree to stdout. For example:
+The [`asdf.info`][] function prints a representation of an ASDF tree to stdout. For example:
 
 ```pycon
 >>> asdf.info("path/to/some/file.asdf")  # doctest: +SKIP
@@ -432,7 +432,7 @@ root (AsdfObject)
 
 The first argument may be a `str` or `pathlib.Path` filesystem path, or an [`AsdfFile`][asdf.AsdfFile] or sub-node of an ASDF tree.
 
-By default, [`asdf.info`][asdf.info] limits the number of lines, and line length, of the displayed tree. The `max_rows` parameter controls the number of lines, and `max_cols` controls the line length. Set either to `None` to disable that limit.
+By default, [`asdf.info`][] limits the number of lines, and line length, of the displayed tree. The `max_rows` parameter controls the number of lines, and `max_cols` controls the line length. Set either to `None` to disable that limit.
 
 An integer `max_rows` will be interpreted as an overall limit on the number of displayed lines. If `max_rows` is a tuple, then each member limits lines per node at the depth corresponding to its tuple index. For example, to show all top-level nodes and 5 of each's children:
 
@@ -443,9 +443,9 @@ An integer `max_rows` will be interpreted as an overall limit on the number of d
 
 If the attribute is described in a schema, the info functionality will see if it has an associated title and if it does, display it as a comment on the same line. This provides a way for users to see more information about the attribute, similar to the way FITS header comments are used.
 
-The [`AsdfFile.info`][asdf.AsdfFile.info] method behaves similarly to [`asdf.info`][asdf.info], rendering the tree of the associated [`AsdfFile`][asdf.AsdfFile].
+The [`AsdfFile.info`][asdf.AsdfFile.info] method behaves similarly to [`asdf.info`][], rendering the tree of the associated [`AsdfFile`][asdf.AsdfFile].
 
-Normally [`asdf.info`][asdf.info] will not show the contents of asdf nodes turned into Python custom objects, but if that object supports a special method, you may see the contents of such objects. See *[Making converted object's contents visible to `info` and `search`][extending-exposing-extension-object-internals]* for how to implement such support for [`asdf.info`][asdf.info] and [`asdf.search`][asdf.search].
+Normally [`asdf.info`][] will not show the contents of asdf nodes turned into Python custom objects, but if that object supports a special method, you may see the contents of such objects. See *[Making converted object's contents visible to `info` and `search`][extending-exposing-extension-object-internals]* for how to implement such support for [`asdf.info`][] and [`asdf.search`][].
 
 ## Searching the ASDF tree
 
@@ -519,7 +519,7 @@ The first argument to [`AsdfFile.search`][asdf.AsdfFile.search] searches by dict
 
 ### Chaining searches
 
-The return value of [`AsdfFile.search`][asdf.AsdfFile.search], [`asdf.search.AsdfSearchResult`][asdf.search.AsdfSearchResult], has its own search method, so it's possible to chain searches together. This is useful when you need to see intermediate results before deciding how to further narrow the search.
+The return value of [`AsdfFile.search`][asdf.AsdfFile.search], [`asdf.search.AsdfSearchResult`][], has its own search method, so it's possible to chain searches together. This is useful when you need to see intermediate results before deciding how to further narrow the search.
 
 ```pycon
 >>> af.search()  # See an overview of the entire ASDF tree # doctest: +SKIP
@@ -625,7 +625,7 @@ One needs to provide a `key`, which corresponds to the keyword the information i
  'thing2': {'archive_catalog': 'Thing 2 Archive catalog information'}}
 ```
 
-Or one can provide a `path` as an [`asdf.search.AsdfSearchResult`][asdf.search.AsdfSearchResult] object:
+Or one can provide a `path` as an [`asdf.search.AsdfSearchResult`][] object:
 
 ```pycon
 >>> af.schema_info("archive_catalog", af.search("bar"))  # doctest: +SKIP
@@ -637,7 +637,7 @@ Or one can provide a `path` as an [`asdf.search.AsdfSearchResult`][asdf.search.A
 	There is also the
 	[`asdf.search.AsdfSearchResult.schema_info`][asdf.search.AsdfSearchResult.schema_info]
 	method, which can be directly called on an
-	[`asdf.search.AsdfSearchResult`][asdf.search.AsdfSearchResult] object,
+	[`asdf.search.AsdfSearchResult`][] object,
 	instead of passing the search through
 	[`AsdfFile.schema_info`][asdf.AsdfFile.schema_info].
 

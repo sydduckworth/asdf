@@ -3,7 +3,7 @@
 
 ## Saving arrays
 
-Beyond the basic data types of dictionaries, lists, strings and numbers, the most important thing ASDF can save is arrays. It's as simple as putting a `numpy` array somewhere in the tree. Here, we save an 8x8 array of random floating-point numbers (using [`numpy.random.rand`][numpy.random.rand]). Note that the resulting YAML output contains information about the structure (size and data type) of the array, but the actual array content is in a binary block.
+Beyond the basic data types of dictionaries, lists, strings and numbers, the most important thing ASDF can save is arrays. It's as simple as putting a `numpy` array somewhere in the tree. Here, we save an 8x8 array of random floating-point numbers (using [`numpy.random.rand`][]). Note that the resulting YAML output contains information about the structure (size and data type) of the array, but the actual array content is in a binary block.
 
 ```pycon
 >>> from asdf import AsdfFile
@@ -224,7 +224,7 @@ my_array: !core/ndarray-1.1.0
 
 In certain scenarios, you may want to stream data to disk, rather than writing an entire array of data at once. For example, it may not be possible to fit the entire array in memory, or you may want to save data from a device as it comes in to prevent data loss. The ASDF specification allows exactly one streaming block per file where the size of the block isn't included in the block header, but instead is implicitly determined to include all of the remaining contents of the file. By definition, it must be the last block in the file.
 
-To use streaming, rather than including a Numpy array object in the tree, you include a [`asdf.tags.core.Stream`][asdf.tags.core.Stream] object which sets up the structure of the streamed data, but will not write out the actual content. The file handle's `write` method is then used to manually write out the binary data.
+To use streaming, rather than including a Numpy array object in the tree, you include a [`asdf.tags.core.Stream`][] object which sets up the structure of the streamed data, but will not write out the actual content. The file handle's `write` method is then used to manually write out the binary data.
 
 ```pycon
 >>> from asdf import AsdfFile
@@ -310,7 +310,7 @@ Individual blocks in an ASDF file may be compressed.
 	fixed in `5.2.1`. As a result files created by `asdf<=5.2.0` may fail
 	block checksum validation with `asdf	=5.2.1` and vice-versa.
 
-	By default `asdf` does not verify block checksums when reading a file 	so this change does not impact anyone already using the default 	configuration. If you encounter validation errors while reading a file 	created by an older or newer `asdf` version you will need to disable 	validation by setting `validate_checksums=False` in 	[`asdf.open`][asdf.open].
+	By default `asdf` does not verify block checksums when reading a file 	so this change does not impact anyone already using the default 	configuration. If you encounter validation errors while reading a file 	created by an older or newer `asdf` version you will need to disable 	validation by setting `validate_checksums=False` in 	[`asdf.open`][].
 
 [zlib](http://www.zlib.net/) and [bzip2](http://www.bzip.org) are included in every asdf install. Passing one of these 4 character codes as `all_array_compression` to [`asdf.AsdfFile.write_to`][asdf.AsdfFile.write_to] will compress all blocks with the corresponding algorithm:
 
@@ -359,7 +359,7 @@ b: !core/ndarray-1.1.0
 
 The [lz4](https://en.wikipedia.org/wiki/LZ_4) compression algorithm is also supported, but requires the optional [lz4](https://python-lz4.readthedocs.io/) package in order to work.
 
-Similarly, [`asdf.config`][asdf.config] can be used to configure compression of all blocks by setting [`asdf.config.AsdfConfig.all_array_compression`][asdf.config.AsdfConfig.all_array_compression].
+Similarly, [`asdf.config`][] can be used to configure compression of all blocks by setting [`asdf.config.AsdfConfig.all_array_compression`][asdf.config.AsdfConfig.all_array_compression].
 
 [`asdf.AsdfFile.set_array_compression`][asdf.AsdfFile.set_array_compression] can be used to set the compression for a specific block. Similarly [`asdf.AsdfFile.get_array_compression`][asdf.AsdfFile.get_array_compression] can be used to get the compression for a specific block.
 
@@ -389,7 +389,7 @@ af.write_to('different.asdf', all_array_compression='lz4')
 
 ## Memory mapping
 
-When enabled, array data can be memory mapped using [`numpy.memmap`][numpy.memmap]. This allows for the efficient use of memory even when reading files with very large arrays.
+When enabled, array data can be memory mapped using [`numpy.memmap`][]. This allows for the efficient use of memory even when reading files with very large arrays.
 
 !!! note
 	Opening a file with `memmap=True` does not guarantee that any given array will actually be memory mapped: compressed arrays are never memory mapped, and memory mapping is not possible for remote files.
@@ -406,7 +406,7 @@ with asdf.open('my_data.asdf', memmap=True) as af:
 ```
 
 !!! warning
-	Memory mapping creates a new `numpy`-managed file handle which may persist after the corresponding ASDF file is closed (see [`numpy.memmap`][numpy.memmap]).
+	Memory mapping creates a new `numpy`-managed file handle which may persist after the corresponding ASDF file is closed (see [`numpy.memmap`][]).
 
 Memory-mapped arrays can be written to while in memory. Changes to an array are flushed to disk by calling [`AsdfFile.close`][asdf.AsdfFile.close] or [`AsdfFile.update`][asdf.AsdfFile.update].
 

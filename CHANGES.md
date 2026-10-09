@@ -15,11 +15,11 @@
 - Fixed structured arrays with zero-length dimensions failing to
   round-trip correctly when saved inline.
   ([\#2083](https://github.com/asdf-format/asdf/pull/2083))
-- Fixed [`asdf.AsdfFile.copy`][asdf.AsdfFile.copy] failing for
+- Fixed [`asdf.AsdfFile.copy`][] failing for
   files created with `lazy_tree=True`.
   ([\#2133](https://github.com/asdf-format/asdf/pull/2133))
-- Fixed [`copy.deepcopy`][copy.deepcopy] raising an
-  exception when passed [`asdf.AsdfFile`][asdf.AsdfFile].
+- Fixed [`copy.deepcopy`][] raising an
+  exception when passed [`asdf.AsdfFile`][].
   ([\#2133](https://github.com/asdf-format/asdf/pull/2133))
 
 ### Doc
@@ -32,8 +32,8 @@
 ### Feature
 
 - Added type hints to [`AsdfFile`][asdf.AsdfFile] and
-  [`asdf.config.AsdfConfig`][asdf.config.AsdfConfig]. Added
-  [`asdf.typing`][asdf.typing] module containing new type
+  [`asdf.config.AsdfConfig`][]. Added
+  [`asdf.typing`][] module containing new type
   aliases. ([\#2031](https://github.com/asdf-format/asdf/pull/2031))
 - Change block index parsing to only check the first block header. This
   improves IO performance (especially for remote files) by removing
@@ -46,24 +46,24 @@
   ([\#2040](https://github.com/asdf-format/asdf/pull/2040))
 - In a future release the default value for
   [`asdf.config.AsdfConfig.warn_on_failed_conversion`][asdf.config.AsdfConfig.warn_on_failed_conversion]
-  will change from [`False`][False] to
-  [`True`][True]. Currently if ASDF raises an
+  will change from [`False`][] to
+  [`True`][]. Currently if ASDF raises an
   exception due to a conversion error it will now *also* emit a warning
   regarding the change in behavior. To silence the warning you can
   either set `warn_on_failed_conversion` to
-  [`True`][True] to opt into the new behavior or to
-  [`False`][False] to retain the old behavior.
+  [`True`][] to opt into the new behavior or to
+  [`False`][] to retain the old behavior.
   ([\#2125](https://github.com/asdf-format/asdf/pull/2125))
 - In a future release the default value for
   [`asdf.config.AsdfConfig.validate_on_read`][asdf.config.AsdfConfig.validate_on_read]
-  will change from [`True`][True] to
-  [`False`][False]. Currently if a validation error
+  will change from [`True`][] to
+  [`False`][]. Currently if a validation error
   occurs while reading a file ASDF will now *also* emit a warning
   regarding the change in behavior. To silence the warning you can
-  either set `validate_on_read` to [`False`][False]
-  to opt into the new behavior or to [`True`][True]
+  either set `validate_on_read` to [`False`][]
+  to opt into the new behavior or to [`True`][]
   to retain the old behavior. This change has no effect on manual calls
-  to [`asdf.AsdfFile.validate`][asdf.AsdfFile.validate].
+  to [`asdf.AsdfFile.validate`][].
   ([\#2126](https://github.com/asdf-format/asdf/pull/2126))
 
 ### Removal
@@ -661,7 +661,7 @@
 - Add search support to
   [`schema_info`][asdf.AsdfFile.schema_info].
   \[[\#1187](https://github.com/asdf-format/asdf/issues/1187)\]
-- Add [`asdf.search.AsdfSearchResult`][asdf.search.AsdfSearchResult]
+- Add [`asdf.search.AsdfSearchResult`][]
   support for [`schema_info`][asdf.AsdfFile.schema_info]
   and
   [`schema_info`][asdf.search.AsdfSearchResult.schema_info]
@@ -1267,7 +1267,7 @@
   ASDF tree on-the-fly.
   \[[\#549](https://github.com/asdf-format/asdf/issues/549)\]
 - Fix large integer validation when storing
-  [`numpy`][numpy] integer literals in the tree.
+  [`numpy`][] integer literals in the tree.
   \[[\#553](https://github.com/asdf-format/asdf/issues/553)\]
 - Fix bug that caused subclass of external type to be serialized by the
   wrong tag. \[[\#560](https://github.com/asdf-format/asdf/issues/560)\]
