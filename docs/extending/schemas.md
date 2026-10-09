@@ -33,7 +33,7 @@ properties:
 ...
 ```
 
-This is similar to the quantity schema, found `here <asdf-standard:stsci.edu/asdf/unit/quantity-1.1.0>`, but has been updated to reflect current recommendations regarding schemas. Let's walk through this schema line by line.
+This is similar to the quantity schema, found [here][stsci.edu/asdf/unit/quantity-1.1.0], but has been updated to reflect current recommendations regarding schemas. Let's walk through this schema line by line.
 
 ``` yaml
 %YAML 1.1
@@ -105,7 +105,7 @@ The first subschema in the list contains a `type` validator that succeeds if the
 - tag: tag:stsci.edu:asdf/core/ndarray-1.*
 ```
 
-The second subschema contains a `tag` validator, which makes an assertion regarding the YAML tag URI of the object assigned to `value`. In this subschema we're requiring a ndarray-1.\* tag which is how n-dimensional arrays are represented in an ASDF tree. The `*` is a wildcard allowing this `tag` validator to succeed for any minor or bugfix version of ndarray that has a major version of `1`. This means a ndarray-1.0.0 tag will succeed as will ndarray-1.1.0 but not ndarray-2.0.0.
+The second subschema contains a `tag` validator, which makes an assertion regarding the YAML tag URI of the object assigned to `value`. In this subschema we're requiring a `ndarray-1.*` tag which is how n-dimensional arrays are represented in an ASDF tree. The `*` is a wildcard allowing this `tag` validator to succeed for any minor or bugfix version of ndarray that has a major version of `1`. This means a `ndarray-1.0.0` tag will succeed as will `ndarray-1.1.0` but not `ndarray-2.0.0`.
 
 The net effect of the `anyOf` combiner and its two subschemas is: validate successfully if the `value` object is either a numeric literal or an n-dimensional array.
 
@@ -115,7 +115,7 @@ unit:
   tag: tag:stsci.edu:asdf/unit/unit-1.*
 ```
 
-The `unit` property has another bit of documentation and a `tag` validator that requires it to be any unit-1.\* tagged object.
+The `unit` property has another bit of documentation and a `tag` validator that requires it to be any `unit-1.*` tagged object.
 
 ``` yaml
 required: [value, unit]
@@ -150,7 +150,7 @@ An alternative that doesn't have these downsides is to reference another schema 
 
 ## Checking schema syntax
 
-The [`check_schema`][asdf.schema.check_schema] function performs basic syntax checks on a schema and will raise an error if it discovers a problem. It does not currently accept URIs and requires that the schema already be loaded into Python objects. If the schema is already registered with the asdf library as a resource (see `extending_resources`), it can be loaded and checked like this:
+The [`check_schema`][asdf.schema.check_schema] function performs basic syntax checks on a schema and will raise an error if it discovers a problem. It does not currently accept URIs and requires that the schema already be loaded into Python objects. If the schema is already registered with the asdf library as a resource (see *[Resources and resource mappings](resources.md)*), it can be loaded and checked like this:
 
 ``` python
 from asdf.schema import load_schema, check_schema
@@ -186,31 +186,23 @@ The validate function will return successfully if the object is valid, or raise 
 
 ### Testing custom schemas
 
-Packages that provide their own schemas can test them using [`asdf`][]'s `pytest <pytest:toc>` plugin for schema testing. Schemas are tested for overall validity, and any examples given within the schemas are also tested.
+Packages that provide their own schemas can test them using [`asdf`][]'s [pytest](https://docs.pytest.org) plugin for schema testing. Schemas are tested for overall validity, and any examples given within the schemas are also tested.
 
 The schema tester plugin is automatically registered when the [`asdf`][] package is installed. In order to enable testing, it is necessary to add the directory containing your schema files to the pytest section of your project's build configuration (`pyproject.toml` or `setup.cfg`). If you do not already have such a file, creating one with the following should be sufficient:
 
-<div class="tab">
+=== "pyproject.toml"
 
-pyproject.toml
+  ``` toml
+  [tool.pytest.ini_options]
+  asdf_schema_root = 'path/to/schemas another/path/to/schemas'
+  ```
 
-``` toml
-[tool.pytest.ini_options]
-asdf_schema_root = 'path/to/schemas another/path/to/schemas'
-```
+=== "setup.cfg"
 
-</div>
-
-<div class="tab">
-
-setup.cfg
-
-``` ini
-[tool:pytest]
-asdf_schema_root = path/to/schemas another/path/to/schemas
-```
-
-</div>
+  ``` ini
+  [tool:pytest]
+  asdf_schema_root = path/to/schemas another/path/to/schemas
+  ```
 
 The schema directory paths should be paths that are relative to the top of the package directory **when it is installed**. If this is different from the path in the source directory, then both paths can be used to facilitate in-place testing (see [`asdf`][]'s own `pyproject.toml` for an example of this).
 
@@ -225,4 +217,4 @@ The schema tests do **not** run by default. In order to enable the tests by defa
 
 - [JSON Schema Draft 4](https://json-schema.org/specification-links.html#draft-4)
 - [Understanding JSON Schema](https://json-schema.org/understanding-json-schema/)
-- `Unit Schemas <asdf-standard:stsci.edu/asdf/unit/quantity-1.1.0>`
+- [Unit Schemas][stsci.edu/asdf/unit/quantity-1.1.0]
