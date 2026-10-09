@@ -1,44 +1,22 @@
 # Validators
 
-The [`Validator`][asdf.extension.Validator] interface
-provides support for a custom ASDF schema property. The Validator
-identifies the schema property and tag(s) that it works on and provides
-a method for doing the work of validation.
+The [`Validator`][asdf.extension.Validator] interface provides support for a custom ASDF schema property. The Validator identifies the schema property and tag(s) that it works on and provides a method for doing the work of validation.
 
 ## The Validator interface
 
-Every Validator implementation must provide two required properties and
-one required method:
+Every Validator implementation must provide two required properties and one required method:
 
-[`Validator.schema_property`][asdf.extension.Validator.schema_property] - The schema
-property that triggers this validator. The property need not be globally
-unique, but it should be unique among the validators that apply to the
-tag(s), and must not collide with any of the built-in JSON schema
-properties (type, additionalProperties, etc).
+[`Validator.schema_property`][asdf.extension.Validator.schema_property] - The schema property that triggers this validator. The property need not be globally unique, but it should be unique among the validators that apply to the tag(s), and must not collide with any of the built-in JSON schema properties (type, additionalProperties, etc).
 
-[`Validator.tags`][asdf.extension.Validator.tags] - a list of tag URIs or
-URI patterns handled by the validator. Patterns may include the wildcard
-character `*`, which matches any sequence of characters up to a `/`, or
-`**`, which matches any sequence of characters. The
-[`uri_match`][asdf.util.uri_match] method can be used
-to test URI patterns.
+[`Validator.tags`][asdf.extension.Validator.tags] - a list of tag URIs or URI patterns handled by the validator. Patterns may include the wildcard character `*`, which matches any sequence of characters up to a `/`, or `**`, which matches any sequence of characters. The [`uri_match`][asdf.util.uri_match] method can be used to test URI patterns.
 
-[`Validator.validate`][asdf.extension.Validator.validate] - a method that
-accepts the schema property value, a tagged ASDF node, and the
-surrounding schema dict, and performs validation on the node. For every
-error present, the method should yield an instance of
-`asdf.exceptions.ValidationError`.
+[`Validator.validate`][asdf.extension.Validator.validate] - a method that accepts the schema property value, a tagged ASDF node, and the surrounding schema dict, and performs validation on the node. For every error present, the method should yield an instance of `asdf.exceptions.ValidationError`.
 
 ## A simple example
 
-Say we have a custom tagged object,
-`asdf://example.com/example-project/tags/rectangle-1.0.0`, which
-describes a rectangle with `width` and `height` properties. Let's
-implement a validator that checks that the area of the rectangle is less
-than some maximum value.
+Say we have a custom tagged object, `asdf://example.com/example-project/tags/rectangle-1.0.0`, which describes a rectangle with `width` and `height` properties. Let's implement a validator that checks that the area of the rectangle is less than some maximum value.
 
-The schema property will be called `max_area`, so our validator will
-look like this:
+The schema property will be called `max_area`, so our validator will look like this:
 
 ``` python
 from asdf.extension import Validator
@@ -57,11 +35,9 @@ class MaxAreaValidator(Validator):
             )
 ```
 
-Note that the validator operates on raw ASDF tagged nodes, and not the
-custom Python object that they'll be converted to.
+Note that the validator operates on raw ASDF tagged nodes, and not the custom Python object that they'll be converted to.
 
-In order to use this Validator, we'll need to create a simple extension
-around it and install that extension:
+In order to use this Validator, we'll need to create a simple extension around it and install that extension:
 
 ``` python
 import asdf
@@ -77,5 +53,4 @@ class ShapesExtension(Extension):
 asdf.get_config().add_extension(ShapesExtension())
 ```
 
-Now we can include a `max_area` property in a schema and have it
-restrict the area of a rectangle.
+Now we can include a `max_area` property in a schema and have it restrict the area of a rectangle.
