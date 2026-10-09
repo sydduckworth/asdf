@@ -37,7 +37,7 @@ class FooExtension(Extension):
     converters = [FooConverter()]
 ```
 
-The implementation of a Converter is a topic unto itself and is discussed in detail in `extending_converters`.
+The implementation of a Converter is a topic unto itself and is discussed in detail in *[Converters](converters.md)*.
 
 The Extension implemented above will happily convert between `foo-1.0.0` tagged YAML objects and the appropriate Python representation, but it will not perform any schema validation. In order to associate the tag with a schema, we'll need to provide a [`TagDefinition`][asdf.extension.TagDefinition] object instead of just a string:
 
@@ -80,7 +80,7 @@ class FooExtension(Extension):
     compressors = [FooCompressor()]
 ```
 
-See `extending_compressors` for details on implementing the Compressor interface.
+See *[Binary block compressors](compressors.md)* for details on implementing the Compressor interface.
 
 ### Additional YAML tag handles
 
@@ -103,7 +103,7 @@ value: !example!foo-1.0.0
 ...
 ```
 
-In both cases the `value` object has tag asdf://example.com/example-project/tags/foo-1.0.0, but in the second example the tag is abbreviated as `!example!foo-1.0.0` through use of a handle. This has no impact on the interpretation of the file but can make the raw ASDF tree easier to read for humans.
+In both cases the `value` object has tag `asdf://example.com/example-project/tags/foo-1.0.0`, but in the second example the tag is abbreviated as `!example!foo-1.0.0` through use of a handle. This has no impact on the interpretation of the file but can make the raw ASDF tree easier to read for humans.
 
 Tag handles can be defined in the `yaml_tag_handles` property of an extension:
 
@@ -134,7 +134,7 @@ class FooExtension(Extension):
     validators = [FooValidator()]
 ```
 
-See [validators][] for details on implementing the Validator interface.
+See *[Validators](validators.md)* for details on implementing the Validator interface.
 
 ### ASDF Standard version requirement
 
@@ -169,7 +169,7 @@ class FooExtension(Extension):
 [](){ #extending-exposing-extension-object-internals }
 ### Making converted object's contents visible to `info` and `search`
 
-If the object produced by the extension supports a class method `.__asdf_traverse__` then it can be used by those tools to expose the contents of the object. That method should accept no arguments and return either a dict of attributes and their values, or a list if the object itself is list-like.
+If the object produced by the extension supports a class method `__asdf_traverse__` then it can be used by those tools to expose the contents of the object. That method should accept no arguments and return either a dict of attributes and their values, or a list if the object itself is list-like.
 
 Similarly a [`Converter`][asdf.extension.Converter] can implement a method `to_info` which converts an instance of one of the supported types to a dict, tuple or list of items to show during `info` and `search`. This can be useful when the supported type cannot be easily updated to add an `__asdf_traverse__` method.
 
@@ -179,7 +179,7 @@ Once an extension is implemented, it must be installed so that the [`asdf`][] li
 
 ### Installing extensions via AsdfConfig
 
-The simplest way to install an extension is to add it at runtime using the <span class="title-ref">AsdfConfig.add_extension \<asdf.config.AsdfConfig.add_extension\></span> method. For example, the following code defines and installs a minimal extension:
+The simplest way to install an extension is to add it at runtime using the [`AsdfConfig.add_extension`][asdf.config.AsdfConfig.add_extension] method. For example, the following code defines and installs a minimal extension:
 
 ``` python
 import asdf
@@ -211,28 +211,20 @@ We'll assume that method is located in the module `asdf_foo_extension.integratio
 
 Next, in the package's `pyproject.toml`, define a `[project.entry-points]` section (or `[options.entry_points]` in `setup.cfg`) that identifies the method as an `asdf.extensions` entry point:
 
-<div class="tab">
+=== "pyproject.toml"
 
-pyproject.toml
+    ``` toml
+    [project.entry-points]
+    'asdf.extensions' = { asdf_foo_extension = 'asdf_foo_extension.integration:get_extensions' }
+    ```
 
-``` toml
-[project.entry-points]
-'asdf.extensions' = { asdf_foo_extension = 'asdf_foo_extension.integration:get_extensions' }
-```
+=== "setup.cfg"
 
-</div>
-
-<div class="tab">
-
-setup.cfg
-
-``` ini
-[options.entry_points]
-asdf.extensions =
-    asdf_foo_extension = asdf_foo_extension.integration:get_extensions
-```
-
-</div>
+    ``` ini
+    [options.entry_points]
+    asdf.extensions =
+        asdf_foo_extension = asdf_foo_extension.integration:get_extensions
+    ```
 
 After installing the package, the extension should be automatically available in any new Python session.
 
@@ -244,9 +236,9 @@ For the good of [`asdf`][] users everywhere, it's important that entry point met
 
 ## Populating an extension from a manifest
 
-An "extension manifest" is a language-independent description of an ASDF extension (little 'e') that includes information such as the extension URI, list of tags, ASDF Standard requirement, etc. Instructions on writing a manifest can be found in `extending_manifests`, but once written, we'll still need a Python Extension (big 'E') whose content mirrors the manifest. Rather than duplicate that information in Python code, we recommend use of the [`ManifestExtension`][asdf.extension.ManifestExtension] class, which reads a manifest and maps its content to the appropriate Extension interface properties.
+An "extension manifest" is a language-independent description of an ASDF extension (little 'e') that includes information such as the extension URI, list of tags, ASDF Standard requirement, etc. Instructions on writing a manifest can be found in *[Extension manifests](manifests.md)*, but once written, we'll still need a Python Extension (big 'E') whose content mirrors the manifest. Rather than duplicate that information in Python code, we recommend use of the [`ManifestExtension`][asdf.extension.ManifestExtension] class, which reads a manifest and maps its content to the appropriate Extension interface properties.
 
-Assuming the manifest is installed as a resource (see `extending_resources`), an extension instance can be created using the `from_uri` factory method:
+Assuming the manifest is installed as a resource (see *[Resources and resource mappings](resources.md)*), an extension instance can be created using the `from_uri` factory method:
 
 ``` python
 from asdf.extension import ManifestExtension
@@ -333,7 +325,7 @@ To expand on this example let's assume the `xyz-1.0.0` schema was linked to tag 
 
 After this update is made, asdf will be able to open files with both the old and new tags and write out files with the new tag. To expand on this, when a file with an old tag is opened, asdf will look for an extension that supports that tag. The new extension will be checked first (since it occurs earlier in the list) but since the new manifest does not contain the old tag the new extension will be skipped. Next the old extension will be checked, support for the tag will be confirmed and the converted included in that old extension will be used to handle the tag. On write, asdf will again check the list of extensions. Except this time asdf will see that the new extension supports the type and select the new tag when writing the file.
 
-For more details on the behavior of schema and tag versioning from a user perspective, see `version_and_compat`, and also `custom_type_versions`.
+For more details on the behavior of schema and tag versioning from a user perspective, see *[Versioning and Compatibility][features-versioning-and-compat]*, and also *[Custom types, extensions, and versioning][using-extensions-custom-types]*.
 
 ### Versioning during development
 

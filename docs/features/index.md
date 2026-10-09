@@ -106,6 +106,7 @@ If your custom schema is registered with ASDF in an extension, you may pass the 
 !!! note
 	The top-level core schemas can be found [here][core-schema].
 
+[](){ #features-versioning-and-compat }
 ## Versioning and Compatibility
 
 There are several different versions to keep in mind when discussing ASDF:
