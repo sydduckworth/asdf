@@ -4,7 +4,7 @@
 
 ## 5.4.0 (2026-09-04)
 
-## Bugfix
+### Bugfix
 
 - Fixed files failing to load if their history section contains
   extension entries without tags.
@@ -22,14 +22,14 @@
   exception when passed [`asdf.AsdfFile`][asdf.AsdfFile].
   ([\#2133](https://github.com/asdf-format/asdf/pull/2133))
 
-## Doc
+### Doc
 
 - Remove some use of sphinx-asdf in docs.
   ([\#2057](https://github.com/asdf-format/asdf/pull/2057))
 - Added link to AI policy in contributor guide.
   ([\#2088](https://github.com/asdf-format/asdf/pull/2088))
 
-## Feature
+### Feature
 
 - Added type hints to [`AsdfFile`][asdf.AsdfFile] and
   [`asdf.config.AsdfConfig`][asdf.config.AsdfConfig]. Added
@@ -40,7 +40,7 @@
   several file seeks and reads.
   ([\#2056](https://github.com/asdf-format/asdf/pull/2056))
 
-## General
+### General
 
 - Added `typing-extensions` as a package dependency.
   ([\#2040](https://github.com/asdf-format/asdf/pull/2040))
@@ -66,7 +66,7 @@
   to [`asdf.AsdfFile.validate`][asdf.AsdfFile.validate].
   ([\#2126](https://github.com/asdf-format/asdf/pull/2126))
 
-## Removal
+### Removal
 
 - Deprecated support for duck-typed files that aren't instances of
   `IOBase`. Deprecated reading from non-seekable files.
@@ -74,14 +74,14 @@
 
 ## 5.3.1 (2026-06-08)
 
-## Bugfix
+### Bugfix
 
 - Fix bug where `add_history_entry` incorrectly used a custom schema if
   available. ([\#2044](https://github.com/asdf-format/asdf/pull/2044))
 
 ## 5.3.0 (2026-04-23)
 
-## Bugfix
+### Bugfix
 
 - Added `__delitem__` method to [`AsdfFile`][asdf.AsdfFile].
   ([\#2008](https://github.com/asdf-format/asdf/pull/2008))
@@ -95,7 +95,7 @@
   replace it with validation of the newly created entry.
   ([\#2029](https://github.com/asdf-format/asdf/pull/2029))
 
-## Feature
+### Feature
 
 - Added optional block info table to `asdftool info` and
   `AsdfFile.info`.
@@ -105,31 +105,31 @@
 
 ## 5.2.0 (2026-03-19)
 
-## Bugfix
+### Bugfix
 
 - Fix bug in validation where a failure within a schema combiner can
   result in failure to correctly validate a tree.
   ([\#1999](https://github.com/asdf-format/asdf/pull/1999))
 
-## General
+### General
 
 - Remove unused dependency asdf-transform-schemas.
   ([\#1965](https://github.com/asdf-format/asdf/pull/1965))
 
-## Removal
+### Removal
 
 - Drop support for python 3.9.
   ([\#1992](https://github.com/asdf-format/asdf/pull/1992))
 
 ## 5.1.0 (2025-11-06)
 
-## Bugfix
+### Bugfix
 
 - Fix but preventing extension checking when opening a file with
   lazy_tree enabled.
   ([\#1979](https://github.com/asdf-format/asdf/pull/1979))
 
-## Feature
+### Feature
 
 - Add support for registering unstable/development versions of core
   extensions if the ASDF_UNSTABLE_CORE_SCHEMAS environment variable is
@@ -143,7 +143,7 @@
 
 ## 5.0.0 (2025-09-10)
 
-## Removal
+### Removal
 
 - Remove deprecated refresh_extension_manager argument to
   `AsdfFile.schema_info` and `AsdfFile.info`. Remove deprecated
@@ -157,13 +157,13 @@
 
 ## 4.5.0 (2025-09-04)
 
-## Bugfix
+### Bugfix
 
 - Fix bug in identification of tagged objects during schema validation
   and using `get_tag`.
   ([\#1960](https://github.com/asdf-format/asdf/pull/1960))
 
-## Doc
+### Doc
 
 - Update references to "ASDF standard" to refer to either the
   specification or core schemas to follow the new terminology used in
@@ -172,7 +172,7 @@
 - Update metaschemas description discouraging custom metaschemas.
   ([\#1964](https://github.com/asdf-format/asdf/pull/1964))
 
-## Removal
+### Removal
 
 - Deprecate the bundled pytest plugin, please install pytest-asdf-plugin
   to run schema tests.
@@ -180,7 +180,7 @@
 
 ## 4.4.0 (2025-08-18)
 
-## Bugfix
+### Bugfix
 
 - Fix asdftool diff failures for recursive structures and int keys.
   ([\#1939](https://github.com/asdf-format/asdf/pull/1939))
@@ -188,21 +188,21 @@
   round tripping.
   ([\#1955](https://github.com/asdf-format/asdf/pull/1955))
 
-## Feature
+### Feature
 
 - Add asdftool search command.
   ([\#1939](https://github.com/asdf-format/asdf/pull/1939))
 - Add `asdftool validate` to validate ASDF files.
   ([\#1952](https://github.com/asdf-format/asdf/pull/1952))
 
-## Removal
+### Removal
 
 - Deprecate asdftool defragment. Use implode instead.
   ([\#1939](https://github.com/asdf-format/asdf/pull/1939))
 
 ## 4.3.0 (2025-07-16)
 
-## Bugfix
+### Bugfix
 
 - When `lazy_load=False` use `ndarray` instances for arrays (instead of
   `NDArrayType`).
@@ -210,19 +210,19 @@
 - Fix issue where custom schema provided to `AsdfFile` was ignored on
   `write_to`. ([\#1931](https://github.com/asdf-format/asdf/pull/1931))
 
-## Doc
+### Doc
 
 - Expand extension documentation to cover tag vs ref, converter tag
   wildcards, versioning and user documentation to cover
   get/set_array_compression.
   ([\#1938](https://github.com/asdf-format/asdf/pull/1938))
 
-## Feature
+### Feature
 
 - Add `dump` `load` `dumps` and `loads` functions.
   ([\#1930](https://github.com/asdf-format/asdf/pull/1930))
 
-## Removal
+### Removal
 
 - Deprecate `resolver` argument to `asdf.schema.load_schema`. Arbitrary
   mapping of uris is no longer supported. Instead register all uris with
@@ -241,7 +241,7 @@
 
 ## 4.2.0 (2025-05-30)
 
-## Bugfix
+### Bugfix
 
 - Allow extra keywords in structured datatype validation.
   ([\#1901](https://github.com/asdf-format/asdf/pull/1901))
@@ -255,12 +255,12 @@
 - Fix deepcopy of lazy tree.
   ([\#1922](https://github.com/asdf-format/asdf/pull/1922))
 
-## Doc
+### Doc
 
 - Improve documentation based on review feedback.
   ([\#1913](https://github.com/asdf-format/asdf/pull/1913))
 
-## Feature
+### Feature
 
 - Optionally use fsspec for urls (like those for s3 resources) provided
   to asdf.open.
@@ -268,14 +268,14 @@
 - Load block index with CSafeLoader if available.
   ([\#1920](https://github.com/asdf-format/asdf/pull/1920))
 
-## Removal
+### Removal
 
 - Deprecate opening http uris unless fsspec is installed.
   ([\#1906](https://github.com/asdf-format/asdf/pull/1906))
 
 ## 4.1.0 (2025-01-31)
 
-## Bugfix
+### Bugfix
 
 - Improve `schema_info` handling of schemas with combiners (allOf,
   anyOf, etc). ([\#1875](https://github.com/asdf-format/asdf/pull/1875))
@@ -291,21 +291,21 @@
 - Only use ANSI format codes when supported by stdout.
   ([\#1884](https://github.com/asdf-format/asdf/pull/1884))
 
-## Doc
+### Doc
 
 - Fix typos in search documentation.
   ([\#1880](https://github.com/asdf-format/asdf/pull/1880))
 - updates docs theme to be consistent with asdf subprojects
   ([\#1897](https://github.com/asdf-format/asdf/pull/1897))
 
-## Feature
+### Feature
 
 - Add `Converter.to_info` to allow customizing `info` output.
   ([\#1884](https://github.com/asdf-format/asdf/pull/1884))
 
 ## 4.0.0 (2024-11-19)
 
-## Feature
+### Feature
 
 - Switch default ASDF standard to 1.6.0.
   ([\#1744](https://github.com/asdf-format/asdf/pull/1744))
@@ -313,12 +313,12 @@
   doesn't implement select_tag.
   ([\#1853](https://github.com/asdf-format/asdf/pull/1853))
 
-## General
+### General
 
 - Set `memmap=False` to default for `asdf.open` and `AsdfFile.__init__`.
   ([\#1801](https://github.com/asdf-format/asdf/pull/1801))
 
-## Removal
+### Removal
 
 - remove `copy_arrays` (replaced by `memmap`)
   ([\#1800](https://github.com/asdf-format/asdf/pull/1800))
@@ -330,24 +330,24 @@
 
 ## 3.5.0 (2024-10-02)
 
-## Bugfix
+### Bugfix
 
 - Allow `asdf.util.load_yaml` to handle recursive objects
   ([\#1825](https://github.com/asdf-format/asdf/pull/1825))
 
-## Doc
+### Doc
 
 - added issue links to changelog entries
   ([\#1827](https://github.com/asdf-format/asdf/pull/1827))
 - Change asdf standard changelog entries to notes to ease transition to
   towncrier ([\#1830](https://github.com/asdf-format/asdf/pull/1830))
 
-## General
+### General
 
 - fix changelog checker to remove brackets
   ([\#1828](https://github.com/asdf-format/asdf/pull/1828))
 
-## Removal
+### Removal
 
 - Deprecate `ignore_version_mismatch`. This option has done nothing
   since asdf 3.0.0 and will be removed in an upcoming asdf version
@@ -526,7 +526,7 @@
   `asdftool diff` comparisons
   \[[\#1652](https://github.com/asdf-format/asdf/issues/1652)\]
 
-2.15.2 (2023-09-29) ==================-
+## 2.15.2 (2023-09-29)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -534,7 +534,7 @@
 - Add support for python 3.12
   \[[\#1641](https://github.com/asdf-format/asdf/issues/1641)\]
 
-2.15.1 (2023-08-07) ==================-
+## 2.15.1 (2023-08-07)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -551,7 +551,7 @@
 - Drop jsonschema as a dependency
   \[[\#1614](https://github.com/asdf-format/asdf/issues/1614)\]
 
-2.15.0 (2023-03-28) ==================-
+## 2.15.0 (2023-03-28)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -613,7 +613,7 @@
 - rename master branch to main
   \[[\#1479](https://github.com/asdf-format/asdf/issues/1479)\]
 
-2.14.4 (2022-03-17) ==================-
+## 2.14.4 (2022-03-17)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -621,7 +621,7 @@
 - require jsonschema\<4.18
   \[[\#1487](https://github.com/asdf-format/asdf/issues/1487)\]
 
-2.14.3 (2022-12-15) ==================-
+## 2.14.3 (2022-12-15)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -633,7 +633,7 @@
 - Bump asdf-transform-schemas version
   \[[\#1278](https://github.com/asdf-format/asdf/issues/1278)\]
 
-2.14.2 (2022-12-05) ==================-
+## 2.14.2 (2022-12-05)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -641,7 +641,7 @@
 - Fix issue \#1256, where `enum` could not be used on tagged objects.
   \[[\#1257](https://github.com/asdf-format/asdf/issues/1257)\]
 
-2.14.1 (2022-11-23) ==================-
+## 2.14.1 (2022-11-23)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -651,7 +651,7 @@
 - Add ndarray-1.1.0 and integer-1.1.0 support
   \[[\#1250](https://github.com/asdf-format/asdf/issues/1250)\]
 
-2.14.0 (2022-11-22) ==================-
+## 2.14.0 (2022-11-22)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -691,7 +691,7 @@
   fits file
   \[[\#1234](https://github.com/asdf-format/asdf/issues/1234)\]
 
-2.13.0 (2022-08-19) ==================-
+## 2.13.0 (2022-08-19)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -700,7 +700,7 @@
   using [`schema_info`][asdf.AsdfFile.schema_info]
   method. \[[\#1167](https://github.com/asdf-format/asdf/issues/1167)\]
 
-2.12.1 (2022-08-17) ==================-
+## 2.12.1 (2022-08-17)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -716,7 +716,7 @@
 - Pin `jsonschema` to below `4.10.0`.
   \[[\#1171](https://github.com/asdf-format/asdf/issues/1171)\]
 
-2.12.0 (2022-06-06) ==================-
+## 2.12.0 (2022-06-06)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -727,12 +727,12 @@
 - Add ability to set asdf-standard version for schema example items.
   \[[\#1143](https://github.com/asdf-format/asdf/issues/1143)\]
 
-2.11.2 (2022-08-17) ==================-
+## 2.11.2 (2022-08-17)
 
 - Backport `jsonschema` pin to strictly less than 4.10.1.
   \[[\#1175](https://github.com/asdf-format/asdf/issues/1175)\]
 
-2.11.1 (2022-04-15) ==================-
+## 2.11.1 (2022-04-15)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -740,7 +740,7 @@
 - Update minimum astropy version to 5.0.4.
   \[[\#1133](https://github.com/asdf-format/asdf/issues/1133)\]
 
-2.11.0 (2022-03-15) ==================-
+## 2.11.0 (2022-03-15)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -748,7 +748,7 @@
 - Update minimum jsonschema version to 4.0.1.
   \[[\#1105](https://github.com/asdf-format/asdf/issues/1105)\]
 
-2.10.1 (2022-03-02) ==================-
+## 2.10.1 (2022-03-02)
 
 !!! note
 	The ASDF Standard is at v1.6.0
@@ -758,7 +758,7 @@
 - Fix small bug with handling multiple schema uris per tag.
   \[[\#1095](https://github.com/asdf-format/asdf/issues/1095)\]
 
-2.10.0 (2022-02-17) ==================-
+## 2.10.0 (2022-02-17)
 
 !!! note
 	The ASDF Standard is at v1.6.0
