@@ -96,6 +96,8 @@ markdown_extensions:
     line_spans: __span
 - pymdownx.inlinehilite
 - pymdownx.superfences
+# Convert `--` to emdash, `...` to ellipse, etc
+- smarty
 
 plugins:
 - search
