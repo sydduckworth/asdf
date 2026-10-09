@@ -234,6 +234,7 @@ It is important to consider the order of extensions registered via the entry poi
 
 For the good of [`asdf`][] users everywhere, it's important that entry point methods load as quickly as possible. All extensions must be loaded before reading an ASDF file, so any entry point method that lingers will introduce a delay to the initial call to [`asdf.open`][]. For that reason, we recommend that extension authors minimize the number of imports that occur in the module containing the entry point method, particularly imports of modules outside of the Python standard library or [`asdf`][] itself.
 
+[](){ #extending-extensions-from-manifest }
 ## Populating an extension from a manifest
 
 An "extension manifest" is a language-independent description of an ASDF extension (little 'e') that includes information such as the extension URI, list of tags, ASDF Standard requirement, etc. Instructions on writing a manifest can be found in *[Extension manifests](manifests.md)*, but once written, we'll still need a Python Extension (big 'E') whose content mirrors the manifest. Rather than duplicate that information in Python code, we recommend use of the [`ManifestExtension`][asdf.extension.ManifestExtension] class, which reads a manifest and maps its content to the appropriate Extension interface properties.
