@@ -13,39 +13,28 @@
 <!-- --8<-- [end:badges] -->
 
 <!-- --8<-- [start:summary] -->
-The **A**dvanced **S**cientific **D**ata **F**ormat (ASDF) is a
-next-generation interchange format for scientific data. This package
-contains the Python implementation of the ASDF specification. More
-information on the ASDF file format including the specification can be
-found [here](https://asdf-standard.readthedocs.io).
+The **A**dvanced **S**cientific **D**ata **F**ormat (ASDF) is a next-generation interchange format for scientific data. This package contains the Python implementation of the ASDF specification. More information on the ASDF file format including the specification can be found [here](https://asdf-standard.readthedocs.io).
 
 The ASDF format has the following features:
 
-- Hierarchical and human-readable metadata in [YAML](http://yaml.org)
-  format
-- Efficient binary array storage with support for memory mapping and
-  flexible compression.
-- Content validation using schemas (using [JSON
-  Schema](http://json-schema.org))
-- Native and transparent support for most basic Python data types, with
-  an extension API to add support for any custom Python object.
+- Hierarchical and human-readable metadata in [YAML](http://yaml.org) format
+- Efficient binary array storage with support for memory mapping and flexible compression.
+- Content validation using schemas (using [JSON Schema](http://json-schema.org))
+- Native and transparent support for most basic Python data types, with an extension API to add support for any custom Python object.
 <!-- --8<-- [end:summary] -->
 
 ASDF is under active development [on
-github](https://github.com/asdf-format/asdf). More information on
-contributing can be found below.
+github](https://github.com/asdf-format/asdf). More information on contributing can be found below.
 
 ## Overview
 
-This section outlines basic use cases of the ASDF package for creating
-and reading ASDF files.
+This section outlines basic use cases of the ASDF package for creating and reading ASDF files.
 
 ### Creating a file
 
 <!-- --8<-- [start:create-file] -->
 We're going to store several [`numpy`][numpy] arrays
-and other data to an ASDF file. We do this by creating a "tree", which
-is simply a [`dict`][dict], and we provide it as
+and other data to an ASDF file. We do this by creating a "tree", which is simply a [`dict`][dict], and we provide it as
 input to the constructor of `AsdfFile`:
 
 ``` python
@@ -73,8 +62,7 @@ af = asdf.AsdfFile(tree)
 af.write_to("example.asdf")
 ```
 
-If we open the newly created file's metadata section, we can see some of
-the key features of ASDF on display:
+If we open the newly created file's metadata section, we can see some of the key features of ASDF on display:
 
 ``` yaml
 #ASDF 1.0.0
@@ -110,12 +98,7 @@ sequence: !core/ndarray-1.0.0
 ...
 ```
 
-The metadata in the file mirrors the structure of the tree that was
-stored. It is hierarchical and human-readable. Notice that metadata has
-been added to the tree that was not explicitly given by the user. Notice
-also that the numerical array data is not stored in the metadata tree
-itself. Instead, it is stored as binary data blocks below the metadata
-section (not shown above).
+The metadata in the file mirrors the structure of the tree that was stored. It is hierarchical and human-readable. Notice that metadata has been added to the tree that was not explicitly given by the user. Notice also that the numerical array data is not stored in the metadata tree itself. Instead, it is stored as binary data blocks below the metadata section (not shown above).
 
 <!-- --8<-- [end:create-file] -->
 <!-- --8<-- [start:compress-file] -->
@@ -125,18 +108,13 @@ It is possible to compress the array data when writing the file:
 af.write_to("compressed.asdf", all_array_compression="zlib")
 ```
 
-The built-in compression algorithms are `'zlib'`, and `'bzp2'`. The
-`'lz4'` algorithm becomes available when the
-[lz4](https://python-lz4.readthedocs.io/) package is installed. Other
-compression algorithms may be available via extensions.
+The built-in compression algorithms are `'zlib'`, and `'bzp2'`. The `'lz4'` algorithm becomes available when the [lz4](https://python-lz4.readthedocs.io/) package is installed. Other compression algorithms may be available via extensions.
 <!-- --8<-- [end:compress-file] -->
 
 ### Reading a file
 
 <!-- --8<-- [start:read-file] -->
-To read an existing ASDF file, we simply use the top-level
-[`open`][asdf.open] function of the
-[`asdf`][asdf] package:
+To read an existing ASDF file, we simply use the top-level [`open`][asdf.open] function of the [`asdf`][asdf] package:
 
 ``` python
 import asdf
@@ -144,16 +122,14 @@ import asdf
 af = asdf.open("example.asdf")
 ```
 
-The [`open`][asdf.open] function also works as a context
-handler:
+The [`open`][asdf.open] function also works as a context handler:
 
 ``` python
 with asdf.open("example.asdf") as af:
     ...
 ```
 
-To get a quick overview of the data stored in the file, use the
-top-level [`AsdfFile.info()`][asdf.AsdfFile.info] method:
+To get a quick overview of the data stored in the file, use the top-level [`AsdfFile.info()`][asdf.AsdfFile.info] method:
 
 ```pycon
 >>> import asdf
@@ -180,9 +156,7 @@ root (AsdfObject)
 └─sequence (NDArrayType): shape=(100,), dtype=int64
 ```
 
-The [`AsdfFile`][asdf.AsdfFile] behaves like a Python
-[`dict`][dict], and nodes are accessed like any
-other dictionary entry:
+The [`AsdfFile`][asdf.AsdfFile] behaves like a Python [`dict`][dict], and nodes are accessed like any other dictionary entry:
 
 ```pycon
 >>> af["name"]
@@ -219,32 +193,23 @@ af = asdf.open("example.asdf", memmap=True)
 ```
 <!-- --8<-- [end:read-file] -->
 
-For more information and for advanced usage examples, see the
-[documentation](http://asdf.readthedocs.io/en/latest/).
+For more information and for advanced usage examples, see the [documentation](http://asdf.readthedocs.io/en/latest/).
 
 ### Extending ASDF
 
-Out of the box, the `asdf` package automatically serializes and
-deserializes native Python types. It is possible to extend `asdf` by
-implementing custom tags that correspond to custom user types. More
-information on extending ASDF can be found in the [official
-documentation](http://asdf.readthedocs.io/en/latest/#extending-asdf).
+Out of the box, the `asdf` package automatically serializes and deserializes native Python types. It is possible to extend `asdf` by implementing custom tags that correspond to custom user types. More information on extending ASDF can be found in the [official documentation](http://asdf.readthedocs.io/en/latest/#extending-asdf).
 
 ## Installation
 
 <!-- --8<-- [start:pip-install] -->
-Stable releases of the ASDF Python package are registered [at
-PyPi](https://pypi.python.org/pypi/asdf). The latest stable version can
-be installed using `pip`:
+Stable releases of the ASDF Python package are registered [at PyPi](https://pypi.python.org/pypi/asdf). The latest stable version can be installed using `pip`:
 
     $ pip install asdf
 
 <!-- --8<-- [end:pip-install] -->
 <!-- --8<-- [start:source-install] -->
 
-The latest development version of ASDF is available from the `main`
-branch [on github](https://github.com/asdf-format/asdf). To clone the
-project:
+The latest development version of ASDF is available from the `main` branch [on github](https://github.com/asdf-format/asdf). To clone the project:
 
     $ git clone https://github.com/asdf-format/asdf
 
@@ -253,8 +218,7 @@ To install:
     $ cd asdf
     $ pip install .
 
-To install in [development
-mode](https://packaging.python.org/tutorials/distributing-packages/#working-in-development-mode):
+To install in [development mode](https://packaging.python.org/tutorials/distributing-packages/#working-in-development-mode):
 
     $ pip install -e .
 <!-- --8<-- [end:source-install] -->
@@ -262,8 +226,7 @@ mode](https://packaging.python.org/tutorials/distributing-packages/#working-in-d
 ## Testing
 
 <!-- --8<-- [start:testing] -->
-To install the test dependencies from a source checkout of the
-repository:
+To install the test dependencies from a source checkout of the repository:
 
     $ pip install -e ".[tests]"
 
@@ -271,14 +234,12 @@ To run the unit tests from a source checkout of the repository:
 
     $ pytest
 
-It is also possible to run the test suite from an installed version of
-the package.
+It is also possible to run the test suite from an installed version of the package.
 
     $ pip install "asdf[tests]"
     $ pytest --pyargs asdf
 
-It is also possible to run the tests using
-[nox](https://nox.thea.codes/).
+It is also possible to run the tests using [nox](https://nox.thea.codes/).
 
     $ pip install nox
 
@@ -298,32 +259,18 @@ Groups of sessions can also be specified by tag:
 
 ## Documentation
 
-More detailed documentation on this software package can be found
-[here](https://asdf.readthedocs.io).
+More detailed documentation on this software package can be found [here](https://asdf.readthedocs.io).
 
-More information on the ASDF file format itself can be found
-[here](https://asdf-standard.readthedocs.io).
+More information on the ASDF file format itself can be found [here](https://asdf-standard.readthedocs.io).
 
-> If you are looking for the **A**daptable **S**eismic **D**ata
-> **F**ormat, information can be found
-> [here](https://seismic-data.org/).
+> If you are looking for the **A**daptable **S**eismic **D**ata **F**ormat, information can be found [here](https://seismic-data.org/).
 
 ## License
 
-ASDF is licensed under a BSD 3-clause style license. See
-[LICENSE](https://github.com/asdf-format/asdf/blob/main/LICENSE) for the
-[licenses
-folder](https://github.com/asdf-format/asdf/tree/main/licenses) for
-licenses for any included software.
+ASDF is licensed under a BSD 3-clause style license. See [LICENSE](https://github.com/asdf-format/asdf/blob/main/LICENSE) for the [licenses folder](https://github.com/asdf-format/asdf/tree/main/licenses) for licenses for any included software.
 
 ## Contributing
 
-We welcome feedback and contributions to the project. Contributions of
-code, documentation, or general feedback are all appreciated. Please
-follow the [contributing
-guidelines](https://github.com/asdf-format/asdf/blob/main/CONTRIBUTING.rst)
-to submit an issue or a pull request.
+We welcome feedback and contributions to the project. Contributions of code, documentation, or general feedback are all appreciated. Please follow the [contributing guidelines](https://github.com/asdf-format/asdf/blob/main/CONTRIBUTING.rst) to submit an issue or a pull request.
 
-We strive to provide a welcoming community to all of our users by
-abiding to the [Code of
-Conduct](https://github.com/asdf-format/asdf?tab=coc-ov-file).
+We strive to provide a welcoming community to all of our users by abiding to the [Code of Conduct](https://github.com/asdf-format/asdf?tab=coc-ov-file).
