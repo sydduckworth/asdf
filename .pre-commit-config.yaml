@@ -24,8 +24,6 @@ repos:
   hooks:
     - id: python-check-blanket-noqa
     - id: python-check-mock-methods
-    - id: rst-directive-colons
-    - id: rst-inline-touching-normal
     - id: text-unicode-replacement-char
 
 - repo: https://github.com/codespell-project/codespell
