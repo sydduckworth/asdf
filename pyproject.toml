@@ -181,6 +181,7 @@ select = [
   "UP",  # pyupgrade
   "RUF",  # ruff specific, includes yesqa
   "TC",  # type-checking
+  "PLE",  # pylint
   "PGH",  # pygrep-hooks
   "T100",  # flake-debugger
 ]
