@@ -30,9 +30,7 @@ class MaxAreaValidator(Validator):
     def validate(self, max_area, node, schema):
         area = node["width"] * node["height"]
         if area > max_area:
-            yield ValidationError(
-                f"Rectangle with area {area} exceeds max area of {max_area}"
-            )
+            yield ValidationError(f"Rectangle with area {area} exceeds max area of {max_area}")
 ```
 
 Note that the validator operates on raw ASDF tagged nodes, and not the custom Python object that they'll be converted to.

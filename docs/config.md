@@ -44,7 +44,6 @@ The latter method, [`config_context`][asdf.config_context], returns a context ma
 >>> with asdf.config_context() as config:  # doctest: +ELLIPSIS
 ...     config.validate_on_read = True
 ...     asdf.get_config()
-...
 <AsdfConfig
   array_inline_threshold: None
   all_array_storage: None
@@ -179,9 +178,7 @@ Flag to control if any errors raised during conversion of a tagged object to a c
 ... required: [foo]
 ... ...
 ... """
->>> asdf.get_config().add_resource_mapping(
-...     {"http://example.com/example-project/schemas/foo-1.0.0": content}
-... )
+>>> asdf.get_config().add_resource_mapping({"http://example.com/example-project/schemas/foo-1.0.0": content})
 >>> af = asdf.AsdfFile(custom_schema="http://example.com/example-project/schemas/foo-1.0.0")
 >>> af.validate()
 Traceback (most recent call last):

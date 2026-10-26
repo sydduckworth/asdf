@@ -24,9 +24,7 @@ required: [foo]
 ...
 """
 
-asdf.get_config().add_resource_mapping(
-    {"asdf://example.com/example-project/schemas/foo-1.0.0": content}
-)
+asdf.get_config().add_resource_mapping({"asdf://example.com/example-project/schemas/foo-1.0.0": content})
 ```
 
 The schema will now be available for validating files:

@@ -12,9 +12,9 @@ extra:
 from __future__ import annotations
 
 import logging
+import re
 import shutil
 import subprocess
-import re
 import tomllib
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -28,6 +28,7 @@ if TYPE_CHECKING:
 log = logging.getLogger(f"properdocs.plugins.{__name__}")
 
 _NO_CHANGE_RE = re.compile(r"^No significant changes.\s+\Z", flags=re.MULTILINE)
+
 
 def on_page_markdown(markdown: str, page: Page, config: ProperDocsConfig, files: Files) -> str | None:
     src_uri = config.extra.get("changelog", {}).get("src_uri", None)
@@ -43,7 +44,7 @@ def on_page_markdown(markdown: str, page: Page, config: ProperDocsConfig, files:
     cfg = py["tool"]["towncrier"]
     start_string = cfg["start_string"]
 
-    res = subprocess.run([cmd, "build", "--draft"], check=True, capture_output=True, text=True)
+    res = subprocess.run([cmd, "build", "--draft"], check=True, capture_output=True, text=True)  # noqa: S603
     out = res.stdout
 
     if _NO_CHANGE_RE.search(out):

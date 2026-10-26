@@ -12,13 +12,13 @@ At its core, ASDF is a way of saving nested data structures to YAML. Here we sav
 >>> from asdf import AsdfFile
 
 >>> # Make the tree structure, and create a AsdfFile from it.
->>> tree = {'hello': 'world'}
+>>> tree = {"hello": "world"}
 >>> ff = AsdfFile(tree)
 >>> ff.write_to("test.asdf")
 
 >>> # You can also make the AsdfFile first, and modify its tree directly:
 >>> ff = AsdfFile()
->>> ff.tree['hello'] = 'world'
+>>> ff.tree["hello"] = "world"
 >>> ff.write_to("test.asdf")
 
 ```

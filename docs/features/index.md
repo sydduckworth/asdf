@@ -91,13 +91,14 @@ In order to use this schema for a secondary validation pass, we pass the `custom
 
 ```py
 import asdf
-af = asdf.open('image.asdf', custom_schema='image_schema.yaml')
+
+af = asdf.open("image.asdf", custom_schema="image_schema.yaml")
 ```
 
 Similarly, if we wished to use this schema when creating new files:
 
 ```py
-new_af = asdf.AsdfFile(custom_schema='image_schema.yaml')
+new_af = asdf.AsdfFile(custom_schema="image_schema.yaml")
 ...
 ```
 
@@ -147,10 +148,7 @@ First, we'll create a ASDF file with a couple of arrays in it:
 >>> from asdf import AsdfFile
 >>> import numpy as np
 
->>> tree = {
-...     'a': np.arange(0, 10),
-...     'b': np.arange(10, 20)
-... }
+>>> tree = {"a": np.arange(0, 10), "b": np.arange(10, 20)}
 
 >>> target = AsdfFile(tree)
 >>> target.write_to("target.asdf")
@@ -192,10 +190,10 @@ Then we will reference those arrays in a couple of different ways. First, we'll 
 >>> from asdf import AsdfFile
 >>> ff = AsdfFile()
 
->>> with asdf.open('target.asdf') as target:
-...     ff.tree['my_ref_a'] = target.make_reference(['a'])
+>>> with asdf.open("target.asdf") as target:
+...     ff.tree["my_ref_a"] = target.make_reference(["a"])
 
->>> ff.tree['my_ref_b'] = {'$ref': 'target.asdf#b'}
+>>> ff.tree["my_ref_b"] = {"$ref": "target.asdf#b"}
 >>> ff.write_to("source.asdf")
 
 ```
@@ -224,9 +222,9 @@ Calling [`find_references`][asdf.AsdfFile.find_references] will look up all of t
 
 ```pycon
 >>> import asdf
->>> with asdf.open('source.asdf') as ff:
-...    ff.find_references()
-...    assert ff.tree['my_ref_b'].shape == (10,)
+>>> with asdf.open("source.asdf") as ff:
+...     ff.find_references()
+...     assert ff.tree["my_ref_b"].shape == (10,)
 
 ```
 
@@ -234,8 +232,8 @@ On the other hand, calling [`resolve_references`][asdf.AsdfFile.resolve_referenc
 
 ```pycon
 >>> import asdf
->>> with asdf.open('source.asdf') as ff:
-...    ff.resolve_references()
+>>> with asdf.open("source.asdf") as ff:
+...     ff.resolve_references()
 
 ```
 
@@ -277,9 +275,9 @@ Anchors and aliases are handled automatically by [`asdf`][] when the data struct
 
 ```pycon
 >>> from asdf import AsdfFile
->>> d = {'foo': 'bar'}
->>> d['baz'] = d
->>> tree = {'d': d}
+>>> d = {"foo": "bar"}
+>>> d["baz"] = d
+>>> tree = {"d": d}
 
 >>> ff = AsdfFile(tree)
 
@@ -324,11 +322,11 @@ As an example, we will create a reference to an external CSV file. We will assum
 ```pycon
 >>> import asdf
 
->>> csv_data_row = 10 # The row of the CSV file containing the data we want
->>> csv_row_size = 100 # The size of the array
->>> extref = asdf.ExternalArrayReference('data.csv', csv_data_row, "int64", (csv_row_size,))
+>>> csv_data_row = 10  # The row of the CSV file containing the data we want
+>>> csv_row_size = 100  # The size of the array
+>>> extref = asdf.ExternalArrayReference("data.csv", csv_data_row, "int64", (csv_row_size,))
 
->>> tree = {'csv_data': extref}
+>>> tree = {"csv_data": extref}
 >>> af = asdf.AsdfFile(tree)
 
 ```
@@ -368,17 +366,18 @@ Given a [`AsdfFile`][asdf.AsdfFile] object, call [`add_history_entry`][asdf.Asdf
 >>> from asdf import AsdfFile
 >>> import numpy as np
 
->>> tree = {
-...    'a': np.random.rand(32, 32)
-... }
+>>> tree = {"a": np.random.rand(32, 32)}
 
 >>> ff = AsdfFile(tree)
 >>> ff.add_history_entry(
-...    "Initial random numbers",
-...    {'name': 'asdf examples',
-...     'author': 'John Q. Public',
-...     'homepage': 'http://github.com/asdf-format/asdf',
-...     'version': '0.1'})
+...     "Initial random numbers",
+...     {
+...         "name": "asdf examples",
+...         "author": "John Q. Public",
+...         "homepage": "http://github.com/asdf-format/asdf",
+...         "version": "0.1",
+...     },
+... )
 
 ```
 
@@ -512,9 +511,7 @@ The first argument to [`AsdfFile.search`][asdf.AsdfFile.search] searches by dict
 >>> af.search("foo")  # Find nodes with key containing the string 'foo' # doctest: +SKIP
 >>> af.search(type_=int)  # Find nodes that are instances of int # doctest: +SKIP
 >>> af.search(value=10)  # Find nodes whose value is equal to 10 # doctest: +SKIP
->>> af.search(
-...     "foo", type_=int, value=10
-... )  # Find the intersection of the above # doctest: +SKIP
+>>> af.search("foo", type_=int, value=10)  # Find the intersection of the above # doctest: +SKIP
 
 ```
 
@@ -525,9 +522,7 @@ The return value of [`AsdfFile.search`][asdf.AsdfFile.search], [`asdf.search.Asd
 ```pycon
 >>> af.search()  # See an overview of the entire ASDF tree # doctest: +SKIP
 >>> af.search().search(type_="NDArrayType")  # Find only ndarrays # doctest: +SKIP
->>> af.search().search(type_="NDArrayType").search(
-...     "err"
-... )  # Only ndarrays with 'err' in the key # doctest: +SKIP
+>>> af.search().search(type_="NDArrayType").search("err")  # Only ndarrays with 'err' in the key # doctest: +SKIP
 
 ```
 
@@ -537,9 +532,7 @@ Another way to narrow the search is to use the index operator to descend into a 
 
 ```pycon
 >>> af.search()["data"]  # Restrict search to the 'data' child # doctest: +SKIP
->>> af.search()["data"].search(
-...     type_=int
-... )  # Find integer descendants of 'data' # doctest: +SKIP
+>>> af.search()["data"].search(type_=int)  # Find integer descendants of 'data' # doctest: +SKIP
 
 ```
 
@@ -563,9 +556,7 @@ Note that all node keys (even list indices) will be converted to string before t
 When the `type_` argument is a string, the search compares against the fully-qualified class name of each node:
 
 ```pycon
->>> af.search(
-...     type_="asdf.tags.core.Software"
-... )  # Find instances of ASDF's Software type # doctest: +SKIP
+>>> af.search(type_="asdf.tags.core.Software")  # Find instances of ASDF's Software type # doctest: +SKIP
 >>> af.search(type_="^asdf\.")  # Find all ASDF objects # doctest: +SKIP
 
 ```
@@ -573,9 +564,7 @@ When the `type_` argument is a string, the search compares against the fully-qua
 When the `value` argument is a string, the search compares against the string representation of each node's value.
 
 ```pycon
->>> af.search(
-...     value="^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-... )  # Find values that look like dates # doctest: +SKIP
+>>> af.search(value="^[0-9]{4}-[0-9]{2}-[0-9]{2}$")  # Find values that look like dates # doctest: +SKIP
 
 ```
 
@@ -601,9 +590,7 @@ The [`AsdfSearchResult`][asdf.search.AsdfSearchResult] object displays its conte
 Like [`AsdfSearchResult.search`][asdf.search.AsdfSearchResult.search], calls to format may be chained:
 
 ```pycon
->>> af.search("time").format(max_rows=10).search(type_=str).format(
-...     max_rows=None
-... )  # doctest: +SKIP
+>>> af.search("time").format(max_rows=10).search(type_=str).format(max_rows=None)  # doctest: +SKIP
 
 ```
 

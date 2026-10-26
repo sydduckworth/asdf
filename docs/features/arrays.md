@@ -9,7 +9,7 @@ Beyond the basic data types of dictionaries, lists, strings and numbers, the mos
 >>> from asdf import AsdfFile
 >>> import numpy as np
 
->>> tree = {'my_array': np.random.rand(8, 8)}
+>>> tree = {"my_array": np.random.rand(8, 8)}
 >>> ff = AsdfFile(tree)
 >>> ff.write_to("array.asdf")
 
@@ -54,11 +54,8 @@ Arrays that are views on the same data can share the same data in the file. In t
 >>> import numpy as np
 
 >>> my_array = np.random.rand(8, 8)
->>> subset = my_array[2:4,3:6]
->>> tree = {
-...     'my_array': my_array,
-...     'subset':   subset
-... }
+>>> subset = my_array[2:4, 3:6]
+>>> tree = {"my_array": my_array, "subset": subset}
 >>> ff = AsdfFile(tree)
 >>> ff.set_array_save_base(subset, True)
 >>> ff.write_to("array_with_subset.asdf")
@@ -114,9 +111,9 @@ For small arrays, you may not care about the efficiency of a binary representati
 >>> import numpy as np
 
 >>> my_array = np.random.rand(8, 8)
->>> tree = {'my_array': my_array}
+>>> tree = {"my_array": my_array}
 >>> ff = AsdfFile(tree)
->>> ff.set_array_storage(my_array, 'inline')
+>>> ff.set_array_storage(my_array, "inline")
 >>> ff.write_to("inline_array.asdf")
 
 ```
@@ -187,15 +184,15 @@ To save a block in an external file, set its block type to `'external'`.
 >>> import numpy as np
 
 >>> my_array = np.random.rand(8, 8)
->>> tree = {'my_array': my_array}
+>>> tree = {"my_array": my_array}
 >>> ff = AsdfFile(tree)
 
 >>> # On an individual block basis:
->>> ff.set_array_storage(my_array, 'external')
+>>> ff.set_array_storage(my_array, "external")
 >>> ff.write_to("external.asdf")
 
 >>> # Or for every block:
->>> ff.write_to("external.asdf", all_array_storage='external')
+>>> ff.write_to("external.asdf", all_array_storage="external")
 
 ```
 
@@ -235,11 +232,11 @@ To use streaming, rather than including a Numpy array object in the tree, you in
 
 >>> tree = {
 ...     # Each "row" of data will have 128 entries.
-...     'my_stream': Stream([128], np.float64)
+...     "my_stream": Stream([128], np.float64)
 ... }
 
 >>> ff = AsdfFile(tree)
->>> with open('stream.asdf', 'wb') as fd:  # doctest: +SKIP
+>>> with open("stream.asdf", "wb") as fd:  # doctest: +SKIP
 ...     ff.write_to(fd)
 ...     # Write 100 rows of data, one row at a time.  ``write``
 ...     # expects the raw binary bytes, not an array, so we use
@@ -320,14 +317,11 @@ Individual blocks in an ASDF file may be compressed.
 >>> from asdf import AsdfFile
 >>> import numpy as np
 
->>> tree = {
-...     'a': np.random.rand(32, 32),
-...     'b': np.random.rand(64, 64)
-... }
+>>> tree = {"a": np.random.rand(32, 32), "b": np.random.rand(64, 64)}
 
 >>> target = AsdfFile(tree)
->>> target.write_to('target.asdf', all_array_compression='zlib')
->>> target.write_to('target.asdf', all_array_compression='bzp2')
+>>> target.write_to("target.asdf", all_array_compression="zlib")
+>>> target.write_to("target.asdf", all_array_compression="bzp2")
 
 ```
 
@@ -365,7 +359,7 @@ Similarly, [`asdf.config`][] can be used to configure compression of all blocks 
 
 [`asdf.AsdfFile.set_array_compression`][asdf.AsdfFile.set_array_compression] can be used to set the compression for a specific block. Similarly [`asdf.AsdfFile.get_array_compression`][asdf.AsdfFile.get_array_compression] can be used to get the compression for a specific block.
 
-``` python
+```python
 import asdf
 import numpy as np
 
@@ -401,7 +395,7 @@ When memory mapping is enabled array data access must occur while the correspond
 ```python
 import asdf
 
-with asdf.open('my_data.asdf', memmap=True) as af:
+with asdf.open("my_data.asdf", memmap=True) as af:
     # array data can be accessed since the with above
     # will keep my_data.asdf open
     print(af["my_array"][0])
@@ -415,7 +409,7 @@ Memory-mapped arrays can be written to while in memory. Changes to an array are 
 ```python
 import asdf
 
-with asdf.open('my_data.asdf', memmap=True) as af:
+with asdf.open("my_data.asdf", memmap=True) as af:
     # Write to memmapped array (in memory)
     x[:10] = np.arange(10)
 

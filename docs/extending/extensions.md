@@ -246,9 +246,7 @@ Assuming the manifest is installed as a resource (see *[Resources and resource m
 ``` python
 from asdf.extension import ManifestExtension
 
-extension = ManifestExtension.from_uri(
-    "asdf://example.com/example-project/manifests/foo-1.0.0"
-)
+extension = ManifestExtension.from_uri("asdf://example.com/example-project/manifests/foo-1.0.0")
 ```
 
 Compressors and converters can be included in the extension by adding them as keyword arguments:
@@ -272,20 +270,14 @@ When implementing a package that automatically installs a ManifestExtension, we'
 ``` python
 from asdf.extension import ManifestExtension
 
-RESOURCES = {
-    "asdf://example.com/example-project/manifests/foo-1.0.0": open(
-        "foo-1.0.0.yaml"
-    ).read()
-}
+RESOURCES = {"asdf://example.com/example-project/manifests/foo-1.0.0": open("foo-1.0.0.yaml").read()}
 
 
 def get_resource_mappings():
     return [RESOURCES]
 
 
-EXTENSION = ManifestExtension.from_uri(
-    "asdf://example.com/example-project/manifests/foo-1.0.0"
-)
+EXTENSION = ManifestExtension.from_uri("asdf://example.com/example-project/manifests/foo-1.0.0")
 
 
 def get_extensions():
@@ -298,11 +290,7 @@ The solution is to instantiate the ManifestExtension inside of its entry point m
 
 ``` python
 def get_extensions():
-    return [
-        ManifestExtension.from_uri(
-            "asdf://example.com/example-project/manifests/foo-1.0.0"
-        )
-    ]
+    return [ManifestExtension.from_uri("asdf://example.com/example-project/manifests/foo-1.0.0")]
 ```
 
 This is not as inefficient as it might seem, since the [`asdf`][] library only calls the method once and reuses a cached result thereafter.
