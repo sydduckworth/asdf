@@ -132,8 +132,6 @@ plugins:
           docstring_style: numpy
           find_stubs_package: true
           extensions:
-          # Parse sphinx-style `#:` attribute docstrings
-          - griffe_sphinx
           # Resolve generic typevars in subclasses
           - griffe_generics
           # Copy docstrings from parent class for classes/methods without docstrings
