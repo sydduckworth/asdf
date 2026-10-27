@@ -10,6 +10,7 @@ watch:
   - asdf
   - README.md
   - changes
+  - CHANGES.md
 theme:
   name: material
   custom_dir: docs/.overrides
@@ -58,7 +59,6 @@ theme:
 hooks:
 - docs/.hooks/toctree.py
 - docs/.hooks/strip_doctest_flags.py
-- docs/.hooks/changelog.py
 extra_css:
 - assets/stylesheets/mkdocstrings.css
 - assets/stylesheets/asdf.css
@@ -92,6 +92,7 @@ markdown_extensions:
 - pymdownx.snippets:
     base_path:
     - README.md
+    - CHANGES.md
     - docs/
 # Block and inline syntax highlighting
 - pymdownx.highlight:
@@ -109,6 +110,8 @@ markdown_extensions:
 
 plugins:
 - search
+- macros:
+    module_name: docs/.overrides/macros
 - autorefs
 # Generate API docs pages for all modules automatically
 - api-autonav:
@@ -181,5 +184,3 @@ extra:
     href: https://www.asdf-format.org/en/latest/tutorials/index.html
   - title: Community
     href: https://www.asdf-format.org/en/latest/community/index.html
-  changelog:
-    src_uri: CHANGES.md

@@ -22,5 +22,5 @@
 * [Release Cycle and Major Dependency Support Policy](release_and_support.md)
 * [What's New](whats_new.md)
 * [Deprecations](deprecations.md)
-* [Changelog](CHANGES.md)
+* [Changelog](changelog.md)
 * [Citation](CITATION.md)

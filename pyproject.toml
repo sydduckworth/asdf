@@ -60,6 +60,7 @@ docs = [
   "mkdocs-api-autonav",
   "mkdocs-git-revision-date-localized-plugin",
   "mkdocs-literate-nav",
+  "mkdocs-macros-plugin",
   "mkdocs-material",
   "mkdocstrings[python]",
   "properdocs",
