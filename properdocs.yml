@@ -122,6 +122,8 @@ plugins:
 # Show last modified date for pages
 - git-revision-date-localized:
     fallback_to_build_date: true
+- offline:
+    enabled: !ENV [OFFLINE, false]
 - mkdocstrings:
     handlers:
       python:
