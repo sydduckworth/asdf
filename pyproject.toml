@@ -61,7 +61,6 @@ docs = [
   "mkdocs-git-revision-date-localized-plugin",
   "mkdocs-literate-nav",
   "mkdocs-material",
-  "mkdocs-section-index",
   "mkdocstrings[python]",
   "properdocs",
   "ruff",

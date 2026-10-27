@@ -21,6 +21,7 @@ theme:
   - navigation.path # Show path breadcrumbs for nested pages
   - navigation.top # Show "return to top" button when scrolling up
   - navigation.footer # Show "next/previous" page links in footer
+  - navigation.indexes
   - toc.follow
   - header.autohide
   - content.action.edit
@@ -104,6 +105,7 @@ markdown_extensions:
 # Convert `--` to emdash, `...` to ellipse, etc
 - smarty
 - pymdownx.smartsymbols
+- md_in_html
 
 plugins:
 - search
@@ -118,7 +120,6 @@ plugins:
 - literate-nav:
     nav_file: SUMMARY.md
     implicit_index: true
-- section-index
 # Show last modified date for pages
 - git-revision-date-localized:
     fallback_to_build_date: true
