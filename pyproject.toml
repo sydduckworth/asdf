@@ -56,7 +56,6 @@ mocks3 = ["boto", "fsspec", "moto[s3,server]", "s3fs>2023.12.1"]
 docs = [
   "griffe-generics",
   "griffe-inherited-docstrings",
-  "griffe-sphinx",
   "mkdocs-api-autonav",
   "mkdocs-git-revision-date-localized-plugin",
   "mkdocs-literate-nav",
