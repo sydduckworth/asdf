@@ -1,3 +1,5 @@
+"""Environment configuration for the mkdocs-macros plugin."""
+
 from . import towncrier
 
 
