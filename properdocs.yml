@@ -85,6 +85,7 @@ markdown_extensions:
 - footnotes
 # Required for several other plugins to work correctly
 - attr_list
+- pymdownx.saneheaders
 # Regular and collapsible admonitions
 - admonition
 - pymdownx.details
@@ -128,6 +129,14 @@ plugins:
     fallback_to_build_date: true
 - offline:
     enabled: !ENV [OFFLINE, false]
+- redirects:
+    redirect_maps:
+      'changes.md': 'changelog.md'
+      'user_api.md': 'user/index.md'
+      'developer_api.md': 'developer/index.md'
+      'using_extensions.md': 'features/using_extensions.md'
+      'arrays.md': 'features/arrays.md'
+
 - mkdocstrings:
     handlers:
       python:
