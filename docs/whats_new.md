@@ -33,11 +33,10 @@ Asdf 5.0.0 removes some deprecated API.
 
 Hi! Asdf 4.0.0 is a new major version including:
 
-- [removal of deprecated API][whats-new-4.0.0-removed]
-- [changes to a few key defaults][whats-new-4.0.0-defaults]
+- [removal of deprecated API](#400-removed)
+- [changes to a few key defaults](#400-defaults)
 
-[](){ #whats-new-4.0.0-removed }
-### Removed API
+### Removed API { #400-removed }
 
 - The `copy_arrays` argument for `asdf.open` and `AsdfFile` has been removed and replaced by `memmap` (`memmap == not copy_arrays`).
 - `ignore_version_mismatch` has had no effect since asdf 3.0.0 and was removed.
@@ -58,14 +57,13 @@ Hi! Asdf 4.0.0 is a new major version including:
 - `ignore_implicit_conversion` has been removed (see `whats_new_4.0.0_implicit_conversion` below)
 - providing a tag uri within a schema `$ref` will no longer resolve to the schema uri associated with that tag
 
-[](){ #whats-new-4.0.0-defaults }
-### New Defaults
+### New Defaults { #400-defaults }
 
-#### Memory mapping disabled by default
+#### Memory mapping disabled by default  { #400-memmap }
 
 Calls to `asdf.open()` and `AsdfFile()` will now default to `memmap=False`, disabling memory mapping of arrays by default.
 
-#### ASDF standard version
+#### ASDF standard version { #400-standard }
 
 By default asdf 4.0.0 will write files that use the 1.6.0 version of the ASDF standard. This change should be transparent and all files that use the older standards are readable. If you wish to write files using the 1.5.0 (or older) ASDF standard you can provide a version to [`AsdfFile.write_to`][asdf.AsdfFile.write_to] or change [`asdf.config.AsdfConfig.default_version`][asdf.config.AsdfConfig.default_version].
 
@@ -74,8 +72,7 @@ In addition to new schemas and tags ASDF standard 1.6.0 comes with a few other c
 - Opening files will no longer trigger [`AsdfFile.fill_defaults`][asdf.AsdfFile.fill_defaults].
 - Mapping keys are restricted to str, int, bool See *[YAML Subset][yaml_subset]*.
 
-[](){ #whats-new-4.0.0-validation }
-#### Validation
+#### Validation { #400-validation }
 
 Several operations no longer automatically trigger tree validation. These changes were made to limit the number of times a tree is validated to allow incremental construction of trees and to improve performance.
 
@@ -86,9 +83,9 @@ Several operations no longer automatically trigger tree validation. These change
 !!! note
 	Validation can be triggered with [`AsdfFile.validate`][asdf.AsdfFile.validate] and will occur when writing to a file (or reading if `AsdfConfig.validate_on_read` is enabled).
 
-#### Find References
+#### Find References { #400-find-references }
 
-Similar to [Validation][whats-new-4.0.0-validation] several operations no longer automatically trigger [`AsdfFile.find_references`][asdf.AsdfFile.find_references]:
+Similar to [Validation](#400-validation) several operations no longer automatically trigger [`AsdfFile.find_references`][asdf.AsdfFile.find_references]:
 
 - [`asdf.open`][] does not trigger [`AsdfFile.find_references`][asdf.AsdfFile.find_references]
 - providing a tree (or [`AsdfFile`][asdf.AsdfFile]) to `AsdfFile.__init__` no longer triggers [`AsdfFile.find_references`][asdf.AsdfFile.find_references]
@@ -96,11 +93,11 @@ Similar to [Validation][whats-new-4.0.0-validation] several operations no longer
 !!! note
 	[`AsdfFile.find_references`][asdf.AsdfFile.find_references] is only for JSON pointer references which are most useful for external references. YAML anchors and aliases are automatically resolved.
 
-#### Implicit Conversion
+#### Implicit Conversion { #400-implicit-conversion }
 
 In older asdf versions `namedtuple` instances were automatically converted to lists when written to a file. When read back in the `namedtuple` was not reconstructed and instead these objects were returned as lists. With asdf 4.0.0 this "implicit conversion" is no longer performed which allows extensions to implement converters for `namedtuple` instances.
 
-#### Unknown NDArray Subclasses
+#### Unknown NDArray Subclasses  { #400-unknown-ndarray-subclasses }
 
 In asdf 3.0.0 a config attribute was added `AsdfConfig.convert_unknown_ndarray_subclasses` that was enabled by default (to retain the behavior of the removed legacy extension that handled ndarrays).
 
@@ -114,7 +111,7 @@ Asdf 3.0.0 is the first major asdf release since 2018.
 
 Thank you to all the [contributors](https://github.com/asdf-format/asdf/graphs/contributors)!
 
-### Removed features
+### Removed features { #300-removed }
 
 The following deprecated features are removed in asdf 3.0.0:
 
@@ -123,7 +120,7 @@ The following deprecated features are removed in asdf 3.0.0:
 
 Please see the links above or *[Deprecations](deprecations.md)* for more details.
 
-### New features
+### New features { #300-new-features }
 
 As asdf now only supports new-style [extensions](extending/extensions.md) several new features were added to allow these extensions to retain all the functionality of the now removed type system.
 
@@ -135,7 +132,7 @@ Converters have always been "strict" about tag version mismatches (returning 'ra
 
 ### Internal changes
 
-2.15.1 included internally a version of jsonschema. See the [jsonschema][whats-new-2.15.1-jsonschema] sub-section of the [2.15.1][whats-new-2.15.1] section for more details. Asdf 3.0.0 drops jsonschema as a dependency. If your software requires jsonschema be sure to add it to your dependencies.
+2.15.1 included internally a version of jsonschema. See the [jsonschema](#2151-jsonschema) sub-section of the [2.15.1](#2151) section for more details. Asdf 3.0.0 drops jsonschema as a dependency. If your software requires jsonschema be sure to add it to your dependencies.
 
 To accomplish the above improvements to asdf extensions, a major rewrite of the ASDF block management code was required. During this rewrite `AsdfBlockIndexWarning` was added which users will see if they open an ASDF file with an invalid block index. Re-saving the file (or removing the optional block index) is often sufficient to fix the file so it no longer issues the warning when opened.
 
@@ -145,11 +142,9 @@ With the release of asdf 3.0.0 the developers are beginning work on 3.1.0 and 4.
 
 In an attempt to construct a coherent api, asdf 3.1 (and additional minor versions) will likely contain new deprecations in an effort to reorganize and clean up the api. If you are using features that are not currently listed in the User API or Developer API documentation please open an issue. This will help us to know what functions should be preserved, what requires a deprecation prior to removal and which of our un-documented (non-public) features can be removed without a deprecation.
 
-[](){ #whats-new-2.15.1 }
 ## 2.15.1
 
-[](){ #whats-new-2.15.1-jsonschema }
-### jsonschema
+### jsonschema { #2151-jsonschema }
 
 Asdf 2.15.1 includes internally a version of jsonschema 4.17.3. This inclusion was done to deal with incompatible changes in jsonschema 4.18.
 

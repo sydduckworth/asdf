@@ -165,7 +165,7 @@ ff.write_to("all_inline.asdf", all_array_storage='inline')
 
 For automatic management of the array storage type based on number of elements, see `config_options_array_inline_threshold`.
 
-## Saving external arrays
+## Saving external arrays { #exploded }
 
 ASDF files may also be saved in "exploded form", which creates multiple files corresponding to the following data items:
 

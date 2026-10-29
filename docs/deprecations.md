@@ -76,6 +76,6 @@ Support for `AsdfInFits` (including the `asdf.fits_embed` module) is deprecated.
 
 Without support for `fits_embed.AsdfInFits` the `extract` and `remove-hdu` commands for [asdftool](asdf_tool.md) are no longer usable and are deprecated.
 
-### asdf.tests.helpers Deprecation
+### asdf.tests.helpers Deprecation { #tests-helpers-deprecation }
 
 Use of `asdf.tests.helpers` is deprecated. Please see [`asdf.testing.helpers`][] for alternative functions to aid in testing.

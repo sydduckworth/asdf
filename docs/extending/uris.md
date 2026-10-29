@@ -27,7 +27,7 @@ To counter the problem of URIs vs URLs, [`asdf`][] 2.8 introduced support for th
 The following is a complete list of entity types that are identified by URI in ASDF:
 
 [](){ #extending-uris-entities-schemas }
-### Schemas
+### Schemas { #entities-schemas }
 
 Schemas are expected to include an `id` property that contains the URI that identifies them. That URI is used when referring to the schema in calls to [`asdf`][] library functions. We recommend the following pattern for schema URIs:
 
@@ -38,7 +38,7 @@ Where `<domain>` is some domain that you control, `<project>` collects all entit
 `asdf://example.com/example-project/schemas/foo-1.2.3`
 
 [](){ #extending-uris-entities-tags }
-### Tags
+### Tags { #entities-tags }
 
 Tags, which annotate typed objects in an ASDF file's YAML tree, are represented as URIs. Unlike schemas, there is no resource associated with the tag; no blob of bytes exists that corresponds to the URI. Instead, the URI alone communicates the type of a YAML object. We recommend the following pattern for tag URIs:
 

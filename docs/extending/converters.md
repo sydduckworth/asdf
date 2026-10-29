@@ -2,7 +2,7 @@
 
 The [`Converter`][asdf.extension.Converter] interface defines a mapping between tagged objects in the ASDF tree and their corresponding Python object(s). Typically a Converter will map one YAML tag to one Python type, but the interface also supports many-to-one and many-to-many mappings. A Converter provides the software support for a tag and is responsible for both converting from parsed YAML to more complex Python objects and vice versa.
 
-## The Converter interface
+## The Converter interface { #converter-interface }
 
 Every Converter implementation must provide two required properties and two required methods:
 
@@ -135,7 +135,7 @@ class RectangleConverter(Converter):
 As noted above [`Converter.tags`][asdf.extension.Converter.tags] can contain wildcard patterns (`asdf://example.com/shapes/tags/rectangle-1.*` to match all `1.x.x` versions of the rectangle tag). When a wildcard is used the specific tag versions should be defined in the manifest (or extension) that uses the [`Converter`][asdf.extension.Converter]. If a [`Converter`][asdf.extension.Converter] with a tag wildcard is provided to an extension with a manifest that contains no tags that match the pattern the [`Converter`][asdf.extension.Converter] will be ignored. No errors or warnings will be produced when this extension is registered with asdf (as this can be a useful pattern). However attempts to use the [`Converter`][asdf.extension.Converter] can produce errors during reading and writing (if it's expected that the [`Converter`][asdf.extension.Converter] is used). Developers are encouraged to write unit tests that check reading and writing with any custom [`Converter`][asdf.extension.Converter] instances.
 
 [](){ #extending-converters-deferral }
-## Deferring to another converter
+## Deferring to another converter { #deferral }
 
 Converters only support the exact types listed in [`Converter.types`][asdf.extension.Converter.types]. When a supported type is subclassed the extension will need to be updated to support the new subclass. There are a few options for supporting subclasses.
 
@@ -281,7 +281,7 @@ assert reconstituted_f1.inverse.inverse is reconstituted_f1
 ```
 
 [](){ #extending-converters-block-storage }
-## Block storage
+## Block storage { #block-storage }
 
 As described above *[Converters](#)* can return complex objects that will be passed to other Converters. If a Converter returns a ndarray, asdf will recognize this array and store it in an ASDF block. This is the easiest and preferred means of storing data in ASDF blocks.
 
@@ -336,7 +336,7 @@ During read, [`Converter.from_yaml_tree`][asdf.extension.Converter.from_yaml_tre
 During write, [`Converter.to_yaml_tree`][asdf.extension.Converter.to_yaml_tree] will be called. The Converter can use `SerializationContext.find_available_block_index` to find the location of an available block for writing. The data to be written to the block can be provided as an `ndarray` or a callable function that will return a `ndarray` (note that it is possible this callable function will be called multiple times and the developer should cache results from any non-repeatable sources).
 
 [](){ #extending-converters-multiple-block-storage }
-### Converters using multiple blocks
+### Converters using multiple blocks { #multiple-blocks }
 
 As discussed above, while serializing and deserializing objects that use one block, asdf will watch which block is accessed by `find_available_block_index` and `get_block_data_callback` and associate the block with the converted object. This association allows asdf to map read and write blocks during updates of ASDF files. An object that uses multiple blocks must provide a unique key for each block it uses. These keys are generated using `SerializationContext.generate_block_key` and must be stored by the extension code. These keys must be resupplied to the converter when writing an object that was read from an ASDF file.
 
@@ -386,6 +386,6 @@ As discussed above, while serializing and deserializing objects that use one blo
 ```
 
 [](){ #extending-converters-performance }
-## Entry point performance considerations
+## Entry point performance considerations { #entry-point-performance }
 
 For the good of [`asdf`][] users everywhere, it's important that entry point methods load as quickly as possible. All extensions must be loaded before reading an ASDF file, and therefore all converters are created as well. Any converter module or `__init__` method that lingers will introduce a delay to the initial call to [`asdf.open`][]. For that reason, we recommend that converter authors minimize the number of imports that occur in the module containing the Converter implementation, and defer imports of serializable types to within the `from_yaml_tree` method. This will prevent the type from ever being imported when reading ASDF files that do not contain the associated tag.
