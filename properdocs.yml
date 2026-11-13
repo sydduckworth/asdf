@@ -5,6 +5,7 @@ site_author: The ASDF Developers
 site_description: Python implementation of the ASDF Standard
 repo_url: https://github.com/asdf-format/asdf
 repo_name: asdf-format/asdf
+use_directory_urls: false
 
 watch:
   - asdf
@@ -13,7 +14,7 @@ watch:
   - CHANGES.md
 theme:
   name: material
-  custom_dir: docs/.overrides
+  custom_dir: docs/overrides
   favicon: assets/favicon.ico
   logo: assets/logo-dark-mode.png
   features:
@@ -57,11 +58,10 @@ theme:
         name: Switch to system preference
 
 hooks:
-- docs/.hooks/toctree.py
-- docs/.hooks/strip_doctest_flags.py
-- docs/.hooks/export_legacy_labels.py
+- docs/hooks/toctree.py
+- docs/hooks/strip_doctest_flags.py
+- docs/hooks/export_legacy_labels.py
 extra_css:
-- assets/stylesheets/mkdocstrings.css
 - assets/stylesheets/asdf.css
 extra_javascript:
 - assets/scripts/readthedocs.js
@@ -69,6 +69,8 @@ extra_javascript:
 exclude_docs: |
   # literate-nav files not actually part of the final docs
   SUMMARY.md
+  hooks
+  overrides
 not_in_nav: |
   # API docs are selectively included in navigation
   api/
@@ -80,16 +82,17 @@ validation:
   anchors: warn
 
 markdown_extensions:
+# We don't use [TOC] but this is used to add permalinks to all headers
 - toc:
-    # Add permalinks to all headers
     permalink: true
+# Enable footnotes [^1]
 - footnotes
 # Required for several other plugins to work correctly
 - attr_list
+# Require space after # for a valid heading
 - pymdownx.saneheaders
-# Regular and collapsible admonitions
+# Regular and collapsible admonitions (!!!)
 - admonition
-- pymdownx.details
 # Preprocessing to include snippets from other files
 - pymdownx.snippets:
     base_path:
@@ -101,19 +104,20 @@ markdown_extensions:
     anchor_linenums: true
     pygments_lang_class: true
     line_spans: __span
-- pymdownx.inlinehilite
+# Additional syntax highlighting
 - pymdownx.superfences
+# Provides tabs (===)
 - pymdownx.tabbed:
     alternate_style: true
 # Convert `--` to emdash, `...` to ellipse, etc
 - smarty
+# Convert {tm} to trademark symbol, etc
 - pymdownx.smartsymbols
-- md_in_html
 
 plugins:
 - search
 - macros:
-    module_name: docs/.overrides/macros
+    module_name: docs/overrides/macros
 - autorefs
 # Generate API docs pages for all modules automatically
 - api-autonav:
@@ -132,11 +136,8 @@ plugins:
     enabled: !ENV [ASDF_DOCS_OFFLINE, false]
 - redirects:
     redirect_maps:
-      'changes.md': 'changelog.md'
       'user_api.md': 'user/index.md'
       'developer_api.md': 'developer/index.md'
-      'using_extensions.md': 'features/using_extensions.md'
-      'arrays.md': 'features/arrays.md'
 
 - mkdocstrings:
     handlers:
@@ -191,15 +192,5 @@ extra:
     href: https://www.asdf-format.org/en/latest/tutorials/index.html
   - title: Community
     href: https://www.asdf-format.org/en/latest/community/index.html
-  legacy_labels_path: docs/.hooks/legacy_labels.csv  # Config for `export_legacy_labels` hook
-  external_links: # Config for `extlink` macro
-    check: true
-    stdatamodels:
-      url: https://stdatamodels.readthedocs.io/en/latest/
-      suffix: ".html"
-    asdf_standard:
-      url: https://www.asdf-format.org/projects/asdf-standard/en/latest/
-      suffix: ".html"
-    pytest:
-      url: https://docs.pytest.org/en/latest/
-      suffix: ".html"
+  legacy_labels_path: docs/hooks/legacy_labels.csv  # Config for `export_legacy_labels` hook
+  asdf_standard_docs: https://www.asdf-format.org/projects/asdf-standard/en/latest/

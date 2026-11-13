@@ -10,7 +10,7 @@
 ## Getting Started
 [toctree install.md depth=2]
 [toctree overview.md depth=2]
-[toctree features/index.md depth=2]
+[toctree features.md depth=2]
 [toctree config.md depth=2]
 [toctree asdf_tool.md depth=2]
 
@@ -30,14 +30,14 @@
 - [Developer API](developer/index.md)
 
 ## Resources
-- [Contributing](CONTRIBUTING.md)
+- [Contributing](contributing.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Release Cycle and Major Dependency Support Policy](release_and_support.md)
 - [What's New](whats_new.md)
 - [Deprecations](deprecations.md)
-- [Change Log](changelog.md)
-- [Citation](CITATION.md)
+- [Change Log](changes.md)
+- [Citation](citation.md)
 
 ## See also
-- The {{ asdf_standard('Advanced Scientific Data Format (ASDF) specification', 'index') }}
+- The [Advanced Scientific Data Format (ASDF) specification]({{ asdf_standard_docs }}/index.html)
 - `asdf` Python package distribution on [pypi](https://pypi.org/project/asdf/)
